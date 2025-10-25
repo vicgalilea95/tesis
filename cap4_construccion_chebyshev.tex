@@ -1,0 +1,70 @@
+\subsubsection{Construcciones del m\'etodo de Chebyshev}
+
+El m\'etodo de Chebyshev es un esquema iterativo de tercer orden para la
+aproximaci\'on de ra\'{\i}ces simples de ecuaciones no lineales $f(x)=0$.
+Su expresi\'on cl\'asica, partiendo de un $x_n$ suficientemente pr\'oximo a la ra\'{\i}z
+$\alpha$, es
+\begin{equation}
+\label{eq:chebyshev-clasico}
+ x_{n+1} 
+ 	= x_n 
+ 	- \frac{f(x_n)}{f'(x_n)} 
+ 	- \frac{1}{2}\,\frac{f''(x_n)}{f'(x_n)}\left(\frac{f(x_n)}{f'(x_n)}\right)^{\!2}.
+\end{equation}
+Este m\'etodo, junto con sus mejoras y variantes, ha sido estudiado extensamente
+en la literatura debido a su buena eficiencia y a que puede deducirse de varias
+maneras equivalentes.
+
+\paragraph{Interpolaci\'on cuadr\'atica inversa.}
+Una primera construcci\'on procede de aproximar la inversa local $g=f^{-1}$
+en torno a $y=0$ mediante interpolaci\'on cuadr\'atica u osculadora.
+Al imponer condiciones de Hermite adecuadas en $y=f(x_n)$ (valores y derivadas
+que dependen de $1/f'(x_n)$ y $-f''(x_n)/f'(x_n)^3$), y evaluar en $y=0$, se
+obtiene precisamente la actualizaci\'on \eqref{eq:chebyshev-clasico}.
+
+\paragraph{Par\'abola tangente.}
+Otra deducci\'on geom\'etrica recurre a una par\'abola osculadora a la gr\'afica de $f$.
+Consideremos la familia
+\begin{equation}
+\label{eq:parabola-osculadora}
+ a\,\bigl(y-f(x_n)\bigr)^2 + \bigl(y-f(x_n)\bigr) + b\,(x-x_n) = 0,
+\end{equation}
+cuya gr\'afica $y=y(x)$ satisface condiciones de tangencia en $x_n$:
+$y(x_n)=f(x_n)$, $y'(x_n)=f'(x_n)$, $y''(x_n)=f''(x_n)$. Derivando
+\eqref{eq:parabola-osculadora} y evaluando en $(x_n,f(x_n))$ se obtiene
+$b=-y'(x_n)=-f'(x_n)$. Una segunda derivada y evaluaci\'on conduce a
+\[ a=-\,\frac{y''(x_n)}{2\,y'(x_n)^2}=-\,\frac{f''(x_n)}{2\,f'(x_n)^2}. \]
+Imponiendo $y=0$ (intersecci\'on con el eje $OX$) en \eqref{eq:parabola-osculadora}
+y despejando $x$, resulta
+\[
+ x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\,\frac{f''(x_n)}{f'(x_n)}\left(\frac{f(x_n)}{f'(x_n)}\right)^{\!2},
+\]
+que coincide con \eqref{eq:chebyshev-clasico}.
+
+\paragraph{Interpolaci\'on exponencial.}
+Una tercera v\'ia de construcci\'on utiliza una curva aproximante de la forma
+\begin{equation}
+\label{eq:interpolacion-exp}
+ y(x) = e^{a(x-x_n)}\,\bigl(b\,(x-x_n)+c\bigr),
+\end{equation}
+con par\'ametros $a,b,c$ escogidos para satisfacer condiciones de osculaci\'on en $x_n$:
+$y(x_n)=f(x_n)$, $y'(x_n)=f'(x_n)$ y $y''(x_n)=f''(x_n)$. De la primera condici\'on
+se deduce $c=f(x_n)$ y de la segunda $b=f'(x_n)-a\,f(x_n)$. La tercera condici\'on
+impone la relaci\'on $2a\,f'(x_n)-a^2 f(x_n)=f''(x_n)$. Al intersectar \eqref{eq:interpolacion-exp}
+con $y=0$ (esto es, imponiendo $b\,(x-x_n)+c=0$) se obtiene la actualizaci\'on
+\[
+ x_{n+1}=x_n-\frac{c}{b}=x_n-\frac{f(x_n)}{f'(x_n)-a\,f(x_n)}.
+\]
+La elecci\'on de $a$ que anula el t\'ermino cuadr\'atico del error (esto es, que asegura
+convergencia c\'ubica) conduce de nuevo a la forma \eqref{eq:chebyshev-clasico}.
+
+\medskip
+Estas construcciones muestran que el m\'etodo de Chebyshev puede interpretarse
+como una correcci\'on de Newton que cancela el t\'ermino de error de segundo orden
+por medio de informaci\'on de segunda derivada. Bajo supuestos habituales
+($f\in\mathcal{C}^3$, $f'(\alpha)\neq0$ y $x_n$ cercano a $\alpha$), el m\'etodo es de
+orden tres y su ecuaci\'on de error local es
+\[
+ e_{n+1}=\frac{f^{(3)}(\alpha)}{6f'(\alpha)}\,e_n^3+\mathcal{O}(e_n^4).
+\]
+

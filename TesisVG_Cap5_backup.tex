@@ -1,0 +1,157 @@
+% TesisVG_Cap5.tex
+% Capítulo 5: Estudio dinámico en el plano complejo
+\chapter{Caracterización de la dinámica del método de Schröder para polinomios con dos raíces}
+\label{cap:dinamica_schroder}
+
+En este capítulo se presenta un estudio completo de la dinámica del método de Schröder aplicado a polinomios con dos raíces de multiplicidades arbitrarias en el plano complejo. Se caracterizan de forma explícita las cuencas de atracción y el conjunto de Julia, y se compara el comportamiento dinámico con el método de Newton. Los resultados teóricos se ilustran mediante diagramas de cuencas de atracción en el plano complejo.
+
+\section{Preliminares: Método de Schröder y conjugación topológica}
+
+El método de Schröder fue introducido por Ernst Schröder en su trabajo seminal de 1870 \cite{Sch} sobre la resolución de ecuaciones no lineales. Schröder construyó este método aplicando el método de Newton a la ecuación $\tfrac{f(z)}{f'(z)}=0$, obteniendo el esquema iterativo
+\begin{equation}
+ z_{k+1}=S_f(z_k)=z_k-\frac{f(z_k)f'(z_k)}{f'(z_k)^2-f(z_k)f''(z_k)}, \quad k\ge 0, \quad z_0\in\C.
+ \label{eq:Sch_def}
+\end{equation}
+Una ventaja importante del método de Schröder, señalada por el propio autor, es que converge cuadráticamente incluso para raíces múltiples, a diferencia del método de Newton que reduce su orden de convergencia en presencia de multiplicidad.
+
+Para mayor comodidad, podemos escribir el iterador de Schröder en términos de la función
+\begin{equation}
+ L_f(z)=\frac{f(z)f''(z)}{\big(f'(z)\big)^2}
+ \label{eq:Lf_def}
+\end{equation}
+como
+\begin{equation}
+ S_f(z)=z-\frac{1}{1-L_f(z)}\,\frac{f(z)}{f'(z)}.
+ \label{eq:Sch_real}
+\end{equation}
+
+\subsection{Conjugación topológica y dinámica simplificada}
+
+Una herramienta fundamental en el análisis de sistemas dinámicos es la conjugación topológica. Dos funciones $f,g: \C \to \C$ se dicen \emph{topológicamente conjugadas} si existe un homeomorfismo $\varphi$ tal que
+$$
+\varphi\circ g=f\circ \varphi.
+$$
+La conjugación topológica es muy útil porque funciones conjugadas comparten las mismas propiedades dinámicas desde el punto de vista topológico: los puntos fijos de una función se mapean en puntos fijos de la otra, los puntos periódicos corresponden entre sí, y lo mismo ocurre con las cuencas de atracción y los conjuntos de Julia.
+
+\subsection{El problema de Cayley y caso de raíces simples}
+
+En 1879, Arthur Cayley \cite{Cay} abordó el problema de caracterizar las cuencas de atracción del método de Newton aplicado a polinomios cuadráticos
+\begin{equation}
+f(z)=(z-a)(z-b),\quad a,b\in \C, \quad a\ne b.
+\label{eq:poly_simple}
+\end{equation}
+Cayley demostró de manera elegante que la función iterativa de Newton
+\begin{equation}
+ N_f(z)=z-\frac{f(z)}{f'(z)}=\frac{a b-z^2}{a+b-2 z}
+ \label{eq:Newton_cuad}
+\end{equation}
+es conjugada con la función $R(z)=z^2$ mediante la transformación de Möbius
+\begin{equation}
+M(z)=\frac{z-a}{z-b}.
+\label{eq:Mobius}
+\end{equation}
+Es decir, $R(z)=M\circ N_f\circ M^{-1}(z)$. El círculo unitario $S^1=\{z\in\C; |z|=1\}$ es invariante por $R$, y su preimagen por $M$ es la bisectriz entre las raíces $a$ y $b$, que constituye el conjunto de Julia de $N_f$. Los iterados convergen a la raíz $a$ si $|z_0-a|<|z_0-b|$ y a la raíz $b$ en caso contrario.
+
+De manera análoga, para el método de Schröder aplicado al mismo polinomio \eqref{eq:poly_simple}, se tiene que
+$$
+S_f(z)=\frac{z^2 (a+b)-4 a b z+a b (a+b)}{a^2-2 z (a+b)+b^2+2 z^2}
+$$
+es conjugada con $-R(z)=-z^2$ mediante la misma transformación de Möbius $M(z)$, es decir, $M\circ S_f\circ M^{-1}(z)=-z^2$. Por tanto, el comportamiento dinámico del método de Schröder para polinomios cuadráticos con raíces simples es idéntico al de Newton: el conjunto de Julia es la bisectriz entre las dos raíces y las cuencas de atracción son los dos semiplanos correspondientes.
+
+\section{Caso de dos raíces con multiplicidades arbitrarias}
+
+Consideramos ahora el caso más general de polinomios con dos raíces complejas de multiplicidades distintas:
+\begin{equation}
+ f(z)=(z-a)^m(z-b)^n,\qquad a,b\in\C,\ a\ne b,\quad m\ge n\ge 1.
+ \label{eq:poly_dos_raices}
+\end{equation}
+Este caso es significativamente más interesante que el de raíces simples, pues la presencia de multiplicidades distintas rompe la simetría y produce conjuntos de Julia con geometría circular no trivial.
+
+\subsection{Reducción al caso canónico mediante conjugación}
+
+Para simplificar el análisis y apreciar mejor las simetrías, realizamos primero una conjugación afín que traslada las raíces $a$ y $b$ a $1$ y $-1$ respectivamente. Definimos la transformación afín
+\begin{equation}
+A(z)=1+2\frac{z-a}{a-b}
+\label{eq:afin}
+\end{equation}
+y consideramos la función conjugada
+\begin{equation}
+T_{m,n}(z)=A\circ S_f\circ A^{-1}(z)=\frac{(m-n) z^2 +2 (m+n) z +m-n}{(m+n) z^2 +2(m-n)z +m+n}.
+\label{eq:Tmn}
+\end{equation}
+Esta función $T_{m,n}$ representa la dinámica del método de Schröder aplicado a $(z-1)^m(z+1)^n$ y depende únicamente de las multiplicidades $m$ y $n$.
+
+Una segunda conjugación con la transformación de Möbius \eqref{eq:Mobius} (para $a=1$, $b=-1$) nos lleva a una función racional extremadamente simple:
+\begin{equation}
+R_{m,n}(z)=M\circ T_{m,n}\circ M^{-1}(z)=-\frac{n}{m}z^2.
+\label{eq:Rmn}
+\end{equation}
+
+\subsection{Análisis dinámico de $R_{m,n}$}
+
+La función $R_{m,n}(z)=-\tfrac{n}{m}z^2$ tiene una dinámica completamente caracterizada. El círculo
+$$
+C_{m,n}=\left\{z\in\C; |z|=\frac{m}{n}\right\}
+$$
+es invariante bajo $R_{m,n}$. Los puntos con $|z_0|<m/n$ convergen al origen bajo iteración, mientras que los puntos con $|z_0|>m/n$ divergen a infinito. Por tanto, $C_{m,n}$ es el conjunto de Julia de $R_{m,n}$.
+
+\begin{teorema}[Frontera de cuencas en $\R$ para Schr\"oder]
+\label{teo:frontera_real_sch}
+Considérese \eqref{eq:poly_dos_raices} con $a<b$ y $m\ge n\ge 1$. Entonces la intersección con $\R$ de la frontera entre las cuencas de atracción de $a$ y $b$ para el método de Schr\"oder está dada por los dos puntos
+\begin{equation}
+ x_{\pm}= -\,\frac{b\,m^2-a\,n^2}{m^2-n^2}\ \pm\ \frac{mn\,|a-b|}{m^2-n^2}.
+ \label{eq:xpm_sch}
+\end{equation}
+Más aún:
+\begin{itemize}
+\item Si $m=n$, la frontera degenera en el punto medio $x=(a+b)/2$ y la recta real se divide en dos semirrectas simétricas: los $x<(a+b)/2$ convergen a $b$ y los $x>(a+b)/2$ a $a$.
+\item Si $m>n$, entonces el intervalo $(x_{-},x_{+})$ pertenece a la cuenca de $b$ (la raíz de menor multiplicidad) y $(-\infty,x_{-})\cup(x_{+},\infty)$ pertenece a la cuenca de $a$ (la raíz de mayor multiplicidad).
+\end{itemize}
+\end{teorema}
+
+\noindent
+\textit{Esbozo de demostración.} En el plano complejo, para \eqref{eq:poly_dos_raices} el iterador de Schr\"oder es conjugado por transformaciones de M\"obius y afines con la aplicación $R_{m,n}(z)=-\tfrac{n}{m}z^2$, cuyo conjunto de Julia es el círculo $|z|=m/n$. Volviendo por la conjugación se obtiene una circunferencia explícita en el plano $z$ cuya ecuación es
+\[
+ \left|z+\frac{b\,m^2-a\,n^2}{m^2-n^2}\right|=\frac{mn\,|a-b|}{m^2-n^2}.
+\]
+La intersección con $\R$ son los dos puntos \eqref{eq:xpm_sch}. El interior de dicha circunferencia corresponde, por conjugación, a la cuenca de la raíz de menor multiplicidad y el exterior a la de mayor multiplicidad. El caso $m=n$ es el límite en el que la circunferencia “explota” en la mediatriz, que corta $\R$ en $(a+b)/2$. \qed
+
+\subsection{Consecuencias dinámicas y sensibilidad}
+
+\begin{itemize}
+\item Localización de las fronteras: la posición de $x_{\pm}$ se desplaza hacia la raíz de menor multiplicidad al crecer $m/n$, de modo que su cuenca en $\R$ queda "encerrada" en un intervalo cada vez más pequeño alrededor de dicha raíz.
+\item Límite $m/n\to 1^+$: los puntos $x_{\pm}$ se separan y su distancia crece sin cota, recuperando en el límite la frontera en el punto medio, coherente con el caso $m=n$.
+\item Robustez numérica: lejos de $x_{\pm}$ la convergencia es estable; en vecindades de $x_{\pm}$ pequeñas perturbaciones en la condición inicial pueden enviar la órbita a la cuenca opuesta.
+\end{itemize}
+
+\subsection{Ejemplos representativos}
+
+\begin{itemize}
+\item Caso simétrico $a=-1$, $b=1$: si $m=n$ la frontera en $\R$ es $x=0$; si $m>n$, la frontera son $x_{\pm}= -\tfrac{m^2+n^2}{m^2-n^2} \pm \tfrac{2mn}{m^2-n^2}$ y $(x_{-},x_{+})$ converge a la raíz simple $x=-1$.
+\item Desplazamiento afín general: para $a<b$ arbitrarios, los mismos patrones se obtienen con los $x_{\pm}$ de \eqref{eq:xpm_sch}.
+\end{itemize}
+
+\section{Comportamiento de los puntos fijos y periodicidad}
+
+Se analizan los puntos fijos reales de los operadores iterativos asociados a cada método, su multiplicidad y la aparición de ciclos periódicos. Se describen criterios para clasificar su naturaleza (atractor, repulsor, neutro) mediante el signo y el valor absoluto de la derivada en puntos fijos.
+
+\section{Análisis de estabilidad y bifurcaciones}
+
+Se expone el análisis de estabilidad lineal (derivada absoluta menor que 1) y se discuten bifurcaciones típicas que aparecen al variar parámetros del método o del polinomio objetivo. Se incluyen observaciones sobre la pérdida de estabilidad y la aparición de ciclos de periodo mayor.
+
+\section{Regiones de convergencia y sensibilidad a las condiciones iniciales}
+
+Se estudian las regiones de atracción en la recta real (intervalos de convergencia) y la sensibilidad frente a la condición inicial. Se sugieren procedimientos numéricos sencillos para aproximar dichas regiones y medir la robustez de cada método ante condiciones ruidosas.
+
+\section{Comparación con el método de Newton en la recta real}
+
+Se comparan de manera concisa las propiedades dinámicas y numéricas (tasa de convergencia, estabilidad ante raíces múltiples, comportamiento cerca de puntos críticos) frente al método de Newton. En particular, para $f(x)=(x-a)^m(x-b)^n$ con $a<b$:
+\begin{itemize}
+\item Si $m=n$, ambas fronteras en $\R$ coinciden en el punto medio $(a+b)/2$.
+\item Si $m>n$, la frontera de Newton en $\R$ es un único punto $c\in(a,b)$ que se desplaza hacia la raíz de menor multiplicidad al crecer $m/n$, mientras que en Schr\"oder la frontera es el intervalo finito $(x_{-},x_{+})$ dado por \eqref{eq:xpm_sch}. En consecuencia, la cuenca del múltiple (raíz $a$) domina $\R$ en Schr\"oder fuera de ese intervalo.
+\item En términos de coste/orden, Newton es de orden 2 y Schr\"oder de orden 2, pero este último muestra una partición de $\R$ más favorable a la raíz de mayor multiplicidad cuando $m\ne n$.
+\end{itemize}
+
+\section{Conclusiones del capítulo}
+
+Breve resumen de los hallazgos y su relevancia para la selección de métodos en problemas reales; se remiten detalles técnicos y experimentales a los capítulos siguientes y al anexo del framework en Python.

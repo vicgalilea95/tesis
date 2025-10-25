@@ -1,0 +1,533 @@
+% !TEX root = MemoriaVGalilea.tex
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% !TEX spellcheck = Spanish
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----- VERSION: 9-10-20215
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[12pt,a4paper,spanish]{book}
+%
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Para controlar el tamaño de las hojas y del texto impreso
+% Tamaño sugerido por el Servicio de Publicaciones de la UR
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\geometry{twoside,
+  paperheight =297mm,% 24.0cm
+  paperwidth = 211mm,%17.0cm
+  columnsep = 1.0cm, % Separación cuando haya dos columnas
+  textheight = 237mm,%19.0cm,
+  textwidth = 166mm, %12.8cm,
+  %centering,
+  right=20mm,
+  left=25mm,
+  top = 3.0cm
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% El primer \setcounter es para añadir numeraciones
+% a las subsecciones:
+%   The sectional levels are numbered starting from 0:
+%     \part is level -1
+%     \chapter is level 0
+%     \section is level 1
+%     \subsection is level 2
+%     \subsubsection is level 3
+%     \paragraph is level 4
+%     \subparagraph is level 5
+% (el primer 4 hace referencia al nivel 3 (subsubsección)
+% y el segundo es para que salga en el toc (table of contents)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----- PAQUETES -----
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath} % AMS--LATEX
+\usepackage{amssymb} % Simbolos del AMS--LATEX
+\usepackage{pdfpages} % Para insertar PDF
+\usepackage{graphicx}
+\usepackage{float} % Para la opción [H] en figuras
+\usepackage{tikz}
+%
+%% Para insertar una figura al lado de un texto:
+%\usepackage{wrapfig}
+%%
+% Si queremos que se añada una sangria en los primeros parrafos cuando trabajamos en ingles, podemos usar el paquete {indentfirst}:
+%\usepackage{indentfirst}
+%
+%\usepackage{color}
+%
+% Paquete para añadir navegabilidad, pero en el PDF, no en div!
+\usepackage{hyperref}
+%
+% Paquete showkeys para mostrar las etiquetas:
+% solo para version preliminar.
+% Añadir el paquete despues del paquete hyperref para que tenga
+% el efecto completo
+%\usepackage[notref,color]{showkeys}
+%\usepackage[notcite,notref]{showkeys} % es otra opcion
+%
+% Paquete para mostrar en la bibliografia las paginas donde
+% se citan las referencias
+%\usepackage{backref}
+%
+\usepackage{url} % Para escribir direcciones web
+%
+%\usepackage{multicol}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----- Nuevo formato para el titulo <Indice General> ------
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\addto\captionsspanish{%
+%\renewcommand{\contentsname}{Contenidos}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----- Encabezamientos para documentos tipo libro -----
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----------------------------------------------------------
+%    Evita las hojas en blanco con encabezamiento cuando
+%    se utiliza la opción 'twoside', predeterminada en la
+%    clase 'book'.
+%    Véase 'Page headers and footers in LaTeX' de
+%    Piet van Oostrum (p. 13-14)
+% ----------------------------------------------------------
+%
+\makeatletter  % '@' es ahora una "letter" normal para LaTeX
+\def\cleardoublepage{\clearpage\if@twoside\ifodd\c@page\else
+    \hbox{}
+    \vspace*{\fill}
+    \vspace{\fill}
+    \thispagestyle{empty}
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother  % '@' se restaura como un caracter 'non-letter'
+%
+% ----------------------------------------------------------
+%    Se redefine "myheadings" pagestyle
+% ----------------------------------------------------------
+%
+\makeatletter  % '@' es ahora una "letter" normal para LaTeX
+\renewcommand{\ps@myheadings}{%
+    \renewcommand{\@oddhead}{%%% encabezamiento (pag. impar) %%%
+       \parbox{\textwidth}{%%% introduce el titulo de la seccion
+	           \textsc{\footnotesize\rightmark}\hfill\thepage}}
+    \renewcommand{\@evenhead}{%%% encabezamiento (pag. par) %%%
+       \parbox{\textwidth}{%%% introduce el titulo del capitulo
+            \thepage\hfill\textsc{\footnotesize\leftmark}}}
+    \renewcommand{\@oddfoot}{}
+    \renewcommand{\@evenfoot}{}
+}
+\makeatother  % '@' se restaura como un caracter 'non-letter'
+%
+\pagestyle{myheadings}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% -------------- Definicion de teoremas ---------------
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      
+\usepackage{amsthm}
+%
+% Para poner la palabra Proof en negrita y en italica
+% (por defecto lo pone solo en italica)
+%\let\oldproofname=\proofname
+%\renewcommand{\proofname}{\rm\bf\emph{\oldproofname}}
+%
+% Para poner la palabra Demostracion en negrita y en italica
+\addto\captionsspanish{%
+\renewcommand{\proofname}{\rm\bf\emph{Demostración.}}}
+%
+% Para poner como QED un cuadrado negro al final de linea
+% (por defecto lo pone blanco)
+\renewcommand{\qedsymbol}{$\blacksquare$}
+%
+%
+\theoremstyle{plain}
+% en castellano:
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposici\'on}
+\newtheorem{corolario}[teorema]{Corolario}
+\newtheorem{definicion}[teorema]{Definici\'on}
+%
+\theoremstyle{definition}
+% en castellano:
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+\newtheorem{algoritmo}[teorema]{Algoritmo}
+%\newtheorem{remark}[theorem]{Remark}
+%
+\theoremstyle{remark}
+% en castellano:
+\newtheorem{nota}[teorema]{Nota}
+%
+% Para poner el simbolo \blacktriangleleft al final de ejemplo
+\newenvironment{ejemploconqed}[1][]{%
+\begin{ejemplo}[#1]
+\renewcommand{\qedsymbol}{$\blacktriangleleft$}%
+\pushQED{\qed}}%
+{\popQED\end{ejemplo}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----- Definición de comandos -----
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\operatorname{e}}
+\newcommand{\Fou}{\mathcal{F}(f)}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Log}{\operatorname{Log}}
+%
+
+% Unificar notacion:
+\renewcommand{\tan}{\tg} 
+\renewcommand{\arctan}{\arctg} 
+\renewcommand{\sin}{\sen} 
+\renewcommand{\arcsin}{\arcsen} 
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+
+\def\x{x^{\ast}}
+\def\z{z^{\ast}}
+\def\t{t^{\ast}}
+\def\tt{t^{\ast\ast}}
+\def\y{y^{\ast}}
+
+%Para ampliar el espaciado entre lineas en una tabla:
+\def\espacioextra{&\\[1mm]}	%%%%% IMPORTANTE
+\renewcommand{\arraystretch}{0.0}	%%%%% IMPORTANTE
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ----- Para colocar dos figuras en la misma linea -----
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newcommand{\twofigures}[4]{%
+\begin{figure}[htb]
+%\setlength{\captionindent}{0pt}
+\begin{minipage}[t]{0.47\textwidth}
+\begin{centering}
+\includegraphics[width=3in, height=3in]{#1}%
+\par
+\end{centering}
+\caption{#2}
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.47\textwidth}
+\begin{centering}
+\includegraphics[width=3in,height=3in]{#3}%
+\par
+\end{centering}
+\caption{#4}
+\end{minipage}
+\end{figure}
+}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% -- Para flexibilizar la colocación de figuras y tablas ---
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\setcounter{topnumber}{4}
+%\setcounter{bottomnumber}{4}
+%\setcounter{totalnumber}{4}
+%\setcounter{dbltopnumber}{4}
+%\renewcommand{\topfraction}{.97}
+%\renewcommand{\bottomfraction}{.97}
+%\renewcommand{\textfraction}{.03}
+%\renewcommand{\floatpagefraction}{.9}
+%\renewcommand{\dbltopfraction}{.97}
+%\renewcommand{\dblfloatpagefraction}{.9}
+%\setlength{\floatsep}{12pt plus 6pt minus 4pt}
+%\setlength{\textfloatsep}{15pt plus 8pt minus 5pt}
+%\setlength{\intextsep}{12pt plus 6pt minus 4pt}
+%\setlength{\dblfloatsep}{12pt plus 6pt minus 4pt}
+%\setlength{\dbltextfloatsep}{15pt plus 8pt minus 5pt}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\decimalpoint % Español: punto decimal en vez de coma decimal
+\renewcommand{\baselinestretch}{1.1} % Entrelineado
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------- Titulo y autores ---------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\title{\textbf{Estudio dinámico de diversos métodos iterativos para resolver ecuaciones no lineales}}
+%
+\author{Víctor Galilea\\[2ex]
+José Manuel Gutiérrez Jiménez\\[2ex]
+}
+\date{}
+%
+%
+%
+\begin{document}
+%
+% Para que en español ponga Tabbla en vez de Cuadro,
+% Referencias en vez de Bibliografia, etc
+%\renewcommand{\tablename}{Tabla}
+%\renewcommand{\bibname}{Referencias}
+%\renewcommand{\listoftables}{Índice de tablas}
+%\renewcommand{\appendixname}{Complemento}
+%
+
+\frontmatter
+
+\maketitle
+
+%\chapter{Introducción}
+
+
+
+
+\tableofcontents
+
+\mainmatter 
+
+% Cada capítulo aparece en un fichero independiente,
+% que no necesita ningún tipo de cabecera,
+% pero que debe llamarse igual.
+
+%CAPITULO 1
+\chapter{Introducción}
+
+Antecedentes y marco teórico sobre métodos iterativos \cite{Traub} y nociones de dinámica, tanto real como compleja. 1.1. Motivación y relevancia del estudio
+1.2. Antecedentes históricos de los métodos iterativos para la resolución de ecuaciones no lineales
+1.3. Dinámica compleja y métodos iterativos: una conexión interdisciplinar (topología, análisis numérico, etc.)
+1.4. Objetivos de la tesis
+1.5. Estructura y organización del trabajo
+
+
+%CAPITULO 2
+\chapter{Fundamentos teóricos}
+
+2.1. Métodos iterativos para la resolución de ecuaciones ( $f(x) = 0 $)
+2.2. Teoría de la iteración de funciones racionales
+2.3. Conceptos de dinámica compleja: conjuntos de Julia y Fatou
+2.4. Conjugación topológica y equivalencia dinámica
+2.5. Plano de parámetros y bifurcaciones
+2.6. Consideraciones numéricas: convergencia local y global
+
+%%CAPITULO 3
+%\chapter{Dinámica del método de Newton}
+%
+%3.1. Revisión teórica y propiedades fundamentales
+%3.2. Dinámica en el plano complejo: cuencas de atracción y fractalidad
+%3.3. Dinámica en la recta real
+%3.4. Propiedades numéricas: orden de convergencia y estabilidad
+%3.5. Discusión sobre su papel como referencia en el análisis comparativo
+%
+%
+%
+%\section{Dinámica del método de Newton en el plano complejo}
+%
+%Aquí se podría seguir el libro de Sergio Plaza
+%
+%\section{Dinámica del método de Newton en la recta real}
+
+\include{TesisVG_Cap3}
+
+%\include{TesisVG_CapPRUEBA}
+%CAPITULO 4
+% \chapter{Estudio dinámico de los métodos de Schröder, Halley y Chebyshev en el plano complejo}
+
+
+% Resumir lo hecho en el TFM.
+
+% 4.1. Definición general y propiedades de cada método
+% 4.2. Análisis de las funciones racionales asociadas
+% 4.3. Estudio de los conjuntos de Julia y Fatou
+% 4.4. Análisis del plano de parámetros
+% 4.5. Comparación con el método de Newton en términos dinámicos
+% 4.6. Comparación con el método de Newton en términos numéricos
+
+% \include{TesisVG_Cap4}
+
+%\section{Dinámica del método de Schr\"oder en el plano complejo}
+%
+%\subsection{Polinomios con dos raíces}
+%
+%Resumir lo hecho en el artículo \cite{Galilea21}
+%
+%\subsection{Polinomios de grado tres}
+%
+%Esto es lo que debemos desarrollara ahora
+%\subsection{Polinomios de grado tres: comportamiento del punto del infinito.
+%}
+%%\item En el plano complejo ampliado $\hat{\mathbb{C}}= \mathbb{C}\cup \{\infty\}$, el $\infty$ puede interpretarse como un punto más del plano complejo. 
+%%\item Método de Newton \cite{Traub}: $\infty$ único punto fijo extraño (repulsor).
+%%\item Método de Schröder: $\infty$ no es siempre un punto fijo.
+%%\item Tiene sentido estudiar sus órbitas para distintas familias de funciones: ¿a dónde va a parar el punto del infinito por le método de  Schröder?
+%%\item El comportamiento de $\infty$ para $S_p(z)$ es el mismo que el comportamiento de $0$ para
+%%\begin{equation}\label{eq2}
+%%T_{p}(z)=\frac{1}{S_{p}(1/z)}
+%
+%\section{Dinámica del método de Schr\"oder en la recta real}
+
+%CAPITULO 5
+\include{TesisVG_Cap5}
+
+%CAPITULO 6
+\chapter{Análisis detallado del método de Schröder}
+
+
+6.1. Derivación teórica y orden de convergencia
+6.2. Estudio del caso $(x - a)^m (x - b)^n$
+6.3. Estudio del caso cúbico
+6.4. El método de Schröder y el punto en el infinito
+6.5. Visualización y análisis gráfico de los resultados
+
+
+%CAPITULO 7
+\chapter{Dinámica de la familia Chebyshev-Halley}
+
+%\section{Algunos métodos notables de la familia Chebyshev-Halley}
+%
+%\section{Dinámica de la familia Chebyshev-Halley en el plano complejo}
+%
+%\section{Dinámica de la familia Chebyshev-Halley en la recta real}
+
+%7.1. Introducción y formulación general
+%%
+%% %Definición de la familia Chebyshev-Halley y sus casos particulares (Chebyshev, Halley, super-Halley).
+%%
+%% Motivación teórica y relevancia dentro del estudio de métodos iterativos.
+%%
+%7.2. Puntos fijos extraños
+%%
+%% Condiciones para la existencia de fijaciones extraviadas atractoras.
+%%
+%%Análisis de los casos particulares de Chebyshev y Halley.
+%%
+%% Influencia del parámetro y del grado del polinomio en la estabilidad.
+%%
+%7.3. Puntos críticos libres y estructura del plano de parámetros
+%%
+%%Caracterización y número de puntos críticos libres.
+%%
+%%Impacto en la aparición de comportamientos caóticos y ciclos no deseados.
+%%
+%% Estudio del plano de parámetros y fenómenos de ``doble mala conducta''
+%%
+%7.4. Aplicaciones a polinomios de grados 2 y 3
+%%
+%% Análisis comparativo de la dinámica para $f(z) = z^2 - 1 ) y ( f(z) = z^3 - 1$
+%%
+%% Visualización de cuencas de atracción y planos de parámetros.
+%%
+%7.5. Conclusiones y comparación con otros métodos
+%
+%% Contraste con Newton y Schröder.
+% 
+% Implicaciones teóricas y numéricas.
+
+%Líneas futuras de investigación.
+
+%CAPITULO 8
+\chapter{Conclusiones y líneas futuras de investigación}
+
+9.1. Principales conclusiones teóricas
+9.2. Contribuciones al estudio de la dinámica de métodos iterativos
+9.3. Aportaciones computacionales
+9.4. Posibles extensiones y trabajos futuros
+
+
+
+
+%\include{Capitulo1}
+
+
+
+\backmatter
+
+\chapter{Anexo 1: Desarrollo de un framework en Python para el análisis dinámico} 
+
+8.1. Motivación y objetivos del framework
+8.2. Arquitectura y diseño del software
+8.3. Implementación de las funciones iterativas y visualización del plano complejo
+8.4. Herramientas para el análisis numérico y visual de la convergencia
+8.5. Casos de estudio y validación de resultados
+8.6. Posibles extensiones futuras del framework
+
+
+
+%Esto es para que incluya la bibliograf\'{\i}a en el \'{\i}ndice
+%Ver Sanguino, pg119.
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\backmatter
+
+%\begin{thebibliography}{99}
+\frenchspacing
+
+\cleardoublepage % <--- Sin esto, el \bibname del toc podría indicar la página par anterior
+% Para meter cosas en el "toc" a mano, ver
+% \S 2.4.2 del LaTeX Companion (ejemplo de la p. 36)
+\phantomsection % <--- Como la bibliografía no está numerada, sin esto 
+%                      el link del índice de navegación del pdf no lo encuentra
+%\addcontentsline{toc}{chapter}{\bibname}
+% Para ponerlo a mano en la cabecera, pues no es \chapter:
+\chaptermark{\bibname}
+% Cuando no hay secciones para las cabeceras impares, se suele hacer esto:
+%\sectionmarkwithoutsections{\bibname}
+\include{VG_Biblio}
+
+\end{document}
+
+
+%BIBLIOGRAFÍA USANDO BIBTEX
+%\begin{thebibliography}{99}
+\frenchspacing
+
+%\renewcommand{\bibname}{Bibliografía}
+%\include{Biblio}
+%Ver otros estilos en p\'aginas 29-30 de Ataz
+%Guia casi completa de Bibtex
+%\bibliographystyle{amsplain}
+\bibliographystyle{plain}
+%\bibliographystyle{unsrt}
+\bibliography{biblioGalilea}
+\nocite{*} % Con esto pone todos en la bibliograf\'{\i}a; si no, s\'olo
+% los citados
+%\end{thebibliography}

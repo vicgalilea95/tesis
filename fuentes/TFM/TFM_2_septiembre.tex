@@ -1,0 +1,2147 @@
+%\title{Plantilla para Trabajo Fin de Máster, UNED}
+% Esta plantilla está basada en la Plantilla de Tesis de la Universidad de Bristol, UK. https://www.overleaf.com/latex/templates/university-of-bristol-thesis-template/kzqrfvyxxcdm#.VNS-e1WG-cg
+\RequirePackage[l2tabu]{nag}		% Warns for incorrect (obsolete) LaTeX usage
+%
+%
+% Memoir is a flexible class for typesetting poetry, fiction, 
+% non-fiction and mathematical works as books, reports, articles or
+% manuscripts. CTAN repository is found at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/memoir/
+% Memoir class loads useful packages by default (see manual).
+\documentclass[a4paper,11pt,leqno,openbib]{memoir} %add 'draft' to turn draft option on (see below)
+%
+%
+% Adding metadata:
+\usepackage{datetime}
+\usepackage{ifpdf}
+\ifpdf
+
+\fi
+% When draft option is on. 
+\ifdraftdoc 
+	\usepackage{draftwatermark}				%Sets watermarks up.
+	\SetWatermarkScale{0.3}
+	\SetWatermarkText{\bf Draft: \today}
+\fi
+%
+% Declare figure/table as a subfloat.
+\newsubfloat{figure}
+\newsubfloat{table}
+% Better page layout for A4 paper, see memoir manual.
+\settrimmedsize{297mm}{210mm}{*}
+\setlength{\trimtop}{0pt} 
+\setlength{\trimedge}{\stockwidth} 
+\addtolength{\trimedge}{-\paperwidth} 
+\settypeblocksize{634pt}{448.13pt}{*} 
+\setulmargins{4cm}{*}{*} 
+\setlrmargins{*}{*}{1.5} 
+\setmarginnotes{17pt}{51pt}{\onelineskip} 
+\setheadfoot{\onelineskip}{2\onelineskip} 
+\setheaderspaces{*}{2\onelineskip}{*} 
+\checkandfixthelayout
+%
+\frenchspacing
+% Font with math support: New Century Schoolbook
+\usepackage{fouriernc}
+\usepackage[T1]{fontenc}
+%
+% UoB guidelines:
+%
+% Text should be in double or 1.5 line spacing, and font size should be
+% chosen to ensure clarity and legibility for the main text and for any
+% quotations and footnotes. Margins should allow for eventual hard binding.
+%
+% Note: This is automatically set by memoir class. Nevertheless \OnehalfSpacing 
+% enables double spacing but leaves single spaced for captions for instance. 
+\OnehalfSpacing 
+%
+% Sets numbering division level
+\setsecnumdepth{subsection} 
+\maxsecnumdepth{subsubsection}
+%
+% Chapter style (taken and slightly modified from Lars Madsen Memoir Chapter 
+% Styles document
+\usepackage{calc,soul,fourier}
+\makeatletter 
+\newlength\dlf@normtxtw 
+\setlength\dlf@normtxtw{\textwidth} 
+\newsavebox{\feline@chapter} 
+\newcommand\feline@chapter@marker[1][4cm]{%
+	\sbox\feline@chapter{% 
+		\resizebox{!}{#1}{\fboxsep=1pt%
+			\colorbox{gray}{\color{white}\thechapter}% 
+		}}%
+		\rotatebox{90}{% 
+			\resizebox{%
+				\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}% 
+			{!}{\scshape\so\@chapapp}}\quad%
+		\raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+} 
+\newcommand\feline@chm[1][4cm]{%
+	\sbox\feline@chapter{\feline@chapter@marker[#1]}% 
+	\makebox[0pt][c]{% aka \rlap
+		\makebox[1cm][r]{\usebox\feline@chapter}%
+	}}
+\makechapterstyle{daleifmodif}{
+	\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so} 
+	\renewcommand\chaptitlefont{\normalfont\Large\bfseries\scshape} 
+	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
+	\renewcommand\printchapternum{\null\hfill\feline@chm[2.5cm]\par} 
+	\renewcommand\afterchapternum{\par\vskip\midchapskip} 
+	\renewcommand\printchaptertitle[1]{\color{gray}\chaptitlefont\raggedleft ##1\par}
+} 
+\makeatother 
+\chapterstyle{daleifmodif}
+%
+% UoB guidelines:
+%
+% The pages should be numbered consecutively at the bottom centre of the
+% page.
+\makepagestyle{myvf} 
+\makeoddfoot{myvf}{}{\thepage}{} 
+\makeevenfoot{myvf}{}{\thepage}{} 
+\makeheadrule{myvf}{\textwidth}{\normalrulethickness} 
+\makeevenhead{myvf}{\small\textsc{\leftmark}}{}{} 
+\makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
+\pagestyle{myvf}
+
+%
+% Oscar's command (it works):
+% Fills blank pages until next odd-numbered page. Used to emulate single-sided
+% frontmatter. This will work for title, abstract and declaration. Though the
+% contents sections will each start on an odd-numbered page they will
+% spill over onto the even-numbered pages if extending beyond one page
+% (hopefully, this is ok).
+\newcommand{\clearemptydoublepage}{\newpage{\thispagestyle{empty}\cleardoublepage}}
+%
+%
+% Creates indexes for Table of Contents, List of Figures, List of Tables and Index
+\makeindex
+% \printglossaries below creates a list of abbreviations. \gls and related
+% commands are then used throughout the text, so that latex can automatically
+% keep track of which abbreviations have already been defined in the text.
+%
+% The import command enables each chapter tex file to use relative paths when
+% accessing supplementary files. For example, to include
+% chapters/brewing/images/figure1.png from chapters/brewing/brewing.tex we can
+% use
+% \includegraphics{images/figure1}
+% instead of
+% \includegraphics{chapters/brewing/images/figure1}
+\usepackage{import}
+
+% Add other packages needed for chapters here. For example:
+\usepackage{lipsum}					%Needed to create dummy text
+\usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
+\usepackage[centertags]{amsmath}			%Writes maths centred down
+\usepackage{stmaryrd}					%New AMS symbols
+\usepackage{amssymb}					%Calls AMS symbols
+\usepackage{amsthm}					%Calls AMS theorem environment
+\usepackage{newlfont}					%Helpful package for fonts and symbols
+\usepackage{layouts}					%Layout diagrams
+\usepackage{graphicx}					%Calls figure environment
+\usepackage{longtable,rotating}			%Long tab environments including rotation. 
+\usepackage[latin1]{inputenc}			       %Needed to encode non-english characters 
+									%directly for mac
+\usepackage{colortbl}					%Makes coloured tables
+\usepackage{wasysym}					%More math symbols
+\usepackage{mathrsfs}					%Even more math symbols
+\usepackage{float}						%Helps to place figures, tables, etc. 
+\usepackage{verbatim}					%Permits pre-formated text insertion
+\usepackage{upgreek }					%Calls other kind of greek alphabet
+\usepackage{latexsym}					%Extra symbols
+\usepackage[square,numbers,
+		     sort&compress]{natbib}		%Calls bibliography commands 
+\usepackage{url}						%Supports url commands
+\usepackage{etex}						%eTeXÃ•s extended support for counters
+\usepackage{fixltx2e}					%Eliminates some in felicities of the 
+									%original LaTeX kernel
+\usepackage[spanish,es-lcroman]{babel}
+\decimalpoint
+		%For languages characters and hyphenation
+\usepackage{color}                    				%Creates coloured text and background
+\usepackage[colorlinks=true,
+		     allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+\hypersetup{colorlinks,linkcolor=,urlcolor=magenta}
+\usepackage{memhfixc}					%Must be used on memoir document 
+									%class after hyperref
+\usepackage{enumerate}					%For enumeration counter
+\usepackage{footnote}					%For footnotes
+\usepackage{microtype}					%Makes pdf look better.
+\usepackage{rotfloat}					%For rotating and float environments as tables, 
+									%figures, etc. 
+\usepackage{alltt}						%LaTeX commands are not disabled in 
+									%verbatim-like environment
+\usepackage[version=0.96]{pgf}			%PGF/TikZ is a tandem of languages for producing vector graphics from a 
+\usepackage{tikz}						%geometric/algebraic description.
+\usetikzlibrary{arrows,shapes,snakes,
+		       automata,backgrounds,
+		       petri,topaths}				%To use diverse features from tikz		
+		       
+		       
+		       
+%							
+%Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
+% (the first line of paragraph at the end of a page)
+\widowpenalty=1000
+\clubpenalty=1000
+%
+% New command definitions for my thesis
+%
+\newcommand{\keywords}[1]{\par\noindent{\small{\bf Keywords:} #1}} %Defines keywords small section
+\newcommand{\parcial}[2]{\frac{\partial#1}{\partial#2}}                             %Defines a partial operator
+\newcommand{\vectorr}[1]{\mathbf{#1}}                                                        %Defines a bold vector
+\newcommand{\vecol}[2]{\left(                                                                         %Defines a column vector
+	\begin{array}{c} 
+		\displaystyle#1 \\
+		\displaystyle#2
+	\end{array}\right)}
+\newcommand{\mados}[4]{\left(                                                                       %Defines a 2x2 matrix
+	\begin{array}{cc}
+		\displaystyle#1 &\displaystyle #2 \\
+		\displaystyle#3 & \displaystyle#4
+	\end{array}\right)}
+\newcommand{\pgftextcircled}[1]{                                                                    %Defines encircled text
+    \setbox0=\hbox{#1}%
+    \dimen0\wd0%
+    \divide\dimen0 by 2%
+    \begin{tikzpicture}[baseline=(a.base)]%
+        \useasboundingbox (-\the\dimen0,0pt) rectangle (\the\dimen0,1pt);
+        \node[circle,draw,outer sep=0pt,inner sep=0.1ex] (a) {#1};
+    \end{tikzpicture}
+}
+
+%
+% My caption style
+\newcommand{\mycaption}[2][\@empty]{
+	\captionnamefont{\scshape} 
+	\changecaptionwidth
+	\captionwidth{0.9\linewidth}
+	\captiondelim{.\:} 
+	\indentcaption{0.75cm}
+	\captionstyle[\centering]{}
+	\setlength{\belowcaptionskip}{10pt}
+	\ifx \@empty#1 \caption{#2}\else \caption[#1]{#2}
+}
+%
+% My subcaption style
+\newcommand{\mysubcaption}[2][\@empty]{
+	\subcaptionsize{\small}
+	\hangsubcaption
+	\subcaptionlabelfont{\rmfamily}
+	\sidecapstyle{\raggedright}
+	\setlength{\belowcaptionskip}{10pt}
+	\ifx \@empty#1 \subcaption{#2}\else \subcaption[#1]{#2}
+}
+%
+%An initial of the very first character of the content
+\usepackage{lettrine}
+\newcommand{\initial}[1]{%
+	\lettrine[lines=3,lhang=0.33,nindent=0em]{
+		\color{gray}
+     		{\textsc{#1}}}{}}
+%
+% Theorem styles used in my thesis
+%
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}[chapter]
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposicion}[chapter]
+\theoremstyle{plain}
+\theoremstyle{definition}
+\newtheorem{dfn}{Definicion}[chapter]
+\theoremstyle{plain}
+\newtheorem{ej}{Ejemplo}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{corollary}{Corolario}[chapter]
+\theoremstyle{plain}
+\newtheorem{result}{Resultado}[chapter]
+
+%
+%
+\begin{document}
+% UoB guidlines:
+%
+% Preliminary pages
+% 
+% The five preliminary pages must be the Title Page, Abstract, Dedication
+% and Acknowledgements, Author's Declaration and Table of Contents.
+% These should be single-sided.
+% 
+% Table of contents, list of tables and illustrative material
+% 
+% The table of contents must list, with page numbers, all chapters,
+ % sections and subsections, the list of references, bibliography, list of
+% abbreviations and appendices. The list of tables and illustrations
+% should follow the table of contents, listing with page numbers the
+% tables, photographs, diagrams, etc., in the order in which they appear
+% in the text.
+% 
+\frontmatter
+\pagenumbering{roman}
+%
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begin{titlingpage}
+\begin{SingleSpace}
+\calccentering{\unitlength} 
+\begin{adjustwidth*}{\unitlength}{-\unitlength}
+\vspace*{13mm}
+\begin{center}
+\rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+\rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+{\HUGE Estudio dinámico del método de Schröder }\\[4mm]
+
+\rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule[0.5ex]{\linewidth}{2pt}\\
+\vspace{6.5mm}
+{\large escrito por}\\
+\vspace{6.5mm}
+{\large\textsc{Víctor Galilea Martín}}\\
+\vspace{11mm}
+{\large Tutores: Francisco Bernis Carro, José Manuel Gutiérrez Jiménez.}\\
+\vspace{11mm}
+\includegraphics[width= 3.5cm]{img/uned-logo.jpg}\\
+\vspace{6mm}
+{\large Facultad de Ciencias\\[1mm]
+\textsc{Universidad Nacional de Educación a Distancia}}\\
+\vspace{11mm}
+\begin{minipage}{11cm}
+\centering Trabajo presentado para la obtención del título de\\ Máster Universitario en Matemáticas Avanzadas de la UNED. \\ Especialidad Análisis Matemático
+\end{minipage}\\
+\vspace{12mm}
+{\large\textsc{Septiembre 2020}}
+\vspace{12mm}
+\end{center}
+\begin{flushright}
+%{\small Word count: ten thousand and four}
+\end{flushright}
+\end{adjustwidth*}
+\end{SingleSpace}
+\end{titlingpage}
+%\clearemptydoublepage
+%
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+\chapter*{Abstract}
+\begin{SingleSpace}
+\noindent \textbf{Resumen}:
+
+El objetivo de este trabajo es el de hacer un estudio a fondo del denominado como ``Método de Schröder'', un proceso iterativo para resolver ecuaciones no lineales en el plano complejo. Para ello, lo primero que haremos será introducir algunos conceptos básicos sobre métodos numéricos y dinámica compleja, para luego ver en qué diferentes contextos puede surgir este método. Haremos un estudio analítico y geométrico del mismo,  para finalmente introducir un estudio  del comportamiento dinámico del mismo.
+\end{SingleSpace}
+\vspace{2cm}
+
+\begin{SingleSpace}
+\noindent \textbf{Abstract}:
+
+The aim of this work is to make an in-depth study of the so-called ``Schröder Method'', a iterative process for solving non linear equations in the complex plane. To do so, the first thing we will do is to introduce some basic concepts about numerical methods and complex dynamics, to then see in what different contexts this method can emerge. We make an analytical and geometric study of the method, to finish with an introduction to the study of its dynamic behavior.
+\end{SingleSpace}
+
+
+\vfill
+\keywords{Sistemas dinámicos, método de Newton, método de Schröder, fractales.}
+%\clearpage
+%\clearemptydoublepage
+%
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+\chapter*{Dedicatoria y agradecimientos}
+\begin{SingleSpace}
+\initial{H}ay muchas personas a las que agradecer todo el apoyo que me han dado en estos tiempos convulsos en los que me ha tocado escribir este trabajo de fin de máster.  Me gustaría empezar agradeciendo la labor de mis dos tutores Francisco Bernis y José Manuel Gutiérrez. Sin ellos no hubiera sido posible la realización de ester trabajo. En especial, me gustaría referirme a José Manuel Gutiérrez, co-tutor de este trabajo, por su gran esfuerzo y ayuda para que saliese a delante y por todas las cosas que he podido aprender de él. También me gustaría agradecerle a Jesús María Aransay, mi supervisor en el trabajo que ejerzo como investigador en la Universidad de La Rioja, porque sin él hubiese sido muy difícil compaginar mi vida laboral con la realización de este estudio.
+\vspace{2.5cm}
+
+
+\end{SingleSpace}
+
+\clearpage
+%\clearemptydoublepage
+
+%
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+\renewcommand{\contentsname}{Tabla de Contenidos}
+\maxtocdepth{subsection}
+\tableofcontents*
+\addtocontents{toc}{\par\nobreak \mbox{}\hfill{\bf Página}\par\nobreak}
+\clearpage
+%\clearemptydoublepage
+%
+\listoftables
+\addtocontents{lot}{\par\nobreak\textbf{{\scshape Tabla} \hfill Página}\par\nobreak}
+\clearpage
+%\clearemptydoublepage
+%
+\listoffigures
+\addtocontents{lof}{\par\nobreak\textbf{{\scshape Figura} \hfill Página}\par\nobreak}
+\clearpage
+%\clearemptydoublepage
+%
+%
+% The bulk of the document is delegated to these chapter files in
+% subdirectories.
+\mainmatter
+%
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+\let\textcircled=\pgftextcircled
+\chapter{Introducción}
+En este primer capítulo introduciremos algunas definiciones y resultados fundamentales en el estudio de la iteración de funciones de variable compleja, una rama de las matemáticas que se enmarca dentro de lo que se llaman los sistemas dinámicos discretos.\\
+En particular vamos a estudiar las funciones de iteración que resultan cuando se aplica un proceso iterativo para resolver una ecuación no lineal $f(z)=0.$ Más concretamente, en este trabajo consideramos sobre todo ecuaciones polinómicas, que dan lugar a funciones de iteración racionales.\\
+Esta disciplina tuvo su origen en el estudio del método de Newton y en los trabajos de Schröder, Cayley, Fatou y Julia entre otros, entre finales del S.XIX y principios del S.XX. Existe una extensa bibliografía que nos permite profundizar en estos temas, como una pequeña muestra, citemos las referencias \cite{Beardon}, \cite{Fagella}, \cite{GutiPlaza}.
+\section{Notación y definiciones previas}
+
+En esta memoria trabajaremos, salvo que se indique lo contrario, en el plano complejo ampliado $\widehat{\mathbb{C}}$, con $z\in \widehat{\mathbb{C}},$ la letra que usaremos habitualmente para referirnos a la variable compleja.
+
+Para denominar a las funciones generales en las que realizaremos la búsqueda de raíces, usaremos las letras minúsculas: $f,g,h.$
+
+
+
+
+
+Si más concretamente nos queremos referir a polinomios, usaremos las letras $p,q:$
+$$ p(z)=\sum_{i=0}^N a_iz^i.$$
+
+Entendemos por \textbf{raíz de $f$} un $z^* \in \mathbb{C}$ tal que $f(z^*)=0.$
+Cuando estemos trabajando con una única raíz de esta función nos referiremos a ella como $z^*,$ mientras que cuando trabajemos con una familia de raíces, las denotaremos por $\lbrace z^i \rbrace_{i=1}^N.$
+
+Cuando trabajemos con procesos iterativos, usaremos el subíndice $n\in \mathbb{N}$ para referirnos a cada iteración del mismo, siendo $z_0$ el punto inicial, como en la siguiente expresión:
+
+$$z_{n+1}=F(z_n),\hspace{0.5cm}z_0\in\mathbb{C}. $$
+
+
+Para el mejor seguimiento de este trabajo, procedemos a la introducción de algunos conceptos básicos sobre dinámica compleja. Trabajaremos sobre la esfera de Riemann o plano complejo ampliado $\widehat{\mathbb{C}}$, es decir, $\mathbb{C} \cup \lbrace\infty\rbrace$. De momento trataremos funciones arbitrarias, aunque conforme vayamos avanzando las iremos acotando.
+
+\begin{dfn}
+Definimos \textbf{órbita de una función compleja $F$ en un punto $z_0\in$ $\mathbb{C}$} como:
+$$\mathcal{O}^{+}(z_0)=\lbrace F^n(z_0)\rbrace_{n=0}^{\infty},$$
+siendo $F^n(z_0)$ la $n$-ésima composición de $F$ consigo misma en $z_0$.
+\end{dfn}
+
+\begin{dfn}
+Dada una función compleja $F$, decimos que $\zeta \in \mathbb{C}$ es \textbf{un punto fijo de $F$}, si cumple que:
+$$F(\zeta)=\zeta.$$
+\end{dfn}
+
+Si generalizamos la definición de punto fijo obtenemos la definición de punto periódico.
+\begin{dfn}
+Dada una función compleja $F$, decimos que $\zeta \in \mathbb{C}$ es \textbf{un punto periódico de $F$ con periodo $p\in\mathbb{N}$}, si cumple que:
+$$0<k<p,\hspace{0.2cm} F^k(\zeta)\neq\zeta, F
+^p(\zeta)=\zeta.$$
+A la órbita de $\zeta$ por $F$ se la denomina \textbf{p-ciclo}.
+\end{dfn}
+
+\begin{ej}
+
+Para el caso concreto de una función racional
+$$R(z)=\frac{p(z)}{q(z)} $$
+podemos considerar al infinito como punto fijo de $R(z)$ si y solo si el grado de $p$ es mayor que el grado de $q$.
+\end{ej}
+
+
+\begin{dfn}
+Llamamos  \textbf{multiplicador} del punto fijo $\zeta$ en la función $F$ al valor
+$$\lambda=\vert F'(\zeta)\vert. $$
+\end{dfn}
+En función de este multiplicador podemos clasificar los puntos fijos en:
+\begin{itemize}
+\item \textbf{Superatractores} si $\lambda=0$.
+\item \textbf{Atractores} si $\lambda \in(0,1)$.
+\item \textbf{Indiferentes} si $\lambda=1$.
+\item \textbf{Repulsores} si $\lambda>1$.
+\end{itemize}
+\begin{dfn}
+Sea un método iterativo $z_{n+1}=F(z_n)$ convergente a un límite $z^*$. Si existe una constante $C\in(0,1)$ tal que
+$$ \lim_{n\to \infty}\frac{|z^*-z_{n+1}|}{|z^*-z_n|}=C,$$
+se dice que el orden de convergencia es lineal.
+Si además existe $p\in \mathbb{R}$ y $C\neq 0$ cumpliendo:
+$$ \lim_{n\to \infty}\frac{|z^*-z_{n+1}|}{|z^*-z_n|^p}=C,$$
+diremos que el método iterativo es convergente con orden de convergencia $p$. A $C$ la denominaremos \textbf{constante de error asintótico}. Si $p=2$ diremos que el método tiene orden de convergencia cuadrático y si $p=3$ orden de convergencia cúbico. Cuando $p\in(1,2)$ el orden de convergencia se dice superlineal.
+\end{dfn}
+Supongamos que para una función continua $F$, la órbita de un punto $z_0\in \mathbb{C}$ converge a $\zeta \in \mathbb{C}$:
+
+$$\lim_{n\to \infty}F^n(z_0)=\zeta. $$
+
+Viéndolo como un proceso iterativo ($z_1=F(z_0),...,z_{n+1}=F(z_n)$) y por la continuidad de $F$, vemos que $\zeta$ es un punto fijo de $F$:
+
+$$ \zeta=\lim_{n\to\infty}z_n=\lim_{n\to\infty}F(z_{n-1})=F(\zeta).$$
+\begin{teo}[Teorema de Schröder ]\label{teoSchroeder}
+Sea un método iterativo definido por la expresión:
+
+$$z_{n+1}=F(z_n),\hspace{0.5cm}z_0\in \mathbb{C}. $$
+Supongamos que $\exists$ $z^*\in\mathbb{C}$ tal que, $z_n\to z^*$. Con $F$ analítica en un entorno de $z^*$ y además $F(z)-z^*$ con un cero de orden $p$ en $z^*$, para $p\geq 1.$
+Entonces se tiene que el método iterativo tiene orden de convergencia $p$.
+\end{teo}
+\begin{proof}
+Queremos demostrar que si un método iterativo del tipo $z_{n+1}=F(z_n)$ convergente a $z^*$, cumple las hipótesis del teorema, entonces tiene orden de convergencia $p$ a $z^*$, es decir:
+
+
+\begin{equation*}
+\lim_{n\to \infty} \frac{|z^*-z_{n+1}|}{\vert z^*-z_n\vert^p}=C.
+\end{equation*}
+Veámoslo. Sabemos que:
+
+\begin{equation*}
+z_{n+1}-z^*=F(z_n)-F(z^*).
+\end{equation*}
+Si hacemos el desarrollo de Taylor de $F(z_n)$ centrado en $z^*$,
+\begin{equation*}
+F(z_n)=F(z^*)+F'(z^*)(z_n-z^*)+\cdots+\frac{1}{p!}F^{(p)}(z^*)(z_n-z^*)^p+o(z_n-z^*)^{p}.
+\end{equation*}
+Ahora como $F(z)-z^*$ tiene un $0$ de orden $p$ en $z^*$,
+\begin{equation*}
+F(z_n)=z^*+F^{(p)}(z^*)(z_n-z^*)^p+o(z_n-z^*)^{p},
+\end{equation*}
+por lo tanto,
+\begin{equation*}
+\lim_{n\to \infty} \frac{|z^*-z_{n+1}|}{\vert z^*-z_n\vert^p}=\lim_{n\to \infty} \frac{|z^*-(z^*+F^{(p)}(z^*)(z_n-z^*)^p+o(z_n-z^*)^{p})|}{\vert z^*-z_n\vert^p}=|F^{(p)}(z^*)|\neq 0.
+\end{equation*}
+
+Acabamos de demostrar que el método converge a $z^*$ con orden $p$ y que la constante de error asintótico toma el valor de $C=|F^{(p)}(z^*)|$.
+
+\end{proof}
+
+
+
+
+
+\section{El método de Newton y otros procesos iterativos}
+El problema de la resolución de ecuaciones no lineales del tipo:
+\begin{equation}\label{ecu1}
+f(z)=0,
+\end{equation}
+es uno de los problemas que con más frecuencia aparecen en el contexto científico general. Cuando éstas no se pueden resolver de manera exacta (la mayoría de las veces) es necesario recurrir a métodos iterativos para encontrar aproximaciones, lo más precisas posible, a estas soluciones. De entre estos métodos, el más usado y estudiado es el método de Newton, el cual vamos a a introducir.
+Dada una ecuación no lineal como en \eqref{ecu1}, si queremos aplicar el método de Newton, debemos partir de una aproximación inicial, $z_0\in \mathbb{C}$, y a partir de aquí iterarla siguiendo una sucesión de la forma:
+\begin{equation}
+z_{n+1}=z_n-\frac{f(z_n)}{f'(z_{n})},\hspace{0.5cm}n\geq0.
+\end{equation}
+
+En condiciones adecuadas sobre la función $f$ y el punto de partida $z_0$, este proceso iterativo converge a $z^*$, una  solución de la ecuación \eqref{ecu1}.
+\\\\
+Durante este trabajo usaremos con frecuencia la función de iteración del método de Newton, que denotamos por $N_f(x).$
+\begin{equation}\label{Nf}
+N_f(x)=x-\frac{f(x)}{f'(x)},
+\end{equation}
+
+
+
+Los orígenes del método de Newton se remontan en el tiempo. Son numerosos los trabajos que estudian su evolución histórica, sus distintas construcciones y sus principales propiedades analíticas y numéricas. De hecho, es un tema de estudio obligado en los planes de estudios de los diferentes grados en Matemáticas y de otras titulaciones (Física, Ingenierías). Como una muestra de los libros que se recomiendan a los estudiantes de estos grados podemos citar los textos clásicos de Burden, Faires y Burden \cite {Burden} o Kincaid y Cheney \cite{Kincaid}. Para conocer más sobre la historia y construcciones del método de Newton, se pueden consultar los trabajos \cite{Aguilo}, \cite{GutiGaceta}, \cite{Ypma} o las numerosos referencias que aparecen en ellos.
+
+El estudio del método de Newton para resolver funciones definidas en el plano complejo tiene su origen en el conocido como \emph{problema de Cayley}, que consiste en estudiar las cuencas de atracción del método de Newton aplicado a ecuaciones polinómicas. En concreto, Cayley caracterizó con éxito en 1879 las cuencas de atracción del método de Newton aplicado a un polinomio de segundo grado. El propio Schr\"oder ya había considerado antes (1870) este problema, como veremos en el siguiente capítulo. Cayley estudió en primer lugar las cuencas de atracción asociadas al polinomio $z^2-1$, probando que las órbitas de los puntos de partida situados en el semiplano $\mathbb{C}^-=\{z\in\mathbb{C} ; \Re{z}<0\}$ convergen a la raíz $z=-1$ mientras que las órbitas de los puntos de partida situados en el semiplano $\mathbb{C}^+=\{z\in\mathbb{C} ; \Re{z}>0\}$  convergen a la raíz $z=1$. En el eje imaginario, que es la frontera entre ambas regiones, el método de Newton tiene un comportamiento caótico. Cayley generalizó este resultado a un polinomio cuadrático en general, aunque fracasó en su intento de caracterizar las cuencas de atracción para polinomios de grado superior.
+
+Los estudios de Schr\"oder y Cayley constituyeron el punto de partida de una teoría que se generalizó y formalizó posteriormente con las aportaciones de Fatou y Julia sobre la iteración de funciones racionales definidos en el plano complejo ampliado. Esta teoría sigue totalmente activa en nuestros días. Existen varias referencias clásicas al respecto como pueden ser los libros de \cite{Beardon},  \cite{Carleson}, \cite{Milnor} o \cite{Peitgen}, otras monografías más recientes, como \cite{Fagella} o \cite{GutiPlaza}, y un gran número de artículos y publicaciones científicas que sería imposible recoger en estas líneas.
+
+Por ejemplo, en \cite{GutiPlaza} encontramos un detallado estudio dinámico en el plano complejo del método de Newton para polinomios de grado bajo (2 y 3) junto con algunas consideraciones para polinomios de grado superior. Existen estudios similares del comportamiento dinámico en el plano complejo de otros procesos iterativos para resolver ecuaciones no lineales. Entre lo métodos más estudiados, podemos citar además de al método de Newton, a los métodos de Halley, Chebyshev o super-Halley, cuyas funciones de iteración se muestran en el Cuadro~\ref{Metodos}. Para profundizar más en el estudio de la dinámica compleja de estos y otros procesos iterativos se pueden consultar  artículos como \cite{ABP}, \cite{campos}, \cite{Kneisl}, \cite{Roberts} o \cite{Varona}, así como las numerosas referencias que aparecen en ellos. 
+
+Hacemos notar que en la definición de las funciones de iteración definidas en  el Cuadro~\ref{Metodos} se ha introducido el operador 
+\begin{equation}\label{Lf}
+L_f(z)=\frac{f(z)f''(z)}{f'(z)^2}.
+\end{equation}
+Este operador, conocido como \emph{grado de convexidad logarítmica}, fue introducido en los trabajos de M. A. Hernández y M. A. Salanova a principios de la década de los 90 sobre el  estudio de la velocidad de convergencia de procesos iterativos \cite{Her}. La relación entre el grado de convexidad logarítmica y los procesos iterativos se ha puesto de manifiesto también por otros autores, como B. Neta \cite{Neta}, que da la expresión de diversos métodos iterativos de tercer orden en función de dicha función.
+
+
+\begin{table}[htp]
+\caption{Funciones de iteración asociadas a algunos conocidos procesos iterativos para resolver ecuaciones no lineales.}
+\begin{center}
+\begin{tabular}{c|c} 
+Método & Función de iteración\\
+\hline
+Newton & $N_f(z)=z-\displaystyle\frac{f(z)}{f'(z)}$\\
+\hline
+Halley & $H_f(z)=z-\displaystyle\frac{2}{2-L_f(z)}\frac{f(z)}{f'(z)}$\\
+\hline
+Chebyshev & $C_f(z)=z-\left(1+\displaystyle\frac{1}{2}L_f(z)\right)\displaystyle\frac{f(z)}{f'(z)}$\\
+\hline
+Super-Halley & $SH_f(z)=z-\left(1+\displaystyle\frac{1}{2}\frac{L_f(z)}{1-L_f(z)}\right)\displaystyle\frac{f(z)}{f'(z)}$\\
+\hline
+Schr\"oder & $S_f(z)=z-\displaystyle\frac{1}{1-L_f(z)}\frac{f(z)}{f'(z)}$\\
+\end{tabular}
+\end{center}
+\label{Metodos}
+\end{table}%
+
+
+El estudio de familias de procesos iterativos dependientes del parámetro $L_f(z)$ es un tema activo de investigación (\cite{campos},\cite{GutiGaceta}).
+En este trabajo, añadimos a este listado otro proceso iterativo: el método de Schr\"oder. Aunque el origen de este método se remonta al trabajo seminal de Schr\"oder \cite{Stewart} y sus propiedades analíticas y numéricas son conocidas (véase el Capítulo 2), sus propiedades dinámicas no han sido tenidas en cuenta, por lo que bien merecen un estudio detallado. Además, como veremos en los Capítulos 3 y 4, el análisis de la dinámica del método de  Schr\"oder esconde algunas sorpresas y muestra un comportamiento distinto al de los procesos iterativos citados anteriormente.
+
+
+
+
+\chapter{Construcciones del método de Schröder }
+
+
+Ernst Schr\"oder (1841-1902) fue un matemático alemán que hizo aportaciones a diversos campos de las matemáticas, tales como la lógica o el álgebra. Sus trabajos sobre conjuntos ordenados o números ordinales tienen gran relevancia en estos campos. Inicialmente, Schr\"oder estaba interesado en cuestiones relacionadas con la Física matemática. Posteriormente, y siguiendo la corriente que imperaba en esa época, su interés fue desplazándose hacia las cuestiones lógicas, buscando fundamentar mejor sus resultados.
+
+ Sin embargo,  lo que ahora nos incumbe es un trabajo de su etapa inicial, relacionado con la búsqueda de raíces de funciones de variable compleja. En 1870 publicó  ``Ueber unendlich viele Algorithmen zur Aufl\"osung der Gleichungen'' en la revista Matematische Annalen \cite{Sch}, que podemos traducir al español como ``Sobre infinitos algoritmos para resolver ecuaciones".  Este artículo, traducido al inglés y comentado por G. W. Stewart, puede encontrarse en \cite{Stewart}. Un halo de misterio envuelve este trabajo de Schröder, ya que en su introducción, el propio Schröder dice que fue inspirado en 1867 por las comunicaciones de un tal Dr. Heinrich Eggers. Sin embargo, los primeros trabajos que se conocen del tal Eggers datan de 1876. Se trata de dos comunicaciones breves (\cite{Eggers1}, \cite{Eggers2}) que se publicaron en \emph{The Analyst}, una revista de cierto prestigio entre los aficionados a las Matemáticas, que se publicó en Des Moines (Iowa, EEUU) entre 1874 y 1883, como precursora de la actual \emph{Annals of Mathematics}. Algunos autores, como el propio Stewart , no encuentran una relación directa entre los trabajos de Eggers y los de Schröder, considerando los de este último como de una mayor profundidad e interés matemático, (\cite{Alex},\cite{Stewart}).
+ 
+Este trabajo de Schröder es considerado por muchos autores como la base de la actual teoría de los sistemas dinámicos complejos (por ejemplo,  \cite{Alex}). También es considerado como el artículo de referencia por excelencia en la teoría de la resolución numérica de ecuaciones no lineales. Por ejemplo, en el libro clásico de Householder \cite{House} se dice:
+ \begin{quote}
+ ``Se puede evaluar un artículo sobre la aproximación numérica de raíces de ecuaciones no lineales, buscando una cita del artículo de Schröder. Si dicha cita no aparece, probablemente el autor ha descubierto algo ya conocido por Schröder''.
+ \end{quote}
+ Como curiosidad, podemos comentar que  Schröder publicó en la misma revista otro artículo más sobre esta temática un año más tarde, en 1871 (\cite{Sch2}). A partir de este momento, las investigaciones de Schröder transcurrieron por otros derroteros.
+ 
+
+\section{Sobre el trabajo de Schröder }
+
+
+\begin{figure}[h!]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+ \includegraphics[scale=0.4]{../ernst-schroder.jpg}
+  \caption{Retrato de Ernst Schröder}
+  \label{etiqueta}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.4]{../schroder_articulo}
+\caption{Artículo publicado por Schröder \cite{Sch}. }
+\label{Figuraraiz3_1}
+\end{minipage}
+\end{figure}
+
+ 
+El artículo   \cite{Sch} de   Schröder va a ser el punto de partida de nuestro trabajo, así que vamos a introducirlo brevemente.
+El objetivo de Schröder estaba claro: quería encontrar soluciones a ecuaciones del tipo
+$$
+f(z) = 0
+$$
+con $f$ una función de variable compleja y analítica en un entorno de sus raíces. Schröder define dos familias de métodos (que él llama ``algoritmos'') para resolver ecuaciones no lineales. En la primera parte de su trabajo, Schröder analiza las propiedades generales de las iteraciones de la forma $z_{n+1}=F(z_n)$, estableciendo el ahora clásico resultado que lleva su nombre y que hemos enunciado y presentado en el Teorema 1.1. En la segunda parte, Schröder intenta encontrar la forma más general de un algoritmo con orden de convergencia $p\in\mathbb{N}$, $p\geq 2$. Para ello define dos familias de procesos iterativos:
+\begin{enumerate}
+\item La familia de Schröder de primer tipo se puede escribir de la forma $z_{n+1}=E_p(z_n)$, donde
+$$
+E_p(z)=z+\sum_{i=1}^{p-1}(-1)^i\frac{(f(z))^i}{i!}(f^{-1})^{(i)}(f(z)),
+$$
+donde $f^{-1}$ es la inversa de $f$. Se puede probar (\cite{Traub}) que $E_p$ tiene convergencia de orden $p$. Entre los métodos de esta familia, nos encontramos con el método de Newton ($E_2$) o el método de Chebyshev ($E_3$).
+\item La familia de Schröder de segundo tipo se puede escribir de la forma $z_{n+1}=S_p(z_n)$, donde
+$$
+S_p(z)=z-u(z)\frac{Q_{p-2}(z)}{Q_{p-1}(z)},
+$$
+donde 
+$$
+u(z)=\frac{f(z)}{f'(z)}, \quad C_j(z)=\frac{f^{(j)}(z)}{j! f'(z)},
+$$
+$$
+Q_p(z)=\sum_{i=1}^{p}(-1)^{i+1} u(z)^{i-1} C_i(z)Q_{k-i}(z),\quad Q_0(z)=1,\quad C_1=1, \quad p\ge 1.
+$$
+ Los métodos de la familia $S_p$ tienen orden de convergencia $p$ (véase \cite{House}). Entre los métodos de esta familia, nos encontramos con el método de Newton ($S_2$) o el método de Halley ($S_3$).
+\end{enumerate}
+El estudio de estas dos familias de algoritmos y su equivalencia con otras familias existentes en la literatura ha sido objeto de estudio por diversos autores, como por ejemplo \cite{Pet1}. En \cite{Lara} o \cite{Pet2} podemos encontrar unas interesantes cuestiones dinámicas acerca de estas familias de métodos.
+
+Curiosamente el método de Schröder, objetivo principal de este trabajo, no está contenido en ninguna de estas dos familias. 
+
+En el resto de este capítulo, vamos a presentar algunas construcciones del método de Schröder. En la Sección~\ref{sec2.1} vamos a introducir la construcción original que hizo Schröder en \cite{Sch}. En el resto de secciones, vamos a presentar unas construcciones inéditas del método de Schröder. Para ello vamos a seguir el patrón introducido en \cite{Guti2}, un artículo dedicado a deducir diversas construcciones para otro proceso iterativo: el método de Halley.
+\section{La construcción que dio Schröder }\label{sec2.1}
+En esta sección estudiaremos  la obra de Schröder  \cite{Stewart}, donde construye el método que lleva su nombre a partir del método de Newton. Incluso utilizaremos la misma notación que el propio Schröder  eligió en el $S.XIX$ ya que consideramos que puede ser útil para la comprensión del trabajo.
+\\\\
+ Esta construcción consiste en darse cuenta de que si la multiplicidad de la raíz que estamos buscando es $1$, el método de Newton sigue una convergencia cuadrática, mientras que si es mayor que 1, ésta es lineal. A continuación demostraremos esto hecho formalmente.
+\begin{teo}\label{teoNewtonLineal}
+Sea $f(z)$ una función definida en el plano complejo y $z^*$ una raíz de $f$ con multiplicidad $p\in \mathbb{N}$, $f(z^*)=0$, con $f$ analítica en un entorno de $z^*$. Se tiene que si $p=1$, el orden de convergencia del método de Newton a $z^*$ será cuadrático, mientras que si $p>1$ el orden de convergencia del método de Newton a $z^*$ será lineal.
+\end{teo}
+\begin{proof}
+Sean $f$ y $z^*$ como se describen en el enunciado del teorema. Por lo tanto, $f$ se puede expresar de la siguiente manera
+\begin{equation}\label{fz*}
+f(z)=(z-z^*)^p\psi(z), \hspace{0.5cm} \psi(z^*)\neq 0,\infty.
+\end{equation}
+Notemos que $\frac{f(z)}{f'(z)}$ es analítica en $z^*$, ya que por el teorema de Hartogs, todo $0$ de un a función analítica es aislado y tiene multiplicidad finita $p \geq 1$.Vamos a ver cuando $N'_f(z^*)=L_f(z^*)$, descrita en \eqref{Lf}, es cero en función de $p$. Para ello, calculemos lo primero la primera y segunda derivada de $f$ siguiendo la expresión \eqref{fz*}. Por ahorrarnos en notación, denotamos $\epsilon=(z-z^*)$ y $\psi(z)=\psi$, teniendo en cuenta que, $\frac{\partial \epsilon}{\partial z}=1$, por lo tanto:
+\begin{align}\label{derivadas}
+f(z)&=\epsilon^p\psi, \\
+f'(z)&=\epsilon^{p-1}(p\psi+\epsilon \psi'),\\
+f''(z)&=\epsilon^{p-2}\lbrace p[(p-1)\psi+\psi'\epsilon]+\epsilon [p\psi'+\psi''\epsilon]  \rbrace.
+\end{align}
+Por lo tanto, puesto en función de $\epsilon$ y $\psi$, tenemos que
+
+\begin{align*}
+N'_f(z) &=\frac{\epsilon^{p-2}\lbrace p[(p-1)\psi+\psi'\epsilon]+\epsilon [p\psi'+\psi''\epsilon]  \rbrace \epsilon^p\psi}{[\epsilon^{p-1}(p\psi+\epsilon \psi')]^2} \\
+& =\frac{\lbrace p[(p-1)\psi+\psi'\epsilon]+\epsilon [p\psi'+\psi''\epsilon]  \rbrace\psi}{(p\psi+\epsilon \psi')^2}.
+\end{align*}
+Evaluando en $z^*$, es decir, cuando $\epsilon=0$,
+
+\begin{equation*}
+N'_f(z^*) = \frac{ p(p-1)\psi^2}{(p\psi)^2}=1-\frac{1}{p}.
+\end{equation*}
+
+Por lo tanto, utilizando el teorema de Schröder  \ref{teoSchroeder} en el caso de las raíces simples ($p=1$) el método de Newton las aproxima con orden de convergencia al menos cuadrático. Mientras que si son raíces múltiples ($p>1$) la velocidad de convergencia del método de Newton es lineal.
+
+\end{proof}
+
+Teniendo en cuenta el mejor comportamiento del método de Newton en raíces simples que en raíces múltiples y sabiendo que la función $\frac{f(z)}{f'(z)}$ tiene las mismas raíces que $f(z)$ pero con multiplicidad 1, si aplicamos Newton en vez de a $f(z)$ a $\frac{f(z)}{f'(z)}$, se obtiene un nuevo método que aproxima las raíces de $f(z)$ con un orden de convergencia cuadrático independientemente de las multiplicidades. Por lo tanto, la función de iteración del método de Schröder  se construye de la siguiente manera. Sea $g(z)=\frac{f(z)}{f'(z)}$ y teniendo en cuenta que $g'(z)=1-L_f(z)$
+\begin{equation}\label{metodoSch}
+S_f(z)=z-\frac{g(z)}{g'(z)}=z-\frac{f(z)}{f'(z)[1-L_f(z)]}.
+\end{equation}
+Ahora conociendo ya la función de iteración del método de Schröder, veamos que tiene orden de convergencia por lo menos 2 para cualquier raíz independientemente de su multiplicidad. 
+\begin{teo}
+Sea $z^*\in\mathbb{C}$ raíz de $f$ con multiplicidad $p$. Se tiene que el método de Schröder tiene orden convergencia por lo menos $2$.
+\end{teo}
+\begin{proof}
+ Si calculamos la derivada de $S_f$:
+\begin{equation*}
+S'_f=1-\left[ (1-L_f)\frac{1}{1-L_f}-\frac{f}{f'}\frac{L'_f}{(1-L_f)^2} \right] = \frac{f}{f'}\frac{L'_f}{(1-L_f)^2}.
+\end{equation*}
+Evaluando en $z^*$, por lo visto en la demostración del teorema \ref{teoNewtonLineal}, se tiene que 
+$$(1-L_f(z^*))^2=\frac{1}{p^2}\neq 0.$$
+
+
+Veamos ahora cuanto vale $S'_f(z^*).$ Previamente vamos a definir un nuevo elemento que denotaremos como $L_{f'}$
+$$ L_{f'}=\frac{f'f^{(3)}}{f''^2}. $$
+
+$$ L'_f=\left[\frac{ff''}{f'^2} \right]'=\frac{f'^2f''+f^{(3)}f'f-2f''^2f}{f'^3}, $$
+
+$$\frac{f}{f'}L'_f=\frac{f}{f'} \frac{f'^2f''+f^{(3)}f'f-2f''^2f}{f'^3}=L_f(1+L_fL_{f'}-2L_f),$$
+
+
+
+$$ S'_f=\frac{L_f(1+L_fL_{f'}-2L_f)}{(1-L_f(z))^2}. $$
+
+Teniendo en cuenta \eqref{fz*} calculemos $f^{(3)}$ en función de $\epsilon$ y $\psi$,
+
+
+$$ f^{(3)}=\psi^{(3)}\epsilon^p+3p\psi''\epsilon^{p-1}+3p(p-1)\epsilon^{p-2}\psi'+p(p-1)(p-2)\epsilon^{p-3}\psi $$
+
+$$ L_{f'}=\frac{f'f^{(3)}}{f''^2}$$
+
+$$=\frac{\epsilon^{p-1}\left[ p\psi+\epsilon\psi' \right][\psi^{(3)}\epsilon^p+3p\psi''\epsilon^{p-1}+3p(p-1)\epsilon^{p-2}\psi'+p(p-1)(p-2)\epsilon^{p-3}\psi ]}{\epsilon^{2p-4}\left[ p(p-1)\psi+2p\psi'\epsilon+\epsilon^2\psi'' \right]^2 } $$
+
+
+$$=\frac{\left( p\psi+\epsilon\psi' \right) ( \psi^{(3)}\epsilon^3+3p(p-1)\epsilon^2\psi' +p(p-1)(p-2)\psi )  }{\left[ p(p-1)\psi+2p\psi'\epsilon+\epsilon^2\psi'' \right]^2}. $$
+\\\\
+Ahora si evaluamos en $z=z^*$, es decir, $\epsilon=0,$
+\\\\
+$$L_{f'}(z^*)= \frac{p\psi[p(p-1)(p-2)\psi]}{[ p(p-1)\psi]^2}=\frac{p-2}{p-1}.$$
+\\\\
+Teniendo en cuenta que $ L_f(z^*)=1-1/p,$
+\\\\
+$$S'_f(z^*)=\frac{L_f(z^*)(1+L_f(z^*)L_{f'}(z^*)-2L_f(z^*))}{(1-L_f(z^*))^2} $$
+$$=\frac{\left[1-\frac{1}{p} \right]\left[1+\left(1-\frac{1}{p} \right)\left(\frac{p-2}{p-1} \right)-2\left(1-\frac{1}{p} \right)    \right]  }{\left( \frac{1}{p^2}\right) } $$
+
+$$=p(p-1)\left[\frac{p-2}{p-1} -\frac{p-2}{p(p-1)}-1+\frac{2}{p}  \right] =0. $$
+\\\\
+Y además como se tiene que
+$$S''_p(z)=-\frac{2 \psi'(z^*)}{p\psi(z^*)}$$
+que como en general es distinto de $0$, el método de Schröder  tiene orden  2 para cualquier raíz independientemente de su multiplicidad.
+\end{proof}
+
+
+\section{Una construcción geométrica en $\mathbb{R}$}
+Al igual que la siguiente iteración del método de Newton se puede interpretar geométricamente como el punto de corte entre el eje $x$ y la recta tangente a la función en el punto, también podemos interpretar geométricamente el método de Schröder utilizando hipérbolas, tal y como se ha hecho en la construcción de otros procesos iterativos (véanse las referencias \cite{Amat}, \cite{melman}, \cite{scavo} para más información sobre este tema).
+
+
+
+Sea $f:\mathbb{R}\to\mathbb{R}$ una función con dominio e imagen en $\mathbb{R}$. Sea la función de iteración del método de Schröder, 
+$$S_f(x)=x-\frac{f(x)}{f'(x)}\frac{1}{[1-L_f(x)]}.$$
+
+Para introducir la construcción geométrica del método de Schröder  partimos de una hipérbola de la forma:
+\begin{equation}\label{hiperbola1}
+axy+y+bx+c=0.
+\end{equation}
+
+
+Queremos hacer que la hipérbola \eqref{hiperbola1} sea tangente a la curva $y=f(x)$ en el punto $(x_n, f(x_n)),$ para lo que imponemos las siguientes condiciones:
+
+\begin{enumerate}
+\item $y(x_n)=f(x_n).$
+\item $y'(x_n)=f'(x_n).$
+\end{enumerate}
+
+Aplicando la primera condición:
+
+\begin{equation*}
+a(x-x_n)(y-f(x_n))+y-f(x_n)+b(x-x_n)=0.
+\end{equation*}
+De esta manera la hipérbola ya pasa por $(x_n,f(x_n))$. Ahora derivamos:
+
+\begin{equation*}
+a(y-f(x_n))+ay'(x-x_n)+y'+b=0,
+\end{equation*}
+
+Evaluando en $x_n$ y teniendo en cuenta la segunda condición, $b=-f'(x_n),$ la hipérbola queda:
+
+\begin{equation}
+a(x-x_n)(y-f(x_n))+y-f(x_n)+f'(x_n)(x-x_n)=0.
+\end{equation}
+
+La siguiente iteración del método será el punto de corte entre la hipérbola y el eje de abcisas $(y=0)$.
+
+
+$$a(x_{n+1}-x_n)(-f(x_n))-f(x_n)+f'(x_n)(x_{n+1}-x_n)=0,$$
+$$(x_{n+1}-x_n)(f'(x_n)-af(x_n))=f(x_n),$$
+$$x_{n+1}=x_{n}-\frac{f(x_n)}{f'(x_n)}\frac{1}{\left[ 1+a\frac{f(x_n)}{f'(x_n)}\right] }. $$
+
+Así hemos encontrado una familia de métodos iterativos dependiente del parámetro $a$. Si escogemos un $a$ adecuado vemos que el método de Schröder  es perteneciente a esta familia.
+
+$$ -L_f(x_n)=a\frac{f(x_n)}{f'(x_n)},$$
+
+$$a=-\frac{f''(x_n)}{f'(x_n)},$$
+
+$$ x_{n+1}=x_{n}-\frac{f(x_n)}{f'(x_n)}\frac{1}{\left[ 1-L_f(x_n)\right] } =S_f(x_n).$$
+
+Para todo $n\in \mathbb{N},$  hemos probado que la siguiente iteración de $x_n$ por el método de Schröder  coincide con el punto de corte entre la hipérbola 
+$$-\frac{f''(x_n)}{f'(x_n)}(x-x_n)(y-f(x_n))+y-f(x_n)+f'(x_n)(x-x_n)=0$$ 
+y la recta $y=0$.
+
+\subsection{Ejemplos}
+
+\begin{ej}[\textbf{$f(x)=(x-1)^2$}]
+
+La función $f(x)=(x-1)^2$ tiene una raíz doble en $x^*=1$ por lo tanto en este caso el método de Schröder  se debería comportar mejor que el de Newton. $S_f(x)=1$, es decir, el método de Schröder  llega directamente a la raíz, mientras que $N_f(x)=\frac{1-x}{2}+x$ y si empezamos en $x_0=0$ la hipérbola correspondiente en este caso tiene como ecuación:
+$$ \frac{2 x-2}{-2 x-2}=y,$$
+y la recta del método de Newton $y=1 - 2 x$.
+
+Gráficamente, podemos ver el comportamiento de los dos métodos para este ejemplo en la Figura \ref{figura_ejemplos1}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo4.jpg}
+  \caption{Primera iteración del método de Newton (en azul) y del método de Schröder (en rojo) aplicados a la función $f(x)=(x-1)^2$, tomando $x_0=0$ (en amarillo).}\label{figura_ejemplos1}
+\end{figure}
+En este caso el método de Schröder llega directamente a la raíz mientras que el de Newton avanza más despacio.
+
+
+\end{ej}
+\begin{ej}[\textbf{$f(x)=e^x-1$}]
+
+En este caso la función $f$ tiene una raíz simple en $x^*=0$, por lo que los métodos de Newton y Schröder  deberían tener ambos velocidad de convergencia cuadrática.
+Para el caso $f(x)=e^x-1$, $S_f(x)=x-e^x+1$ y $N_f(x)=x+e^{-x}-1$ y empezando en $x_0=2$ la hipérbola correspondiente tiene como ecuación:
+
+$$ -\frac{e^2}{x-3}-1=y,$$
+y la recta del método de Newton $y=e^2 (x-1)-1$.
+En las Figuras \ref{figura_ejemplos2} y \ref{figura_ejemplos3} se encuentran representados los comportamientos de ambos métodos.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo5.jpg}
+  \caption{Primera iteración del método de Newton (en rojo) y del método de Schröder (en azul) aplicados a la función $f(x)=e^x-1$, tomando $x_0=2$ (en amarillo).}\label{figura_ejemplos2}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo6.jpg}
+  \caption{Segunda iteración para ambos métodos, aplicados a la función $f(x)=e^x-1$.}\label{figura_ejemplos3}
+\end{figure}
+Como vemos en este caso el método de Newton tiene un mejor comportamiento que el de Schröder. En el Cuadro \ref{iteraciones1} están calculadas las 6 primeras iteraciones para ambos métodos.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Número de iteración & $S_f$ & $N_f$\\ \hline
+$1$ & $-4.38906$ & $1.13534$\\ \hline
+$1$ & $-3.40147$ & $0.45665$\\ \hline
+$3$ & $-2.43479$ & $0.0900519$\\ \hline
+$4$ & $-1.52241$ & $0.00393565$\\ \hline
+$5$ & $-0.740594$ & $7.73452\times 10^{-6}$\\ \hline
+$6$ & $-0.217425$ & $2.99\times 10^{-11}$\\ \hline
+
+\end{tabular}
+\caption{Seis primeras iteraciones de los métodos de Newton y Schröder para $x_0=2$ y $f(x)=e^x-1$.}
+\label{iteraciones1}
+\end{center}
+\end{table}
+\end{ej}
+
+
+\begin{ej}[\textbf{$f(x)=e^x-x-1$}]
+
+En este caso la función $f$ tiene una raíz doble en $x^*=0$, por lo que el método de Schröder  debería converger con mayor velocidad que el de Newton.
+Las funciones de iteración de cada método son, 
+$$S_f(x)=\frac{e^x \left(x^2+2\right)-e^{2 x}-1}{e^x (x-1)+1},\quad N_f(x)=\frac{x}{e^x-1}+x-1.$$ 
+Empezando en $x_0=2$ la hipérbola correspondiente tiene como ecuación:
+
+$$ \frac{e^2 (x-6)+x+e^4+1}{e^2 (x-3)+1},$$
+y la recta del método de Newton $y=e^2 (x-1)-x-1$. En las figuras \ref{figura_ejemplos7} y \ref{figura_ejemplos8} se encuentra el comportamiento geométrico de ambos métodos.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo7.jpg}
+  \caption{Primera iteración del método de Newton (en rojo) y del método de Schröder (en azul) aplicados a la función $f(x)=e^x-x-1$, tomando $x_0=2$ (en amarillo).}\label{figura_ejemplos7}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo8.jpg}
+  \caption{Segunda iteración para ambos métodos, con $f(x)=e^x-x-1$.}\label{figura_ejemplos8}
+\end{figure}
+\end{ej}
+\begin{ej}[\textbf{$f(x)=e^x-\frac{x^2}{2}-x-1$}]
+
+En este caso la función $f$ tiene una raíz triple en $x^*=0$, al igual que en el caso anterior el método de Schröder  debería converger con mayor velocidad que el de Newton.
+Las funciones de iteración para ambos métodos son
+
+$$S_f(x)=\frac{-x (x+4)-2 e^{2 x}+e^x (x ((x-1) x+4)+4)-2}{x \left(e^x (x-2)+x+2\right)},
+$$ $$N_f(x)=\frac{x^2}{2 \left(-x+e^x-1\right)}+x-1.$$ 
+
+Empezando en $x_0=2$ la hipérbola correspondiente tiene como ecuación:
+
+$$ y=\frac{4 x+e^4-8 e^2+7}{e^2 (x-3)-x+5},$$
+
+y la recta del método de Newton $y=\left(e^2-3\right) (x-2)+e^2-5$.
+
+En las figuras \ref{figura_ejemplos9} y \ref{figura_ejemplos10} se encuentra el comportamiento geométrico de ambos métodos.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo9.jpg}
+  \caption{Primera iteración del método de Newton (en rojo) y del método de Schröder (en azul) aplicados a la función $f(x)=e^x-\frac{x^2}{2}-x-1$, tomando $x_0=2$ (en amarillo).}\label{figura_ejemplos9}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../schgeo10.jpg}
+  \caption{Segunda iteración para ambos métodos en el caso $f(x)=e^x-\frac{x^2}{2}-x-1$.}\label{figura_ejemplos10}
+\end{figure}
+\end{ej}
+En estos ejemplos se aprecia que cuanto más aumentamos la multiplicidad de la raíz, mejor se comparta el método de Schröder  respecto al de Newton.
+\section{Construcción mediante el desarrollo de Taylor}
+El método de Schröder  surge de una manera bastante natural si usamos el polinomio de Taylor para aproximarnos a la solución de la ecuación, $f(x)=0.$
+La idea va a ser la de aproximar la diferencia $\epsilon$ entre una iteración del método $x_n$ y su siguiente $x_{n+1}$. Sin prdida de generalidad podremos hablar de $x_0$ y $x_1$. Partiendo de una primera aproximación $x_0$, tomamos $\epsilon$ tal que $f(x_0+\epsilon)=0.$ Teniendo en cuenta esto y usando el método de Taylor centrado en $x_0$ llegamos a:
+
+\begin{equation*}
+0=f(x_0+\epsilon)=f(x_0)+f'(x_0)\epsilon +\frac{f''(x_0)}{2}\epsilon^2+\frac{f'''(x_0)}{6}\epsilon^3+\cdots
+\end{equation*}
+
+
+
+Ahora truncando en el término cuadrático:
+
+\begin{equation*}
+0\simeq f(x_0)+f'(x_0)\epsilon +\frac{f''(x_0)}{2}\epsilon^2,
+\end{equation*}
+
+
+\begin{equation*}
+0\simeq f(x_0)+\epsilon (f'(x_0)+\frac{f''(x_0)}{2}\epsilon),
+\end{equation*}
+
+\begin{equation*}
+\epsilon \simeq \frac{-f(x_0)}{(f'(x_0)+\frac{f''(x_0)}{2}\epsilon)}.
+\end{equation*}
+
+Ahora si sustituimos el $\epsilon$ que aparece en el denominador por 2 veces la corrección de Newton$(-\frac{2f(x_0)}{f'(x_0)})$, nos aparecerá la corrección de Schröder :
+
+\begin{equation*}
+\epsilon \simeq -\frac{-f(x_0)}{(f'(x_0)-\frac{f''(x_0)f(x_0)}{f'(x_0)})}=\frac{f(x_0)}{f'(x_0)}\frac{1}{\left( 1-L_f(x_0)\right) }.
+\end{equation*} 
+
+Por lo tanto:
+
+\begin{equation*}
+x_1=x_0-\frac{f(x_0)}{f'(x_0)}\frac{1}{\left( 1-L_f(x_0)\right) }.
+\end{equation*}
+Notemos que otras elecciones para el valor de $\epsilon$ dan lugar a otros procesos iterativos. Por ejemplo si $\epsilon=\frac{-f(x_0)}{f(x_0)}$ se obtiene el método de Halley \cite{Guti2}.
+\section{Construcción mediante interpolación inversa}
+
+La de la ``interpolación inversa'' es otra técnica para construir procesos iterativos. Es la forma más natural de construir otro proceso iterativo: el método de Chebysev \cite{olivo}. Nuevamente partimos del problema de que queremos resolver la ecuación $f(x)=0.$\label{ecuacion}
+
+
+
+Sea $f^{-1}$ la inversa de $f$, por lo tanto el problema de resolver la ecuación \eqref{ecuacion} equivale a aproximar $f^{-1}(0).$ Sea $x_0$ una primera aproximación a la raíz $x^*$ e $y_0=f(x_0)$. Aproximando $f^{-1}$ por una función racional del tipo:
+\begin{equation*}
+R(y)=\frac{(y-y_0)+a}{b(y-y_0)+c},
+\end{equation*}
+e imponiendo las siguientes condiciones:
+\begin{enumerate}
+\item $R(y_0)=f^{-1}(y_0)=x_0,$
+\item $R'(y_0)=\left[ f^{-1}\right]'(y_0)=\frac{1}{f'(x_0)},$
+\end{enumerate}
+obtenemos las siguientes ecuaciones para ir sustituyendo los parámetros de la función $R$,
+
+\begin{equation*}
+x_0=\frac{a}{c},
+\end{equation*}
+
+\begin{equation*}
+\frac{1}{f'(x_0)}=\frac{c-ba}{c^2}=\frac{1}{c}\left[1-x_0 b\right].
+\end{equation*}
+
+Despejando $a$ y $c$ en función de $x_0$, $f'(x_0)$ y $b$,
+
+\begin{equation*}
+c=f'(x_0)\left[ 1-x_0 b \right],
+\end{equation*}
+
+\begin{equation*}
+a=x_0  f'(x_0)\left[ 1-x_0 b \right].
+\end{equation*}
+
+Ahora si contemplamos a $R(0)$ como la siguiente aproximación del método,
+
+\begin{equation*}
+x_1=R(0)=\frac{a-y_0}{c-b  y_0}=\frac{x_0   f'(x_0)\left[ 1-x_0  b \right]-y_0}{f'(x_0)\left[ 1-x_0  b \right]-b  y_0}
+\end{equation*}
+\begin{equation*}
+=x_0-\frac{f(x_0)}{f'(x_0)} \frac{(1-bx_0)}{(1-bx_0)-\frac{b  f(x_0)}{f'(x_0)}}
+\end{equation*}
+
+\begin{equation*}
+=x_0-\frac{f(x_0)}{f'(x_0)} \frac{1}{1-\frac{bf(x_0)}{(1-bx_0)f'(x_0)}}.
+\end{equation*}
+
+Quedándonos así una familia de métodos iterativos dependientes del parámetro $b$. Eligiendo el $b$ adecuado llegamos a que el método de Schröder  es un miembro concreto de esta familia, veámoslo.
+
+\begin{equation*}
+\frac{bf(x_0)}{(1-bx_0)f'(x_0)}=L_f(x_0)=\frac{f(x_0)f''(x_0)}{(f'(x_0))^2},
+\end{equation*}
+
+\begin{equation*}
+b=\frac{f''(x_0)}{f'(x_0)+x_0f''(x_0)}.
+\end{equation*}
+\\\\
+El también conocido método de Halley, es otro miembro de esta familia de métodos iterativos, tomando $$b=\frac{f''(x_0)}{2f'(x_0)+x_0f''(x_0)}.$$
+En este caso la elección de $b$ viene forzada por la condición $R''(x_0)=0$ que se impone ya que el método de Halley tiene orden de convergencia $3$.
+
+
+
+
+\chapter{Estudio dinámico de Schröder}
+
+
+El objetivo de este capítulo es analizar e intentar completar la sección 14 del trabajo de Schröder  \cite{Stewart}, lo que el propio Schröder estudió bajo el epígrafe  ``Los algoritmos principales aplicados a ejemplos muy simples''. Podemos considerar este trabajo como el primer estudio dinámico documentado de un método iterativo. En concreto Schröder analiza y compara el comportamiento del método de Newton $z_{n+1}=N_p(z_n)$
+$$ N_p(z)=z-\frac{p(z)}{p'(z)},$$
+y del método \eqref{metodoSch}, que lleva su nombre $z_{n+1}=S_p(z_n)$
+$$ S_p(z)=z-\frac{p(z)}{p'(z)}\frac{1}{1-L_f(z)},$$
+en dos casos. Primero, aplicados a un polinomio $p$ con una sola raíz y luego a un polinomio $p$ con dos raíces distintas.
+\section{Los algoritmos principales aplicados a ejemplos muy simples}\label{seccion_sch}
+En el primer caso, si aplicamos los métodos a un polinomio de una sola raíz suponiendo que la raíz en cuestión sea $z^*=0$, tenemos un polinomio de la forma $p(z)=z^d.$ Veamos cómo son las funciones de iteración para ambos métodos.
+
+$$N_p(z)=z-\frac{z^d}{dz^{d-1}}=\left(1-\frac{1}{d}\right)z, $$
+$$L_p(z)=\frac{z^d(d)(d-1)z^{d-2}}{d^2z^{2d-2}}=\frac{d-1}{d},\hspace{0.2cm}1-L_p(z)=\frac{1}{d}, $$
+$$S_p(z)=z-d\frac{z}{d}=0.$$
+
+Se puede observar que en este caso el método de Schröder  converge directamente a la raíz, con independencia de $z_0$. Para el método de Newton \eqref{newtonSencillo},
+\label{newtonSencillo}\begin{equation}
+z_n=\left(1-\frac{1}{d}\right)^nz_0
+\end{equation}
+se tiene que $\forall z_0\in \mathbb{C}$, $\lim_{n\to \infty}z_n=0.$ Por lo tanto, si $d>1$, va a converger a la raíz también con independencia de $z_0$ aunque de una manera más lenta, de manera lineal.
+\\\\
+El siguiente objeto de estudio se complica un poco más. Supongamos un polinomio cuadrático con 2 raíces diferenciadas y asumamos que estas sean $1$ y $-1$, $p(z)=(z-1)(z+1)=z^2-1.$ En este caso las funciones de iteración tendrán la siguiente forma:
+
+$$N_p(z)=\frac{z+\frac{1}{z}}{2}, \hspace{0.2cm}S_p(z)=\frac{2}{z+\frac{1}{z}}. $$
+
+Curiosamente $N_p(z)=S_p(z)^{-1}$. Ahora si las ponemos en función de las coordenadas cartesianas del argumento $z=x+iy,$ para el método de Newton:
+
+$$x_{n+1}=\frac{x_n}{2} \frac{1+x_n^2+y_n^2}{x_n^2+y_n^2},\hspace{0.4cm}y_{n+1}=-\frac{y_n}{2} \frac{1-x_n^2-y_n^2}{x_n^2+y_n^2}, $$
+y para el método de Schröder :
+
+
+$$x_{n+1}=2x_n \frac{1+x_n^2+y_n^2}{[x_n^2+(y_n+1)^2][x_n^2+(y_n-1)^2]},$$ $$y_{n+1}=2y_n \frac{1-x_n^2-y_n^2}{[x_n^2+(y_n+1)^2][x_n^2+(y_n-1)^2]}. $$
+
+Teniendo en cuenta estas ecuaciones podemos sacar varias conclusiones para ambos métodos.
+\begin{enumerate}
+\item Si $|z_0|=1$, esto es si $x_0^2+y_0^2=1,$ se tiene que $z_1$ se sitúa en la recta real o lo que es lo mismo, $y_1=0$. La imagen de la circunferencia unidad recae sobre la recta real.
+\item \label{ejeImInv} La recta real es invariante, es decir, si tomamos $y_0=0$, $\forall n$ $y_n=0$. Lo mismo pasa con el eje imaginario puro.
+\item $x_n$ siempre tendrá el mismo signo que $x_{n+1}$ por lo tanto nunca se saltará el eje imaginario ni se podrá llegar a él desde fuera, mientras que siempre que $|z_n|>1$, $z_{n+1}$ irá al otro lado del eje real o lo que es lo mismo $y_{n+1}$ tendrá signo opuesto a $y_n.$
+\end{enumerate}
+
+Ahora poniendo estas ecuaciones en función de las coordenadas polares del argumento, $z=re^{\alpha i}$. Para el método de Newton se obtienen las siguientes ecuaciones:
+
+$$ r_{n+1}=\frac{1}{2r_n}\sqrt{1+2r_n^2\cos(2\alpha_n)+r_n^4},\hspace{0.4cm} \tan(\alpha_{n+1})=-\frac{1-r_n^2}{1+r_n^2}\tan(\alpha_n).$$
+
+Teniendo en cuenta que la función de iteración del método de Schröder  queda justo la recíproca que la del método de Newton, para el método de Schröder  tenemos:
+
+$$r_{n+1}=\frac{2r_n}{\sqrt{1+2r_n^2\cos(2\alpha_n)+r^4}},\hspace{0.4cm} \tan(\alpha_{n+1})=-\frac{r_n^2-1}{r_n^2+1}\tan(\alpha_n). $$
+
+De estas ecuaciones podemos deducir que para ambos métodos $|\tan(\alpha_{n+1})|<|\tan(\alpha_n)|$, lo que quiere decir que $\alpha_n$ tiende o a 0 o a $\pi$, que son los ángulos de las raíces.
+\\
+Llegados a este punto Schröder  pensó en ver cómo se comportaban los dos métodos desde el punto de vista de las distancias con las raíces.
+Sea $z_0=x_0+iy_0$. Definimos $r^1_0$ como la distancia de $z_0\in \mathbb{C}$ a la raíz de $p(z),$ $z^1=1$ y lo mismo para la raíz $z^2=-1$.
+
+$$ \left( r^1_0\right)^2 = (x_0-1)^2+y_0^2, \hspace{0.4cm}\left(r^2_0\right)^2 = (x_0+1)^2+y_0^2. $$
+
+Haciendo las pertinentes cuentas se llega a que si iteramos respecto a el método de Newton, las distancias con las raíces evolucionan de la siguiente manera:
+
+$$\left( r^1_{n+1}\right)^2 =\frac{( r^1_{n})^4}{2(( r^1_{n})^2+( r^2_{n})^2-2)}, \hspace{0.4cm}\left( r^2_{n+1}\right)^2 =\frac{( r^2_{n})^4}{2(( r^1_{n})^2+( r^2_{n})^2-2)}.$$
+
+Iterando respecto al método de Schröder, llegamos a que
+\begin{equation}\label{schDistancias}
+\left( r^1_{n+1}\right)^2 =\frac{2( r^1_{n})^4}{(( r^1_{n})^2-2)^2+( (r^2_{n})^2-2)^2}, \hspace{0.4cm}\left( r^2_{n+1}\right)^2 =\frac{2( r^2_{n})^4}{(( r^1_{n})^2-2)^2+( (r^2_{n})^2-2)^2}.
+\end{equation}
+
+Ahora podemos ver que para el método de Newton los puntos que cumplen $(r^1_n)^2=(r^1_{n+1})^2$, es decir, los puntos dentro del plano complejo que están a la misma distancia de la raíz $z^1=1$ que su siguiente iteración por el método de Newton, forman una curva que expresada en función de $r^1_n$ y $r^2_n$ tiene la siguiente forma:
+$$(r^1_n)^2+2(r^2_n)=4. $$
+Si lo ponemos en función de las coordenadas cartesianas,
+\begin{equation}\label{circunferencia}
+3y^2+3x^2+2x-1=0,
+\end{equation}
+se trata de la circunferencia con centro en $-\frac{1}{3}$ y radio $\frac{2}{3}$.
+Si tenemos en cuenta que el eje imaginario es invariente, como hemos visto en la propiedad \eqref{ejeImInv} anterior, podemos afirmar que los puntos de corte del eje imaginario con la circunferencia anterior $(\frac{1}{\sqrt{3}}i,-\frac{1}{\sqrt{3}}i)$ forman un 2-ciclo ya que los dos se encuentran a la misma distancia de la raíz $1$ y están en el eje imaginario.  
+Cuando aplicamos el método de Newton a un punto $z_0$ de esta circunferencia, lo lleva a algún punto de la circunferencia con centro en $z^1=1$ y radio la distancia entre $z_0$ y $z^1.$
+En la Figura \ref{Figura1} podemos ver en amarillo la región que predijo Schröder  que contendría a la imagen de la circunferencia por el método de Newton y en la Figura \ref{Figura2} vemos la forma que tiene la imagen por la primera iteración del método de Newton.
+\begin{figure}[H]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../circSch.png}
+\caption{En rojo la circunferencia descrita en \eqref{circunferencia} y en amarillo la acotación que dio Schröder a su conjunto imagen. }
+\label{Figura1}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../circSch2.jpg}
+\caption{En naranja la circunferencia descrita en \eqref{circunferencia} y en azul la curva correspondiente a su conjunto imagen exacto. }
+\label{Figura2}
+\end{minipage}
+\end{figure}
+
+Si observamos cómo evoluciona la imagen de la circunferencia \eqref{circunferencia} por el método de Newton (véase las Figuras \ref{Figura2},\ref{Figura3}, \ref{Figura4}, \ref{Figura5} y \ref{Figura6}), vemos que la curva tiende a estabilizarse. Las iteraciones impares (Figras \ref{Figura4} y \ref{Figura6}) se parecen entre ellas así como las pares (Figuras \ref{Figura3} y \ref{Figura5}). Estas curvas están claramente influenciadas por el 2-ciclo $(\frac{1}{\sqrt{3}}i,-\frac{1}{\sqrt{3}}i)$ y por las raíces $(-1,1)$.
+\begin{figure}[H]
+\begin{minipage}[b]{0.5\linewidth}
+
+\includegraphics[width=\linewidth]{../2_iter_circ_Newton.jpg}
+\caption{En azul la circunferencia descrita en \eqref{circunferencia} y en naranja su segunda iteración por el método de Newton. }
+\centering \label{Figura3}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+
+\includegraphics[width=\linewidth]{../3_iter_circ_Newton.jpg}
+\caption{ En azul la circunferencia descrita en \eqref{circunferencia} y en naranja su tercera iteración por el método de Newton.}
+\centering \label{Figura4}
+\end{minipage}
+\end{figure}
+\begin{figure}[H]
+\begin{minipage}[b]{0.5\linewidth}
+
+\includegraphics[width=\linewidth]{../4_iter_circ_Newton.jpg}
+\caption{En azul la circunferencia descrita en \eqref{circunferencia} y en naranja su cuarta iteración por el método de Newton. }
+\centering \label{Figura5}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+
+\includegraphics[width=\linewidth]{../5_iter_circ_Newton.jpg}
+\caption{En azul la circunferencia descrita en \eqref{circunferencia} y en naranja su quinta iteración por el método de Newton. }
+\centering \label{Figura6}
+\end{minipage}
+\end{figure}
+
+Si estudiamos individualmente cada punto de la circunferencia $-\frac{1}{3}+\frac{2}{3}e^{i\alpha},\alpha\in[0,2\pi]$ podemos comprobar que todos los puntos, menos el 2-ciclo ($\frac{1}{\sqrt{3}}i$, $\frac{-1}{\sqrt{3}}i$) o según coordenadas polares respecto a la circunferencia 
+\begin{equation}\label{2-ciclo1}
+\left(-\frac{1}{3}+\frac{2}{3}e^{\frac{2\pi i}{3}},-\frac{1}{3}+\frac{2}{3}e^{\frac{-2\pi i}{3}}\right),
+\end{equation}
+con un número suficiente de iteraciones por el método de Newton, van a ir acercándose a la raíz $-1$ si su parte real es negativa o la raíz +1 en caso contrario, siendo los puntos del 2-ciclo \eqref{2-ciclo1} los únicos que escapan a este comportamiento. En cambio, si nos fijamos en la curva la estructura parece que no varía demasiado, incluso tiende a estabilizarse.
+Este número de iteraciones necesarias para estar a una distancia ``razonable" de las raíces parece inversamente proporcional a la distancia inicial con el 2-ciclo, a menor distancia con éste, mayor será el número de iteraciones necesarias.
+\\\\
+Estudiemos ahora el mismo caso con el método de Schröder. Teniendo en cuenta \eqref{schDistancias} e imponiendo $r^1_n=r^1_{n+1}$. Veamos qué forma tiene la curva formada por los puntos de $\mathbb{C}$ que al iterarlos por el método de Schröder  se mantienen a la misma distancia de la raíz $z^1=1$:
+
+\begin{equation}
+ (( r^1_{n})^2-2)^2+( (r^2_{n})^2-2)^2=2( r^1_{n})^2.
+\end{equation}
+
+Sustituyendo $(r^1_{n})^2=(x_n-1)^2+y_n^2$ y $(r^2_{n})^2=(x_n+1)^2+y_n^2$, se obtiene una ecuación cuártica que simplificándola nos queda:
+\begin{equation} \label{ecuCuarticaSch}
+2 x_n + x_n^2 + x_n^4 - 3 y_n^2 + 2 x_n^2 y_n^2 + y_n^4 = 0.
+\end{equation}
+
+Esta ecuación que nos ha quedado se puede resolver sin mucha complicación en $y$, quedándonos 4 parametrizaciones de $y$ en función de $x$. En la Figura \ref{cuartica} se representa un dibujo de estas 4 parametrizaciones distinguidas por colores.
+
+
+\begin{figure}[h!]
+	\centering
+  \includegraphics[scale=0.3]{../cuartica_sch.png}
+ 	\caption{Curva descrita en \eqref{ecuCuarticaSch}. Dibujada en 4 colores, azul, naranja, rojo y verde, cada uno de ellos representando una de sus 4 diferentes parametrizaciones.}
+  \label{cuartica}
+\end{figure}
+\begin{figure}[h!]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../1_iter_cuartica_sch.png}
+\caption{Primera iteración por el método de Schröder de la curva descrita en \eqref{ecuCuarticaSch} siguiendo el criterio de colores de la Figura \eqref{cuartica}. }
+\label{cuartica2}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../2_iter_cuartica_sch.png}
+\caption{ Segunda iteración por el método de Schröder de la curva descrita en \eqref{ecuCuarticaSch} siguiendo el criterio de colores de la Figura \eqref{cuartica}.}
+\label{cuartica3}
+\end{minipage}
+\end{figure}
+Fijándonos en el dibujo podemos deducir algunas cosas. Esta nueva curva pasa por el 0, iterándolo por el método de Schröder  nos damos cuenta de que se trata de un punto fijo para la función de iteración, que al no ser raíz del polinomio $p$ diremos que se trata de un  \textbf{punto fijo extraño}. 
+
+El eje imagianario va a seguir siendo invariante y por la simetría de la curva vemos que en sus otros 2 cortes con el eje imaginario $(\sqrt{3}i,-\sqrt{3}i)$ quedan ambos a la misma distancia del 1 con lo cual estos 2 puntos $(\sqrt{3}i,-\sqrt{3}i)$ deben de ser necesariamente un 2-ciclo.
+Respetando los colores, en las Figuras \ref{cuartica2} y \ref{cuartica3} se pueden ver la forma que tienen las dos primeras iteraciones.
+
+
+
+En este caso los dibujos se vuelven más complejos que para el método de Newton, ya que a parte de los dos puntos del 2-ciclo y las raíces, también influye en la dinámica de la curva el $0,$ que es un punto fijo repulsor de la función de iteración.\\
+Schröder no siguió avanzando en esta línea de trabajo. Tampoco queda muy claro cual era el objetivo final del estudio de estas curvas.
+
+
+\section{El problema de Cayley}
+
+\begin{figure}[h!]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.2]{../CaleY}
+\caption{Retrato de Arthur Cayley.}
+  \label{etiqueta}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.4]{../cayley_article}
+\caption{Artículo de una sola página publicado en el American Journal of Mathematics, titulado The Newton-Fourier imaginary problem, en 1879 por Arthur Cayley. }
+\label{Figuraraiz3_1}
+\end{minipage}
+\end{figure}
+\vfill
+Contemporáneo de Schröder, Arthur Cayley (1821-1895) fue un matemático y abogado británico conocido por sus aportaciones en el campo del álgebra, aunque ahora vamos a centrarnos en sus trabajos sobre la dinámica del método de Newton en el plano complejo $\mathbb{C}.$
+Él y Schröder  fueron los primeros que propusieron la utilización del método de Newton para resolver ecuaciones definidas en $\mathbb{C}.$
+
+\begin{dfn}
+Sea $p(z)$ un polinomio en $\mathbb{C}$, $z^*\in \mathbb{C}$ una raíz del mismo y $z_{n+1}=F_p(z_n)$ un método iterativo para aproximar las raíces de $p(z)$. Se llama \textbf{cuenca de atracción de $z^*$} por el método iterativo $F_p$ al conjunto $A(z^*)$ definido por
+
+$$A(z^*)=\lbrace z_0\in \mathbb{C}:z_n\to z^* \rbrace. $$
+\end{dfn}
+
+\begin{figure}[h!]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.35]{../julia-z3-1}
+ 
+  \caption{Cuencas de atracción por el método de Schröder  para el polinomio $z^3-1$. En cyan la cuenca de la raíz 1, en magenta la de $e^{\frac{1}{3} i (4 \pi )}$ y en amarillo la del $e^{\frac{i 2 \pi }{3}}$.}
+  \label{cuencas_z3-1_}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=0.35]{../cuenca_raiz3_i_1_Newton}
+\caption{Cuencas de atracción por el método de Newton  para el polinomio $z^3-1$. En cyan la cuenca de la raíz 1, en magenta la de $e^{\frac{1}{3} i (4 \pi )}$ y en amarillo la del $e^{\frac{i 2 \pi }{3}}$.}
+\label{cuencas_z3-1_Newton}
+\end{minipage}
+\end{figure}
+
+Se conoce como problema de Cayley al estudio de las cuencas de atracción del método de Newton cuando es aplicado a un polinomio $p(z)$. El mismo Calyley consiguió caracterizar las cuencas de atracción de las raíces del polinomio $z^2-1,$ pero fracasó para grados mayores dándose cuenta que era un problema demasiado complejo, tal como se puede ver en la Figura \ref{cuencas_z3-1_Newton}.
+\\\\
+Caracterizar las cuencas de atracción del polinomio $z^2-1$, por el método de Newton no es algo demasiado complicado y quedan dos conjuntos fácilmente distinguibles para cada raíz $-1$ y $+1$:
+
+$$ A(+1)=\lbrace z\in \mathbb{C}, Re(z)>0 \rbrace, $$
+$$ A(-1)=\lbrace z\in \mathbb{C}, Re(z)<0 \rbrace. $$
+Para hacer esto Cayley utilizo la herramienta de la conjugación topológica con una transformada de Möbius, como veremos en la siguiente sección.
+En cambio si queremos caracterizar las cuencas de atracción del polinomio $z^3-1$, esos tres conjuntos uno para cada raíz ($1,e^{\frac{2\pi}{3}},e^{\frac{4\pi}{3}}$) ya no son tan fáciles de caracterizar y queda algo como lo que se ve en la Figura \ref{cuencas_z3-1_}.
+Vista la complejidad de este conjunto es difícil pensar que en la época de Cayley, sin disponer de la tecnología de la que hoy disponemos, fueran capaces de representarlo.
+ 
+\section{Método de Schröder  aplicado a polinomios de grado 2}
+
+En esta sección probaremos que el estudio dinámico del método de Schröder  aplicado a polinomios de grado 2 como $p(z)=(z-a)(z-b),\,a,b\in\mathbb{C}$ es topológicamente similar al estudio dinámico de la función $R(z)=-z^2$. Empezaremos introduciendo los conjuntos de Julia y Fatou.
+
+\subsection*{Los conjuntos de Julia y Fatou}
+Vamos a introducir los conjuntos de Julia y Fatou así como algunas de sus propiedades siguiendo el libro de Beardon \cite{Beardon}.
+
+\begin{dfn}
+\textbf{Equicontinuidad.} Una familia $\mathcal{F}$ de funciones definidas entre dos espacios métricos $(X_1,d_1),(X_2,d_2)$
+
+\begin{equation}
+\mathcal{F}=\lbrace f:X_1\to X_2 \rbrace,
+\end{equation}
+se dice equicontinua en $x_1 \in X_1 $ si $\forall \epsilon>0$, $\exists \delta>0$ tales que $\forall x \in X_1$ y $\forall f \in \mathcal{F}$ se tiene que si:
+\begin{equation}
+d_1(x_1,x)<\delta \Rightarrow d_2(f(x_1),f(x))<\epsilon.
+\end{equation}
+$\mathcal{F}$ será equicontinua en un conjunto $D\subseteq X_1$ si lo es en cada punto de $D$.
+\end{dfn}
+
+\begin{dfn}
+\textbf{Conjuntos de Fatou y Julia.} Sea $R$ una función racional definida en el plano complejo ampliado, $\widehat{\mathbb{C}}$. Se dice conjunto de Fatou de $R$, $F(R),$ al conjunto abierto más grande que hace equicontinua a la familia $\lbrace R^n, n \in \mathbb{N} \rbrace$ en $\mathbb{C}_\infty$(entendiéndose como $R^n$ a $R$ compuesta consigo misma $n$  veces).\\
+Al complementario del conjunto de Fatou se le conoce como conjunto de Julia.
+\end{dfn}
+
+\begin{teo}
+\textbf{Caracterizaciones de los conjuntos de Julia y Fatou.} Sea $R$ una función racional definida en $\mathbb{C}_{\infty}$, siendo $F(R)$ y $J(R)$ sus conjuntos de Julia y de Fatou asociados. Se cumplen las siguientes propiedades:
+\begin{enumerate}
+\item El conjunto de Julia es no vacío.
+\item Los ciclos atractores pertenecen al conjunto de Fatou y los repulsores al de Julia.
+\item El conjunto de Julia $J(R)$ se puede definir como la clausura de los ciclos repulsores.
+\item $J(R)$ es un conjunto perfecto, es decir, es cerrado y no tiene puntos aislados.
+\item $\forall n\in \mathbb{N}$, $J(R^n)=J(R)$ y $F(R^n)=F(R)$.
+\end{enumerate}
+\end{teo}
+\begin{proof}
+La demostración de este resultado se encuentra detallada en la referencia \cite{Beardon}.
+\end{proof}
+
+Ahora vamos a introducir el concepto de conjugación topológica que va a ser fundamental para caracterizar al conjunto de Julia y la dinámica en general del método de Schröder  aplicado a polinomios de grado 2.
+\begin{dfn}\label{defiConj}
+\textbf{Conjugación topológica.} Sean $f:D\to D$ y $g:E\to E$ 2 funciones. Decimos que ellas son topológicamente conjugadas si existe un homomorfismo $\phi:D\to E,$ tal que $g(\phi(z))=\phi(f(z))$, $\forall z \in D.$
+En este caso a $\phi$ se la llama conjugación topológica entre $f$ y $g$.
+
+\end{dfn}
+
+\begin{teo}\textbf{Características de la conjugación topológica.}\label{conjugacion}
+Sean $f,g,\phi$ como en la definición \ref{defiConj}. Se cumplen las siguientes características:
+\begin{enumerate}
+\item $\phi^{-1}:E\to D$ es una conjugación topológica entre $g$ y $f$.
+\item $p\in D$ es un punto periódico de $f$ si y sólo si $\phi(p)\in E$ es un punto periódico de $g$.
+\item Para funciones derivables, si $p\in D$ es un punto periódico de $f$ y $\phi'$ no se anula en la órbita de $p$, entonces $p$ y $\phi(p)$ tienen el mismo carácter (atractor, repulsor o indiferente).
+\item Si $p$ es un punto periódico de $f$ con cuenca de atracción $U(p)\subseteq D$, entonces la cuenca de atracción de $\phi(p)$ es $\phi(U(p))\subseteq E.$
+\item Los puntos periódicos de $f$ son densos en $D$ si y sólo si los puntos periódicos de $g$ son densos en $E$.
+\end{enumerate}
+
+\end{teo}
+\begin{proof}
+La demostración de este resultado se encuentra detallada en la referencia \cite{GutiPlaza}.
+\end{proof}
+
+Con estos resultados previos ya estamos capacitados para darnos cuenta cómo son los conjuntos de Julia y Fatou de la función de iteración del método de Schröder  aplicado a un polinomio de grado $2$.
+
+\begin{teo}
+Sea $S_p$ la función de iteración del método de Schröder aplicada al polinomio $p(z)=(z-a)(z-b).$ Se tiene que $S_p$ es conjugada de $-z^2$ mediante la transformada de Möbius, $M(z)=\frac{z-a}{z-b}$. Además, $J(S_p)$ es la recta equidistante de las dos raíces $a$ y $b$ en el plano complejo $\mathbb{C}$.
+\end{teo}
+
+\begin{proof}
+Lo primero, veamos qué forma tiene $S_p(z),$
+\begin{equation*}
+S_p(z)=z-\frac{1}{1-L_p(z)}\frac{p(z)}{p'(z)},\hspace{0.2cm}L_p(z)=\frac{p(z)p''(z)}{p'(z)^2}.
+\end{equation*}
+Sustituyendo por sus expresiones nos queda:
+
+\begin{equation*}
+S_p(z)=\frac{a^2b+bz^2+a(b^2-4bz+z^2)}{a^2+b^2-2az-2bz+2z^2}.
+\end{equation*}
+Teniendo en cuenta que la inversa de la transformada de Möbius tiene la siguiente forma:
+
+\begin{equation}
+M^{-1}(z)=\frac{bz-a}{z-1},
+\end{equation}
+sustituyendo vemos que
+$$M\circ S_p \circ M^{-1}(z)=-z^2.$$
+Conociendo ya que $S_p(z)$ es conjugada de $-z^2$, veamos primero que forma tienen las cuencas de atracción de $R(z)=-z^2$. 
+\\
+$R(z)$ tiene tres puntos fijos, $0$ e $\infty$ que son atractores y el $-1$ que es repulsor. Se tiene que 
+$$\forall |z_0|>1,R^n(z_0)\to\infty, \hspace{0.2cm}\forall |z_0|<1,R^n(z_0)\to 0,$$
+quedando la circunferencia $|z|=1$ como la frontera entre las dos cuencas de atracción y región invariante por $R(z)$, por lo tanto se tiene que $J(R)=\lbrace z\in \mathbb{C},|z|=1 \rbrace$.
+
+Como hemos visto que $\forall z \in \mathbb{C}$
+\begin{equation}
+S_p\circ M^{-1}(z)= M^{-1}\circ R (z).
+\end{equation}
+Por el Teorema \ref{conjugacion}, como $\lbrace 0, \infty\rbrace$ son puntos fijos atractores de $R$, sus preimágenes por $M$ serán puntos fijos atractores de $S_p$. Lo mismo pasa con sus cuencas de atracción y los conjuntos invariantes.
+Veamos a dónde va la imagen por $M^{-1}$ de $J(R)=\lbrace z\in \mathbb{C},|z|=1 \rbrace$ (conjunto invariante por $R$). $J(R)$ se trata de una circunferencia y como las transformadas de Möbius transforman circunferencias/rectas en circunferencias/rectas (página 390 de la referencia \cite{Moebius}), si tomamos tres puntos, $-1,i,-i\in J(R)$ y calculamos su imagen por $M^{-1}$, estos puntos estarán en $J(S_p)$.
+\\
+Supongamos $a=x_1+iy_1$ y $b=x_2+iy_2,$ se tiene que:
+
+$$M^{-1}(-1)=\frac{x_1+x_2}{2}+i\frac{x_1+x_2}{2}, $$
+
+$$M^{-1}(i)=\frac{1}{2} (x_1+x_2-y_1+y_2)+i\frac{1}{2} (x_1-x_2+y_1+y_2),$$
+
+$$M^{-1}(-i)=\frac{1}{2} (x_1+x_2+y_1-y_2)+i\frac{1}{2} (-x_1+x_2+y_1+y_2), $$
+
+Si asumimos que el imaginario como eje $y$ y el real como eje $x$, la recta que pasa por $M^{-1}(-1)$ y $M^{-1}(i)$, tiene la expresión:
+
+$$y=-\frac{x_1-x_2}{y_1-y_2}x-\frac{-x_1^2+x_2^2-y_1^2+y_2^2}{2 (y_1-y_2)}. $$
+
+Se puede comprobar fácilmente que $M^{-1}(-i)$ pertenece a esta recta y que además se trata de la recta equidistante a las raíces $a$ y $b$ en el plano complejo.
+
+\end{proof}
+ 
+
+
+
+
+
+
+
+
+\chapter{Dinámica del método de Schröder  aplicado a polinomios cúbicos }
+En este capítulo vamos a seguir estudiando la dinámica del método de Schröder, avanzando al siguiente caso de dificultad: los polinomios cúbicos. El procedimiento que vamos a seguir es similar al realizado en las referencias \cite{olivo} y \cite{magrenan} para los métodos de Chebysev y Newton amortiguado respectivamente.
+Hasta ahora las cuencas de atracción habían sido conjuntos geométricamente fáciles de describir, limitadas por rectas y circunferencias. Veamos como para el caso de los polinomios cúbicos, estos conjuntos se complican un poco. Para realizar los diferentes dibujos que aparecen en la memoria nos hemos valido del software Mathematica siguiendo las ideas recogidas en la referencia \citep{Varona}. Todo el código realizado se encuentra publicado en el siguiente repositorio \url{https://github.com/vicgalilea95/Schr-der-s-method}.
+\\\\
+En la Figura \ref{cuenca1} hemos dibujado las cuencas de atracción del polinomio $p(z)=(z^2-1)(z-3-i)$ con ayuda del ordenador.
+\begin{figure}[h!]
+	\centering
+  \includegraphics[scale=0.5]{../cuenca3+i}
+  \caption{En cyan la cuenca del $1$, en magenta la del $-1$ y en amarillo la cuenca del $3+i$. Las zonas blancas representan zonas donde después de un número determinado de iteraciones el método todavía no ha convergido a ninguna raíz.}
+  \label{cuenca1}
+\end{figure}
+
+Fijándonos en la Figura \ref{cuenca1} podemos remarcar 2 cosas: que hay grandes zonas pintadas de blanco, las que podemos suponer que no convergen a ninguna raíz y que color cyan domina al resto. Este hecho no se da en otros procesos iterativos, como en el método de Newton, donde las cuencas de atracción de todas las raíces conectan con el infinito \cite{hubbard}.
+
+En el Cuadro \ref{ciclos_atractores1} están analizadas más detenidamente las zonas blancas tomando un par de puntos que estén en ellas, por ejemplo $1.5-4i$ y $-\frac{1}{8}+3i$ y calculando sus órbitas por la función de iteración.
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Número de iteración & $z_0=1.5-4i$ & $z_0=-0.125+3i$\\ \hline
+$72$ & $1.47032\, -3.1481 i$ & $0.579967\, +1.3703 i$\\ \hline
+$73$ & $0.579967\, +1.3703 i$ & $1.47032\, -3.1481 i$\\ \hline
+$74$ & $1.47032\, -3.1481 i$ & $0.579967\, +1.3703 i$\\ \hline
+$75$ & $0.579967\, +1.3703 i$ & $1.47032\, -3.1481 i$\\ \hline
+$76$ & $1.47032\, -3.1481 i$ & $0.579967\, +1.3703 i$\\ \hline
+$77$ & $0.579967\, +1.3703 i$ & $1.47032\, -3.1481 i$\\ \hline
+
+\end{tabular}
+\caption{Elementos de la órbita de los puntos $z_0=1.5-4i$ y $z_0=-0.125+3i$.}
+\label{ciclos_atractores1}
+\end{center}
+\end{table}
+
+
+
+Como hemos podido comprobar en el Cuadro \ref{ciclos_atractores1}, parece que en estas zonas blancas en vez de converger a la raíz, se converge a un 2-ciclo.
+La existencia de estas zonas blancas, de no convergencia a ninguna raíz, viene a decirnos que el método de Schröder  se comporta numéricamente mal para este polinomio concreto, desde el punto de vista de la búsqueda de raíces.
+\section{El método de Schröder  aplicad a polinomios de grado 3 con 2 raíces distintas}
+
+En esta sección vamos a estudiar como se comporta el método de Schröder  aplicado a polinomios de la forma
+
+\begin{equation}\label{polinomio}
+p(z)=(z-a)^2(z-b),\hspace{0.5cm}a,b \in \mathbb{C}.
+\end{equation}
+Notemos que al tratarse de polinomios dependientes únicamente de dos parámetros (las raíces $a$ y $b$) podemos seguir una técnica similar a la empleada por Cayley en el método de Newton.
+\begin{teo}
+Sea $p(z)=(z-a)^2(z-b),\hspace{0.1cm}a,b \in \mathbb{C}$ y su función de iteración del método de Schröder asociada $S_p(z).$ Se tiene que el conjunto de Julia asociado a $S_p(z)$ corresponde con la circunferencia de centro en $\frac{4b-a}{3}$ y radio $\frac{2}{3}\vert b-a \vert.$
+\end{teo}
+
+\begin{proof}
+Sea $A(z)$ una aplicación afín que lleva las raíces de $p$ a $-1$ y $1$, definida por
+$$ A(z)=1+2\frac{ z-a}{a-b}. $$
+
+Sea $T(z)$ la función de iteración de Schröder para $a=1$ y $b=-1$, se tiene que 
+
+$$ T(z)=A\circ S_p\circ A^{-1}(z)=\frac{z (z+6)+1}{z (3 z+2)+3}.$$
+
+Ahora si usamos la tranformada de Möbius $M(z)=\frac{z-1}{z+1}$, se tiene que 
+
+$$R(z)=M\circ T\circ M^{-1}=\frac{-z^2}{2}. $$
+
+En este caso:
+\begin{itemize}
+\item  $\forall z\in \mathbb{C}$ con $\vert z \vert<2$, se tiene que $R^n(z)\to 0$.
+\item  $\forall z\in \mathbb{C}$ con $\vert z \vert > 2$, se tiene que $R^n(z)\to \infty$.
+\item  $\forall z\in \mathbb{C}$ y $\forall n$ con $\vert z \vert = 2$, se tiene que $\vert R^n(z) \vert = 2$. 
+\end{itemize}
+
+Por lo tanto el conjunto de Julia asociado a $R$ es la circunferencia $\lbrace z\in \mathbb{C},\hspace{0.1cm} \vert z \vert=2\rbrace.$ Ahora ya que $M$ es una conjugación topológica si hacemos la preimagen de la circunferencia por $M$ encontraremos el conjunto de Julia de $T$.
+Como $M^{-1}(\lbrace z\in \mathbb{C},\hspace{0.1cm} \vert z \vert=2\rbrace)$ solo puede ser una recta o una circunferencia al ser $M^{-1}$ una transformada de Möbius, si tomamos $3$ puntos de la circunferencia, como son $2,-2$ y $2i$ y calculamos su preimagen por $M$,
+\begin{itemize}
+\item $M^{-1}(2)=-3,$
+\item $M^{-1}(-2)=-\frac{1}{3},$
+\item $M^{-1}(2i)=\frac{-3+4i}{5}.$
+\end{itemize}
+Estos $3$ puntos obviamente no están alineados así que $J(T)=M^{-1}(\lbrace z\in \mathbb{C},\hspace{0.1cm} \vert z \vert=2\rbrace)$ necesariamente es una circunferencia, y como conocemos $3$ puntos que pasan por ella podemos calcularla explicitamente, si hacemos que $x$ sea la variable en el eje real e $y$ en el eje imaginario, $J(T)$ tiene la siguiente forma
+
+$$ J(T)\equiv x^2+y^2+Ax+By+C=0.$$
+ 
+Si la hacemos pasar por $-3,-\frac{1}{3}$ y $\frac{-3+4i}{5}$ y resolvemos el sistema en $A,B$ y $C$ nos queda
+
+$$ J(T)=\lbrace \vert z+\frac{5}{3}\vert,\hspace{0.1cm} z \in \mathbb{C} \rbrace. $$
+
+Como se tiene que
+
+$$ J(S_p)=A^{-1}(J(T)), $$
+y además las $A^{-1}$ es una transformación afín y estas transforman circunferencias en circunferencias, $J(S_p)$ es una circunferencia con centro $A^{-1}(\frac{5}{3})=\frac{4b-a}{3}$ y radio $A^{-1}(\frac{4}{3})=\frac{2}{3}|b-a|$.
+
+\end{proof}
+En la Figura \ref{cuenca_2_raices} se puede apreciar como queda para el caso $p(z)=(z-1)^2(z+1).$ Nos queda pendiente generalizar este estudio a polinomios de la forma $p(z)=(z-a)^n(z-b)^m.$ 
+\begin{figure}[H]\label{cuenca_2_raices}
+	\centering
+  \includegraphics[scale=0.5]{../cuenca_2_raices}
+  \caption{En cyan la cuenca del $1$ y en magenta la del $-1$ del método de Schröder aplicado al polinomio $p(z)=(z-1)^2(z+1)$.}
+  \label{etiqueta}
+\end{figure}
+\section{El plano de parámetros del método de Schröder}
+
+ En esta sección vamos a intentar identificar para qué tipo de polinomios cúbicos en las cuencas de atracción hay zonas que no convergen a ninguna raíz, para lo que introduciremos algunos conceptos previos. Podemos encontrar un estudio similar hecho para el método de Chebysev en la referencia \cite{gutiVarona}. 
+
+\begin{dfn}\textbf{Punto crítico.} Un punto $\zeta \in \mathbb{C}$ se dice punto crítico de una función racional $R$, si la inyectividad de $R$ falla en un entorno de $\zeta$. Una función racional $R$ con grado $d$ puede tener hasta $2d-2$ puntos críticos contados con sus multiplicidades. Para definir este concepto, nos hemos basado en la referencia \cite{Beardon}.
+\end{dfn}
+
+
+\begin{teo}[Teorema de Fatou-Julia]\label{Julia-Fatou}
+Todo ciclo atractor de una función racional atrae por lo menos a un punto crítico de ésta.
+\end{teo}
+\begin{proof}
+La prueba de este resultado se encuentra de manera detallada en la referencia \cite{Beardon}.
+\end{proof}
+
+Este teorema nos permite identificar a todos los ciclos atractores como el que nos ha salido en el primer ejemplo, mediante algo que ya conocemos a priori como son los puntos críticos de la función de iteración. 
+\\\\
+El siguiente resultado nos va a permitir simplificar el estudio dinámico de la familia tri-paramétrica de polinomios $P_{a,b,c}=\lbrace(z-a)(z-b)(z-c),\hspace{0.2cm}a,b,c\in \mathbb{C}\rbrace$ al estudio de la familia uni-paramétrica de polinomios $P_{\lambda}=\lbrace(z^2-1)(z-\lambda),\hspace{0.2cm}\lambda\in \mathbb{C}\rbrace$.
+
+\begin{teo}
+Sea un polinomio de la forma $p(z)=(z-a)(z-b)(z-c)$, entonces se tiene que existe una aplicación afín $A(z)=\alpha z+ \beta$ tal que $q(z)=(z^2-1)(z-\lambda), \lambda \in \mathbb{C}$. Y la función de iteración del método de Schröder  por $p$, $S_p(z)$ es conjugada a $S_q(z)$ mediante $A$. $A\circ S_q(z)\circ A^{-1}=S_p(z)$.
+\end{teo}
+\begin{proof}
+Primero veamos que todos los polinomios del tipo $p(z)=(z-a)(z-b)(z-c)$ se pueden expresar mediante una transformación afín como un polinomio del tipo $q(z)=(z^2+1)(z-\lambda)$:
+$$p(A(z))=((\alpha z+ \beta)-a)((\alpha z+ \beta)-b)((\alpha z+ \beta)-c)=$$
+$$\alpha^3 \left(  z- \frac{a-\beta}{\alpha}\right) \left(  z- \frac{b-\beta}{\alpha}\right)\left(  z- \frac{c-\beta}{\alpha}\right). $$
+Ahora igualando las raíces,
+$$1=\frac{a-\beta}{\alpha},\hspace{0.5cm}-1=\frac{b-\beta}{\alpha}. $$
+
+Despejando $\alpha$, $\beta$ y $\lambda$
+
+$$\alpha=\frac{a-b}{2},\hspace{0.5cm}\beta=\frac{a+b}{2},\hspace{0.5cm}\lambda=\frac{2c-a-b}{a-b}. $$
+
+Por lo tanto:
+$$p(A(z))=\alpha^3(z^2-1)(z-\frac{2c-a-b}{a-b}).$$
+Como desde el punto de vista dinámico nos da igual tomar un múltiplo del polinomio, podemos asumir $q(z)=(z^2-1)(z-\frac{2c-a-b}{a-b}).$
+Y siendo $A(z)=\frac{a-b}{2}z+\frac{a+b}{2}$ y haciendo las cuentas se puede comprobar que,
+
+$$A(S_q(A^{-1}(z)))=S_p(z). $$
+
+\end{proof}
+
+Uniendo este resultado al del teorema \ref{conjugacion} deducimos que el estudio dinámico de los polinomios cúbicos con 3 raíces distintas se reduce a estudiar una familia de polinomios dependientes de un solo parámetro, $P_{\lambda}=\lbrace(z^2-1)(z-\lambda),\hspace{0.2cm}\lambda \in \mathbb{C}\rbrace$. Esta parametrización para polinomios cúbicos fue dada por \cite{Roberts} entre otros autores. Además existen otras parametrizaciones equivalentes \cite{plazaRomero}, \cite{curry}, \cite{Vrscay}.
+\\\\
+Ahora vamos a estudiar los puntos críticos de la función de iteración y usando el teorema de Julia-Fatou \ref{Julia-Fatou} sabremos para qué polinomios el método de Schröder  tiene puntos no convergentes a ninguna raíz.
+La función de iteración por Schröder  del polinomio $p(z)=(z^2-1)(z-\lambda)$ tiene la siguiente forma:
+
+$$S_p(z)=\frac{4 \lambda^2 z+\lambda \left(z^4-10 z^2+1\right)+4 z^3}{2 \lambda^2 \left(z^2+1\right)-4 \lambda \left(z^3+z\right)+3 z^4+1}. $$
+Su derivada es
+
+$$S'_p(z)=-\frac{4 \left(z^2-1\right) (z-\lambda ) \left(-2 \lambda ^3-2 \lambda +\lambda ^2 z^3+3 z^3-12 \lambda  z^2+9 \lambda ^2 z+3 z\right)}{\left(2 \lambda ^2+3 z^4-4 \lambda  z^3+2 \lambda ^2 z^2-4 \lambda  z+1\right)^2}. $$
+
+Notemos que $-1,1$ y $\lambda$ son las propias raíces del polinomio y en todos los casos van a converger a ellas mismas. Analicemos pues los ceros del término $-2 \lambda ^3-2 \lambda +\lambda ^2 z^3+3 z^3-12 \lambda  z^2+9 \lambda ^2 z+3 z$.
+Este término tiene 3 raíces en $z$,
+
+$$\zeta_1= \frac{-3 \lambda ^4+4 \lambda  \sqrt[3]{\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}}}{\left(\lambda ^2+3\right) \sqrt[3]{\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}}}
+$$
+$$+\frac{\left(\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}\right)^{2/3}+6 \lambda ^2-3}{\left(\lambda ^2+3\right) \sqrt[3]{\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}}} ,$$
+
+
+$$\zeta_2=\frac{9 i \left(\sqrt{3}+i\right) \sqrt[3]{\lambda ^7-11 \lambda ^5+19 \lambda ^3+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}-9 \lambda }}{18 \left(\lambda ^2+3\right)}
+$$
+
+$$
++\frac{\frac{27 \left(1+i \sqrt{3}\right) \left(\lambda ^2-1\right)^2}{\sqrt[3]{\lambda ^7-11 \lambda ^5+19 \lambda ^3+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}-9 \lambda }}+72 \lambda }{18 \left(\lambda ^2+3\right)},$$
+
+$$\zeta_3= \frac{-9 \left(1+i \sqrt{3}\right) \sqrt[3]{\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}}}{18 \left(\lambda ^2+3\right)}
+$$ $$
++\frac{\frac{27 \left(1-i \sqrt{3}\right) \left(\lambda ^2-1\right)^2}{\sqrt[3]{\lambda  \left(\lambda ^2-9\right) \left(\lambda ^2-1\right)^2+\sqrt{\left(\lambda ^2-1\right)^4 \left(\lambda ^2+3\right)^3}}}+72 \lambda }{18 \left(\lambda ^2+3\right)}.$$
+
+Ahora sabiendo cuales son estos 3 puntos, a los que llamaremos \textbf{puntos críticos libres}, vamos a ver para cada uno de estos que valores de $\lambda$ le llevan a converger por el método de Schröder  a una de las tres raíces $(1,-1,\lambda)$ o a algún ciclo atractor.
+\\\\
+La estrategia a seguir será colorear el plano complejo, que en este contexto lo llamaremos \textbf{Plano de Parámetros} con diferentes colores dependiendo del comportamiento de las órbitas de los 3 puntos críticos libres definidos arriba por la función de iteración $S_{p}$. Haremos un dibujo del plano de parámetros por cada punto crítico libre $(\zeta_1,\zeta_2, \zeta_3)$, y en el estarán representados elementos de la familia de polinomios $P_{\lambda}=\lbrace (z^2-1)(z-\lambda),\hspace{0.35cm}\lambda \in \mathbb{C} \rbrace$. 
+\\\\
+Empecemos con $\zeta_1$. En la Figura \ref{planoParametros1} se puede ver el plano de parámetros asociado a este punto crítico libre. Análogamente en las Figuras \ref{planoParametros2} y  \ref{planoParametros3} hemos dibujado los planos de parámetros correspondientes a $\zeta_2$ y $\zeta_3$ respectivamente.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametros_1}
+ 
+  \caption{En cyan los valores de $\lambda$ para los que el punto crítico libre $\zeta_1$ converge a la raíz 1, en magenta los valores de $\lambda$ para los que $\zeta_1$ converge a $-1$, en amarillo valores de $\lambda$ para los que $\zeta_1$ converge al propio $\lambda$ y en negro los valores de $\lambda $ para los que en un determinado número de iteraciones no se ha visto que $\zeta_1$ converja a ninguna raíz.}
+  \label{planoParametros1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametros_2}
+ 
+  \caption{En cyan los valores de $\lambda$ para los que el punto crítico libre $\zeta_2$ converge a la raíz 1, en magenta los valores de $\lambda$ para los que $\zeta_2$ converge a $-1$, en amarillo valores de $\lambda$ para los que $\zeta_2$ converge al propio $\lambda$ y en negro los valores de $\lambda $ para los que en un determinado número de iteraciones no se ha visto que $\zeta_2$ converja a ninguna raíz.}
+  \label{planoParametros2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametros_3}
+ 
+  \caption{En cyan los valores de $\lambda$ para los que el punto crítico libre $\zeta_3$ converge a la raíz 1, en magenta los valores de $\lambda$ para los que $\zeta_3$ converge a $-1$, en amarillo valores de $\lambda$ para los que $\zeta_3$ converge al propio $\lambda$ y en negro los valores de $\lambda $ para los que en un determinado número de iteraciones no se ha visto que $\zeta_3$ converja a ninguna raíz.}
+  \label{planoParametros3}
+\end{figure}
+Las zonas negras representan valores de $\lambda$ donde la órbita del punto crítico libre no tiende a ninguna raíz, lo que da pie a que el método de Schröder  aplicado al polinomio correspondiente al valor concreto de $\lambda$ tenga zonas de no convergencia a ninguna raíz. Para entender mejor este hecho vamos a rehacer el dibujo del plano de parámetros atendiendo al siguiente criterio, en un único dibujo vamos a simplificar el comportamiento de los tres puntos críticos libres en un único dibujo. Véase la Figura \ref{planoParametros_2_colores}.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.2]{../plano_parametrtos_sch2}
+ 
+  \caption{En blanco los valores de $\lambda$ que hacen que la órbita los 3 puntos críticos libres $\zeta_1, \zeta_2$ y $\zeta_3$ converja a alguna raíz y en negro los valores de $\lambda$ que hacen que algún punto crítico libre no converja a ninguna raíz.}
+  \label{planoParametros_2_colores}
+\end{figure}
+Se pueden apreciar varios conjuntos de tipo Mandelbrot, muy parecidos al famoso conjunto de Mandelbrot, combinados en la Figura \ref{planoParametros_2_colores}. Es común que en la iteración de familias de funciones racionales dependientes de un parámetro aparezca el conjunto de Mandelbrot, en las referencias  \cite{ManSet2} y \cite{ManSet1} tratan más a fondo este tema. Si hacemos zoom en pequeñas zonas en torno al eje imaginario también encontramos pequeños conjuntos de Mandelbrot.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.3]{../plano_parametrtos_sch_zoom}
+ 
+  \caption{Ampliación de la Figura \ref{planoParametros_2_colores} donde se aprecia un pequeño conjunto de tipo Mandelbrot.}
+  \label{planoParametros_2_colores_zoom}
+\end{figure}
+\section{El plano de parámetros del método de Newton}
+Ahora si replicamos el mismo proceso con el método de Newton, tal y como esta hecho en la referencia \cite{GutiPlaza}, en vez de con el de Schröder . La función de iteración de Newton para el polinomio $p(z)=(z^2-1)(z+\lambda)$ es,
+
+$$N_{p_\lambda}(z)=\frac{-\lambda +2 z^3-\lambda  z^2}{3 z^2-2 \lambda  z-1}, $$
+
+y su derivada,
+
+$$N_{p_\lambda}'(z)=\frac{2 \left(z^2-1\right) \left(z-\lambda\right)\left(3z-\lambda\right)}{\left(3 z^2-2 \lambda  z-1\right)^2}. $$
+
+Al calcular sus ceros vemos que en este caso solo hay un punto crítico libre $\zeta=\frac{\lambda}{3},$ lo que simplifica mucho el estudio del plano de parámetros en comparación con el de Schröder  donde había $3$.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.5]{../Plano_parametros_Newton1}
+ 
+  \caption{En cyan los valores de $\lambda$ para los que el punto crítico libre $\zeta$ converge por Newton a la raíz 1, en magenta los valores de $\lambda$ para los que $\zeta$ converge a $-1$, en amarillo valores de $\lambda$ para los que $\zeta$ converge al propio $\lambda$ y en negro los valores de $\lambda $ para los que en un determinado número de iteraciones no se ha visto que $\zeta$ converja a ninguna raíz.}
+  \label{planoParametrosNewton1}
+\end{figure}
+Este dibujo es mucho más sencillo y además el color negro es prácticamente inexistente si lo comparamos con los dibujos del método de Schröder , aunque si hacemos zoom podemos ver un conjunto de tipo Mandelbrot en negro.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.5]{../Plano_parametros_Newton2}
+ 
+  \caption{Mismo Plano de Parámetros que el de la Figura \ref{planoParametrosNewton1} con zoom sobre una parte negra.}
+  \label{planoParametrosNewton2}
+\end{figure}
+
+\section{Ejemplos de cuencas de atracción}
+
+\subsection{Cuenca de atracción para $\lambda=\sqrt{3}i$}
+Este punto es significativo ya que las $3$ raíces del polinomio, $1,-1,\sqrt{3}i$ forman un triángulo equilátero.
+Vamos a calcular sus puntos críticos libres para buscar posibles peculiaridades del método. La función de iteración en este caso queda,
+
+\begin{equation*}
+S_{p_{\sqrt{3}i}}(z)=\frac{-\sqrt{3} z^4+4 i z^3+10 \sqrt{3} z^2-12 i z-\sqrt{3}}{3 i z^4+4 \sqrt{3} z^3-6 i z^2+4 \sqrt{3} z-5 i},
+\end{equation*}
+y su derivada
+
+\begin{equation}\label{ecu_raiz_3_I}
+S'_{p_{\sqrt{3}i}}(z)=-\frac{16 (z-1) (z+1) (z-\sqrt{3}i)(z-\frac{i}{\sqrt{3}})^2}{\left[ (z-\frac{i}{\sqrt{3}}) (3 i z^3+3 \sqrt{3} z^2-3 i z+5 \sqrt{3})\right]^2}=-\frac{16 (z-1) (z+1) (z-\sqrt{3}i)}{(3 i z^3+3 \sqrt{3} z^2-3 i z+5 \sqrt{3})^2}.
+\end{equation}
+
+Como se puede ver en la ecuación \eqref{ecu_raiz_3_I} los únicos puntos críticos en este caso son las raíces del polinomio, por lo tanto no hay puntos críticos libres y por el teorema de Julia-Fatou \ref{Julia-Fatou} tampoco pueden haber ciclos atractores en este caso.
+
+
+\begin{figure}[H]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../cuenca_raiz3_i_1}
+\caption{Cuenca de atracción del polinomio $(z^2-1)(z-\sqrt{3}i)$. En cyan las zonas que convergen a $-1$, magenta al $1$, amarillo a $\sqrt{3}i$, dentro del marco $[-5,5]\times[-5i,5i]$.}
+\label{Figuraraiz3_1}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\linewidth]{../cuenca_raiz3_i_2}
+\caption{Cuenca de atracción del polinomio $(z^2-1)(z-\sqrt{3}i)$. En cyan las zonas que convergen a $-1$, magenta al $1$, amarillo a $\sqrt{3}i$, dentro del marco $[-100,100]\times[-100i,100i]$. }
+\label{Figuraraiz3_1}
+\end{minipage}
+\end{figure}
+Como era de esperar para estas cuencas de atracción no se aprecian zonas negras ya que los únicos ciclos atractores son las propias raíces.
+\subsection{Cuenca de atracción para $\lambda=0$}
+En ese caso el polinomio a estudiar es $p_0(z)=(z^2-1)z$ y su función de iteración y la derivada  quedan,
+
+\begin{equation}
+S_{p_0}(z)=\frac{4 z^3}{3 z^4+1},\hspace{0.5cm} S'_{p_0}(z)=-\frac{12 z^2 \left(z^2-1\right)\left(z^2+1\right)}{\left(3 z^4+1\right)^2}.
+\end{equation}
+
+En este caso van a quedar $2$ puntos críticos libres distintos, $\zeta_1=i$ y $\zeta_2=-i$ y fácilmente se puede comprobar que $S_{p_0}(\zeta_1)=\zeta_2$ por lo tanto ambos forman un $2-$ciclo que sabemos gracias al teorema de Julia-Fatou \ref{Julia-Fatou} que por lo menos será atractor pero como además sabemos que $i, -i$ son los ceros de $S'_{p_0}(z)$ se tiene que el multiplicador asociado a este ciclo es $0 $ y por lo tanto se trata de un \textbf{ciclo superatractor}.
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../cuenca_landa_0}
+ 
+  \caption{Cuenca de atracción del polinomio $(z^2-1)z$. En cyan las zonas que convergen a $-1$, magenta al $1$, amarillo a $0$ y en negro las zonas que no convergen a ninguna de las 3 raíces.}
+  
+  \label{cuenca_Lambda0}
+\end{figure}
+
+\section{Cuencas de atracción para $\lambda=bi$, $0<b<\sqrt{3}$}
+Puesto que el método de Schröder es invariante por el eje imaginario, vamos a convertir a $S_p$ de una función definida en $\mathbb{C}$ a una función definida en $\mathbb{R}$ para el caso imaginario, como en \cite{Roberts}. Sean $b,y\in \mathbb{R}.$ La función de iteración de Schröder  asociada a este valor de $\lambda$ queda,
+
+$$S_{p_{b i}}(iy)=-\frac{i \left(4 b^2 y-b y^4-10 b y^2-b+4 y^3\right)}{2 b^2 y^2-2 b^2-4 b y^3+4 b y+3 y^4+1}.$$
+
+Fácilmente se deduce que la parte real de la expresión anterior va a ser $0$, por lo tanto $S_{p_{\lambda}}$ podemos decir que deja invariante el eje imaginario. Así que podemos trasladar el estudio a los números reales. Sea $R_b(y)=Im(S_{p_{bi}}(iy))$
+
+$$R_b(y)=\frac{ \left(4 b^2 y-b y^4-10 b y^2-b+4 y^3\right)}{2 b^2 y^2-2 b^2-4 b y^3+4 b y+3 y^4+1}$$
+y su derivada respecto a $y$,
+$$R'_b(y)= \frac{4 \left(y^2+1\right) (b-y) \left(2 b^3+b^2 y^3-9 b^2 y+12 b y^2-2 b-3 y^3+3 y\right)}{\left(2 b^2 y^2-2 b^2-4 b y^3+4 b y+3 y^4+1\right)^2},$$
+la derivada se hará $0$ en $b$ que corresponde con una raíz, $i,-i$ que al ser raíces complejas no nos interesan y en los puntos $(b,y)$ donde se anule el factor 
+\begin{equation}\label{factor_1}
+\left(2 b^3+b^2 y^3-9 b^2 y+12 b y^2-2 b-3 y^3+3 y\right).
+\end{equation}
+Por lo tanto los puntos críticos libres solo pueden venir de \eqref{factor_1}. 
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../r_b1}
+ 
+  \caption{En azul el dibujo de la curva donde el factor \eqref{factor_1} se iguala a $0$ con $b$ en el eje horizontal e $y$ en el eje vertical. En rojo las rectas $b=\sqrt{3}$ y $b=-\sqrt{3}$.}
+\label{r_b1}
+\end{figure}
+
+Parece claro que según la Figura \ref{r_b1} si $b\in(-\sqrt{3},\sqrt{3})$ va a haber $3$ puntos críticos libres y que si $b^2>3$ solo va a haber 1. Como ya hemos visto en el ejemplo anterior en el caso $b=\sqrt{3}$ no hay puntos críticos libres. Por simetría para $b=-\sqrt{3}$ tampoco habrá puntos críticos libres.
+
+
+
+
+
+
+
+
+
+%=========================================================
+%
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+%
+% And the appendix goes here
+\appendix
+\chapter{$2^n$-ciclos en el eje imaginario}
+\label{app:app01}
+
+\initial{L}a forma del entorno del eje imaginario positivo, el plano de parámetros dibujado, en la Figura \ref{planoParametros_2_colores} con 2 colores (blanco y negro) viene representada en la Figura \ref{plano_parametros_eje_imaginario_apendice}.
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametros_eje_imaginario}
+ 
+  \caption{Plano de parámetros dibujado en torno al eje imaginario, entre los valores $0$ y $0.7 i$. En blanco los valores de $\lambda$ para los que todos los puntos críticos libres convergen a raíces y en negro los valores de $\lambda$ para los que al menos un punto crítico libre no converge a ninguna raíz.}
+\label{plano_parametros_eje_imaginario_apendice}
+\end{figure}
+
+En un ejercicio de ``análisis empírico" de la dinámica del eje imaginario en torno a esta figura, hemos dividido el segmento $\left[ 0, 0.7 i \right] $ en varios puntos y analizado la dinámica para cada $\lambda$ particular.
+Nos hemos encontrado que dependiendo de la ``zona'' del conjunto de donde tomemos el $\lambda$ encontraremos un $2^n-$ciclo distinto en $\zeta_2$, por ejemplo si $\lambda$ está dentro del segmento $\left[ 0,0.34i\right] $ siempre vamos a encontrar $2-$ciclos. Vamos a verlo, tomemos $\lambda=0.175i$ que digamos se encuentra en la zona comprendida entre el $0$ y el $0.35i$. En este caso, en el Cuadro \ref{2-ciclo_apendice1} están calculados algunos elementos de la órbita del punto crítico libre $\zeta_2=1.33174 i$
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Número de iteración & $z_0=\zeta_2$\\ \hline
+$45$ & $-0.571824 i$ \\ \hline
+$46$ & $1.56799 i$ \\ \hline
+$47$ & $-0.571824 i$ \\ \hline
+$48$ & $1.56799 i$ \\ \hline
+$49$ & $-0.571824 i$ \\ \hline
+$50$ & $1.56799 i$ \\ \hline
+
+\end{tabular}
+\caption{Elementos de la órbita de $\zeta_2$ para  $\lambda=0.175i$.}
+\label{2-ciclo_apendice1}
+\end{center}
+\end{table}
+Parece que la órbita de $\zeta_2$ tiende al $2-$ciclo $\lbrace-0.571824 i,1.56799 i\rbrace$. En la Figura \ref{cuenca_Lambda0_175_apendice} están representadas las cuencas de atracción en el entorno de $\zeta_2$.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../cuenca_landa_0,175i}
+ 
+  \caption{Cuenca de atracción del polinomio $(z^2-1)(z-0.175i)$. En cyan las zonas que convergen a $-1$, magenta al $1$, amarillo a $0.175i$, en verde las zonas que van a parar al 2-ciclo y en negro las zonas que no convergen a ninguna de las 3 raíces ni al 2-ciclo.}
+  
+  \label{cuenca_Lambda0_175_apendice}
+\end{figure}
+
+Si por ejemplo ahora tomamos un $\lambda$ en la zona del plano de parámetros \ref{plano_parametros_eje_imaginario_apendice} comprendida aproximadamente entre $0.35 i$ y $0.525i $ como por ejemplo $\lambda=0.4i$. En este caso $\zeta_2=1.91265 i$. En el Cuadro \ref{4-ciclo_1_apendice} están calculados elementos de la órbita del $\zeta_2$.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Número de iteración & $z_0=\zeta_2$\\ \hline
+$492$ & $2.73526 i$ \\ \hline
+$493$ & $-0.216577 i$ \\ \hline
+$494$ & $2.06749 i$ \\ \hline
+$495$ & $-0.2578 i$ \\ \hline
+$496$ & $2.73526 i$ \\ \hline
+$497$ & $-0.216577 i$ \\ \hline
+$498$ & $2.06749 i$ \\ \hline
+$499$ & $-0.2578 i$ \\ \hline
+$500$ & $2.73526 i$ \\ \hline
+
+\end{tabular}
+\caption{Elementos de la órbita de $\zeta_2$ para  $\lambda=0.4i$.}
+\label{4-ciclo_1_apendice}
+\end{center}
+\end{table}
+En este caso nos hemos encontrado con un 4-ciclo. En la Figura \ref{cuenca_Lambda0_4_apendice} está representadas las cuencas de atracción para este caso.
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../cuenca_landa_0,4i}
+ 
+  \caption{Cuenca de atracción del polinomio $(z^2-1)(z-0.4 i)$. En cyan las zonas que convergen a $-1$, magenta al $1$, amarillo a $0$, en verde las zonas que van a parar al 2-ciclo y en negro las zonas que no convergen a ninguna de las 3 raíces ni al 4-ciclo.}
+  
+  \label{cuenca_Lambda0_4_apendice}
+\end{figure}
+Ahora si seguimos aumentando $\lambda$ siguiendo un proceso similar, parece que se puede encontrar cualquiera $2^n$-ciclo, nosotros hemos podido detectar hasta un $1024$-ciclo en $\lambda=0.6124 i$. 
+%
+% Apparently the guidelines don't say anything about citations or
+% bibliography styles so I guess we can use anything.
+
+
+% And the appendix goes here
+
+\chapter{Polinomiografía}
+
+\initial{S}i contamos con que para cada uno de los $3$ puntos críticos libres hay $4$ posibilidades distintas (que podamos identificar) en cuanto al comportamiento de sus órbitas, que converjan a las raíces $1$, $-1$,  $\lambda$ o que no converja a ninguna de ellas, por lo tanto para cada punto del plano de parámetros hay hasta $4^3=64$ combinaciones distintas, lo que se traduce en que podemos dibujar el plano de parámetros con hasta $64$ colores diferentes atendiendo a cada una de estas posibilidades. Tanta posibilidad de colores hace que podamos relacionar esta parte del trabajo con la \textbf{polinomiografía}. Esto es según el autor que introdujo el término Bahman Kalantari, el arte de visualizar las aproximaciones de las raíces de polinomios definidos en el plano complejo. En la referencia \cite{Lara}, también se trata este tema.
+
+En esta sección vamos a colorear de distintas maneras el plano de parámetros atendiendo a criterios diferentes.
+
+En la Figura \ref{figura_1_apendice_B} está representado el plano de parámetros de la siguiente manera, las zonas donde los $3$ puntos críticos libres converjan a alguna raíz están coloreadas en blanco y en el resto están distinguidos 3 colores en función del número de puntos críticos libres cuya órbita converja a alguna de las raíces.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametrtos_sch_colores}
+ 
+  \caption{En blanco los valores de $\lambda$ que hacen que la órbita los 3 puntos críticos libres $\zeta_1, \zeta_2$ y $\zeta_3$ converja a una raíz, amarillo cuando solo la órbita de un único punto crítico libre  converge a una de las raíces y magenta cuando hay dos que lo hacen y otra que no. No se han encontrado valores de $\lambda$ para los que ningún punto crítico libre tienda a alguna raíz.}
+  \label{figura_1_apendice_B}
+\end{figure}
+
+En la Figura \ref{planoParametros_8_colores} hemos intentado ahondar un poco más en el comportamiento de la zona donde al menos la órbita de un punto crítico libre no converja a ninguna raíz. En el Cuadro \ref{colores1} se detalla el criterio coloración que hemos seguido.
+
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Color & $\zeta_1$ & $\zeta_3$ & $\zeta_3$\\
+\hline
+Negro & $0$ & $0$ & $0$\\ \hline
+Marrón & $1$ & $0$ & $0$\\ \hline
+Rojo & $0$ & $1$ & $0$\\ \hline
+Naranja & $1$ & $1$ & $0$\\ \hline
+Amarillo & $0$ & $0$ & $1$\\ \hline
+Azul & $1$ & $0$ & $1$\\ \hline
+Verde & $0$ & $1$ & $1$\\ \hline
+Blanco & $1$ & $1$ & $1$\\ \hline
+
+\end{tabular}
+\caption{Cuadro que describe el criterio de coloración del dibujo \ref{planoParametros_8_colores}. El $1$ significa que el punto crítico libre tiende a alguna raíz y el $0$ que no.}
+\label{colores1}
+\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametrtos_sch_8_colores}
+ 
+  \caption{Significado de los colores descrito en el Cuadro \ref{colores1}.}
+  \label{planoParametros_8_colores}
+\end{figure}
+La figura \ref{planoParametros_zoom_azul} sigue también el criterio descrito en el Cuadro \ref{colores1} pero centrada en un pequeño conjunto de tipo Mandelbrot. 
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametrtos_sch_zoom_azul}
+ 
+  \caption{Como está indicado en el Cuadro \ref{colores1}, en este caso o los 3 puntos críticos libres convergen hacía una raíz o en el caso de la parte de color azul, las órbitas de $\zeta_1$ y $\zeta_3$ convergen hacia alguna raíz y la de $\zeta_2$ no.}
+  \label{planoParametros_zoom_azul}
+\end{figure}
+ En la Fiura \ref{planoParametros_64_colores} están representadas, mediante 64 colores diferentes, las 64 posibilidades de comportamiento que dan los 3 puntos críticos libres. Al ser tantos colores es posible que el ojo no los llegue a distinguir bien. En la Figura \ref{planoParametros_64_colores_zoom1} hemos seguido el mismo criterio pero centrando el dibujo en un pequeño conjunto de Mandelbrot.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.2]{../plano_parametrtos_sch_64_colores}
+ 
+  \caption{Plano de parámetros coloreado utilizando 64 colores distintos en función de las 64 combinaciones.}
+  \label{planoParametros_64_colores}
+\end{figure}
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.5]{../plano_parametrtos_sch_64_colores_zoom}
+ 
+  \caption{Plano de parámetros sobre el rectángulo $[-0.0001,0.0001]\times[10.00615,10.0064]$  coloreado utilizando 64 colores distintos en función de las 64 combinaciones.}
+  \label{planoParametros_64_colores_zoom1}
+\end{figure}
+
+Para reducir el número de colores y que sean más fácilmente distinguibles al ojo, vamos a reducir a 3 el número de posibilidades de convergencia de la órbita de cada punto crítico libre, coincidiendo con las 3 raíces distintas y sumamos una posibilidad coloreando de negro los puntos donde al menos la órbita de un punto crítico libre no converja a ninguna raíz, dando así un dibujo con $3^3+1=28$ colores diferentes. En las Figuras \ref{planoParametros_28_colores1}, \ref{planoParametros_64_colores_atras} y \ref{plano_parametrtos_sch_28_colores_mandelbrot1s} está representada esta nueva forma de coloración desde diferentes perspectivas.
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.5]{../plano_parametrtos_sch_27_colores}
+ 
+  \caption{Plano de parámetros dibujado con 28 colores distintos.}
+  \label{planoParametros_28_colores1}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametrtos_sch_64_colores_desde_atras}
+ 
+  \caption{Plano de parámetros coloreado utilizando 28 colores distintos en función de las 28 combinaciones diferentes de los puntos críticos libres.}
+  \label{planoParametros_64_colores_atras}
+\end{figure}
+
+Como se ve en la Figura \ref{planoParametros_64_colores_atras} con esa escala el plano de parámetros parece mucho más regular salvo por la zona cercana al eje imaginario donde aparecen pequeñas irregularidades, e incluso si nos fijamos bien en los entornos del $150i$ y el $-150i$ aparece un pequeños puntos negros. En este caso con el color negro se colorean las zonas donde al menos una órbita de los $3$ puntos críticos libres no tiende a ninguna raíz, hasta ahora no nos habíamos topado con este caso. Si hacemos zoom justo en la zona negra,
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[scale=0.35]{../plano_parametrtos_sch_64_colores_mandelbrot1s}
+ 
+  \caption{Conjunto de Mandelbrot en el plano de parámetros.}
+  \label{plano_parametrtos_sch_28_colores_mandelbrot1s}
+\end{figure}
+%
+% Apparently the guidelines don't say anything about citations or
+% bibliography styles so I guess we can use anything.
+\backmatter
+
+%=========================================================
+%
+%----------------------------------------------------------------------------------------
+%	THESIS CONCLUSIONS
+%----------------------------------------------------------------------------------------
+%
+% And the conclusions goes here
+\chapter{Conclusiones y trabajo futuro}
+
+Este trabajo me ha permitido estudiar a fondo temas concretos como los métodos numéricos y la dinámica compleja que ni en el grado ni en el máster tuve la oportunidad de profundizar tanto en ellos. 
+\\
+Siempre me han gustado los fractales y ya en mi trabajo de fin grado \cite{TFG} me interesé por este tipo de conjuntos, haciendo un estudio sobre ellos desde el punto de vista de la teoría de la medida y de la dimensión fraccionaria. La realización de este trabajo me ha permitido verlos desde otro punto de vista. He podido ver cómo estos conjuntos surgen al estudiar la dinámica del método de Newton o la del método de Schröder.\\
+También me ha permitido profundizar en cuestiones numéricas y dinámicas del propio método de Schröder, un método que si lo comparamos con los de Newton, Halley o Chebysev no ha sido tan estudiado.
+Hemos podido concluir que el método de Schröder en algunas cosas se parece a los otros métodos más estudiados pero en otras se comporta de manera distinta, dejando varias cuestiones abiertas para poder abordarlas en trabajos futuros. 
+
+\begin{itemize}
+\item ¿Se podrá probar que $\forall n$ existe un $2^n$-ciclo en el eje imaginario?
+\item ¿Es posible caracterizar las cuencas de atracción del método de Schröder para polinomios $p(z)=(z-a)^m(z-b)^n$ con $a, b\in\mathbb{C}$ y $m \geq n>1$?
+\item ¿Sobre que condiciones una raíz domina al resto en las cuencas de atracción del método de Schröder  aplicado a polinomios de grado 3?
+\item ¿Existe una relación entre las cuencas de atracción del método de Newton y del método de Schröder?
+\item ¿Se podrá probar la existencia de ``$n$-ciclos de curvas invariantes", como se intuye en la sección \ref{seccion_sch}?
+\item Todos los dibujos de esta memoria se han realizado usando el software Mathematica, incluidos los dibujos de las cuencas de atracción y de los planos de parámetros. Un objetivo a corto plazo sería traducir estos códigos a otros lenguajes de software libre como Python.
+\end{itemize}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99}  % Un ejemplo de cómo poner las referencias de forma manual. Para manejar muchas referencias no dudar en usar BibTeX
+\bibitem{Aguilo}
+\textsc{F. Aguiló y A. Miralles}:
+\textit{Consideraciones geométricas acerca del método de Newton},
+{La Gaceta de la RSME} \textbf{7} (2004), n.º~1, 247--260.
+
+
+\bibitem{Alex}
+\textsc{D. S. Alexander, F. Iavernaro y A. Rosa}:
+\textit{Early Days in Complex Dynamics: A History of Complex Dynamics in One Variable During 1906-1942}. History of Mathematics, \textbf{38}(2012), 
+American Mathematical Society and The London Mathematical Society, Providence, Rhode Island.
+
+
+\bibitem{Amat}
+\textsc{S. Amat, S. Busquier y J. M. Guti\'errez}:
+\textit{Geometric constructions of iterative functions to solve nonlinear equations}.
+{J. Comput. Appl. Math.} \textbf{157} (2003),  197--205.
+
+
+\bibitem{ABP} 
+\textsc{S. Amat, S. Busquier y S. Plaza}:
+\textit{Review of some iterative root-finding methods from a dynamical point of view}.
+{SCIENTIA, Series A: Math. Sciences} \textbf{10} (2004), 3--35.
+
+
+
+
+\bibitem{Beardon} \textsc{A. F. Beardon.}:
+\textit{Iteration of Rational Functions.}
+Springer-Verlag, 1990.\label{libroBeardon}
+
+\bibitem{ManSet2} \textsc{P. Blanchard, D. Cuzzocreo, R. L. Devaney y E. Fitzgibbon}:
+\textit{Accessible Mandelbrot sets in the family $z^n+\lambda/z^n$.}
+Qual. Theory Dyn. Syst. \textbf{15} (2016), no. 1, 49--66.
+
+
+
+
+\bibitem{Burden}
+\textsc{R. Burden, J. D. Faires, y A. M. Burden}:
+\textit{Análisis numérico}. 
+Cengage Learning, México, 2017
+
+\bibitem{campos}
+\textsc{B.Campos, A.Cordero, J.R. Torregrosa y P. Vindel}:
+\textit{Dynamics of the family of c-iterative methods}.
+Int. J. Compat. Math. \textbf{198(3)} (2014) 591--636.
+
+\bibitem{Carleson}
+\textsc{L. Carleson y T. Gamelin}:
+\textit{Complex Dynamics}. 
+Springer-Verlag, Berlín-Heidelberg,
+1993.
+
+\bibitem{curry}
+\textsc{J. H. Curry, L. Garnett y D. Sullivan}:
+\textit{On the iteration of rational functions:Computer experiments with Newton's method}.
+Commun. Math. Phys.91(1983), 267--277.
+
+\bibitem{Lara}
+\textsc{L. de Juan}:
+\textit{Polinomiografía.} Trabajo Fin de Grado en Matemáticas. Universidad de La Rioja, 2018.
+\url{https://investigacion.unirioja.es/documentos/5eda31a5299952715635a1c9}
+
+\bibitem{Eggers1}
+\textsc{H. Eggers}:
+{Calculation of radicals}.
+\textit{The Analyst} \textbf{3} (1876),  100--102.
+
+\bibitem{Eggers2}
+\textsc{H. Eggers}: 
+\textit{A new method for solving numerical equations}.
+{The Analyst} \textbf{3} (1876),  149--150.
+
+
+\bibitem{GutiGaceta}
+\textsc{J. A. Ezquerro, J. M. Gutiérrez, M. A. Hernández,
+N. Romero y M. J. Rubio}:
+\textit{El método de Newton: de Newton a Kantorovich}.
+{La Gaceta de la RSME} \textbf{13} (2010), n.º~1, 53--76.
+
+
+\bibitem{Guti2} \textsc{J. A. Ezquerro, J. M. Gutiérrez, M. A. Hernández y M. A. Salanova }:
+\textit{El método de Halley: posiblemente, el método más redescubierto del mundo.}
+Margarita Mathematica en memoria de José Javier (Chicho) Guadalupe Hernández,Servicio de Publicaciones, Universidad de La Rioja, Logroño, España, 2001.
+
+
+\bibitem{Fagella}
+\textsc{N. Fagella y X. Jarque}:
+{\it Iteración compleja y fractales.}\/
+Vicens Vives, Barcelona, 2007.
+
+\bibitem{TFG}
+\textsc{V. Galilea}:
+\textit{Conjuntos con dimensión fraccionaraia}, Trabajo Fin de Grado en Matemáticas. Universidad de La Rioja, 2018.
+\url{https://docplayer.es/152276870-Trabajo-fin-de-grado-conjuntos-con-dimension-fraccionaria.html}
+
+\bibitem{olivo} \textsc{M. García Olivo}:
+\textit{El método de Chebysev para el cálculo de las raíces de ecuaciones no lineales.} Tesis Doctoral, Universidad de La Rioja, 2013.\label{GutiPlaza}
+
+\bibitem{GutiPlaza} \textsc{J.M. Gutiérrez y S. Plaza }:
+\textit{Dinámica del Método de Newton.} Servicio de publicaciones de la Universidad de La Rioja, 2013.\label{GutiPlaza}
+
+\bibitem{gutiVarona} \textsc{J. M. Gutiérrez y J. L. Varona}:
+\textit{  Superattracting extraneous fixed points and n-cycles for
+Chebyshev's method on cubic polynomials.}
+Qual. Theory Dyn. Syst. \textbf{19} (2020), article 54, 23 pp. 
+
+\bibitem{Her}
+\textsc{M. A. Hernández y M. A. Salanova}:
+{\it La convexidad en la resolución de ecuaciones escalares no lineales.}\/
+Servicio de Publicaciones de la Universidad de La Rioja, Logroño, 1996.
+
+
+\bibitem{House}
+\textsc{A. S. Householder}:
+\textit{The Numerical Treatment of a Single Nonlinear Equation}. History of Mathematics, \textbf{38}, 
+McGraw-Hill, Nueva York, 1970.
+
+\bibitem{hubbard} 
+\textsc{J. H. Hubbard, D. Schleicher y S. Sutherland }:
+\textit{How to find all roots of complex polynomials by Newtons method.} Inv. Math. \textbf{146} (2001), 1-33.
+
+\bibitem{Kincaid}
+\textsc{D. Kincaid y W. Cheney}:
+\textit{An\'alisis num\'erico. Las matem\'aticas del c\'alculo cient\'{\i}fico}. 
+Addison-Wesley Iberoamericana, Wilmington, 1994.
+
+\bibitem{Kneisl} 
+\textsc{K. Kneisl}:
+\textit{Julia sets for the super-Newton method, Cauchy's method and Halley's method}.
+{Chaos} \textbf{11} (2001), 359--370. 
+
+
+
+
+\bibitem{ManSet1} 
+\textsc{C. McMullen}:
+\textit{  The Mandelbrot set is universal.} The Mandelbrot set, theme and variations, London Math. Soc. Lecture Note Ser., \textbf{274}, pp. 1-17, Cambridge Univ. Press, Cambridge, 2000 .
+
+\bibitem{magrenan} \textsc{Á.A. Magreñán }:
+\textit{Estudio dinámico del método de Newton amortiguado.} Tesis Doctoral Universidad de La Rioja, 2013.\label{GutiPlaza}
+
+\bibitem{melman} \textsc{A. Melman}:
+\textit{ Geometry and convergence of Euler's and Halley's methods.}
+SIAM Rev. \textbf{39} (1997), 728--735.\label{articulo1}
+
+\bibitem{Milnor}
+\textsc{J. Milnor}:
+\textit{Dynamics in one complex variable: Introductory lectures. Third edition}. 
+Princeton University Press, Princeton, New Jersey, 2006.
+
+
+\bibitem{Neta} 
+\textsc{B. Neta}: 
+\textit{Several new methods for solving equations}.
+{Inter. J. Computer. Math.} \textbf{23} (1988), 265--282.
+
+\bibitem{Peitgen}
+\textsc{H. O. Peitgen y P. H. Richter}:
+\textit{The beauty of fractals}. 
+Springer-Verlag, Berlín-Heidelberg,
+1986.
+
+
+\bibitem{Pet1}
+\textsc{M. S. Petkovic, L. D Petkovic y D. Herceg}: 
+\textit{On Schröder's families of root-finding methods}.
+{J. Comput. Appl. Math.} \textbf{233} (2010),  1755--1762.
+
+\bibitem{Pet2}
+\textsc{M. S. Petkovic y L. D Petkovic}:
+\textit{Dynamic study of Schröder's families of first and second kind}.
+{Numer. Algor.} \textbf{78} (2017),  847--865.
+
+\bibitem{plazaRomero}
+\textsc{S. Plaza y N. Romero}: 
+\textit{Attracting cycles for the relaxed Newton's method}.
+{J. Com-put. Appl. Math.\textbf{235}(2011), 3238--3244.} 
+
+\bibitem{Roberts} 
+\textsc{G. E. Roberts y J. Horgan-Kobelski}:
+\textit{Newton's versus Halley's methods: a dynamical systems approach}.
+{Int. J. Bifur. Chaos Appl. Sci. Eng.} \textbf{24} (2004), 3459--3475.
+
+\bibitem{Moebius} 
+\textsc{E. B. Saff y A. D. Snider}: 
+\textit{Fundamentals of Complex Analysis Engineering, Science, and Mathematics}.
+{Pearson New International Edition,  Third Edition.} 
+
+
+\bibitem{scavo} \textsc{T. R. Scavo y J. B. Thoo}:
+\textit{  On the geometry of Halleys method.}
+Amer. Math. Monthly \textbf{102} (1995), 417--426. \label{scavo}
+
+\bibitem{Sch} 
+\textsc{E. Schröder}:
+\textit{Ueber unendlich viele Algorithmen zur Aufl\"osung der Gleichungen}.
+{Matematische Annalen}  \textbf{2} (1870),  317--365. 
+
+\bibitem{Sch2} 
+\textsc{E. Schröder}: 
+\textit{Ueber iterirte functionen}.
+{Matematische Annalen}  \textbf{3} (1871),  296--322. 
+
+\bibitem{Stewart} 
+\textsc{G. W. Stewart}:
+\textit{On Infinitely Many Algorithms for Solving Equations (English translation of Schröder's original paper)}.
+{College Park, MD: University of Maryland, Institute for Advanced Computer Studies, Department of Computer Science,} (1993).\label{articuloSCH}
+
+
+\bibitem{Traub}
+\textsc{J. F. Traub}:
+\textit{Iterative methods for the solution of equations}. Englewood Cliffs, N.J., Prentice-Hall, 1964.
+
+\bibitem{Varona} 
+\textsc{J. L. Varona}:
+\textit{Graphic and numerical comparison between iterative methods}.
+{Math. Intelligencer} \textbf{24} (2002), no. 1, 37--46.
+
+\bibitem{Vrscay} 
+\textsc{Vrscay, E.R., Gilbert, W.J.}:
+\textit{Extraneous fixed points, basin boundaries and chaotic dynamics for Schröder and König rational iteration functions.}
+{Numer. Math.  } \textbf{52(1)}, (2002), 1--16 (1988).
+
+\bibitem{Ypma}
+\textsc{T. J. Ypma}:
+ \textit{Historical development of the Newton-Raphson method.}
+{SIAM Review}  \textbf{37} (1995), n.º~4, 531--551.
+
+
+
+
+
+
+\end{thebibliography}
+
+%
+% Add index
+%\printindex
+%   
+\end{document}

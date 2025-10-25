@@ -1,0 +1,83 @@
+% TesisVG_Cap5.tex
+% Capítulo 5: Estudio dinámico en la recta real
+\chapter{Estudio dinámico de los métodos de Schröder, Halley y Chebyshev en el plano complejo}
+\label{cap:plano_complejo}
+
+% Resumir lo hecho en el TFM.
+
+% \subsection{Construcci\'on del m\'etodo de Chebyshev}
+% Sea $f:\mathbb{R}\to\mathbb{R}$ de clase $\mathcal{C}^3$ en un entorno de una ra\'iz simple $\alpha$ tal que $f(\alpha)=0$ y $f'(\alpha)\neq 0$. Denotamos el error $e_n=x_n-\alpha$. La idea es partir del paso de Newton y a\~nadir una correcci\'on cuadr\'atica que elimine el t\'ermino dominante del error para obtener convergencia de orden tres.
+
+% Usando el desarrollo de Taylor de $f$ y sus derivadas alrededor de $\alpha$, escribimos
+% \[
+% f(x)=f'(\alpha)e+\tfrac{1}{2}f''(\alpha)e^2+\tfrac{1}{6}f^{(3)}(\alpha)e^3+\mathcal{O}(e^4),\qquad
+% f'(x)=f'(\alpha)+f''(\alpha)e+\tfrac{1}{2}f^{(3)}(\alpha)e^2+\mathcal{O}(e^3),
+% \]
+% con $e=x-\alpha$. Si definimos
+% \[
+% t(x)=\frac{f(x)}{f'(x)},
+% \]
+% entonces una expansi\'on formal da
+% \[
+% t(x)=e-c_2e^2+\bigl(2c_2^2-c_3\bigr)e^3+\mathcal{O}(e^4),\quad c_2=\frac{f''(\alpha)}{2f'(\alpha)},\; c_3=\frac{f^{(3)}(\alpha)}{6f'(\alpha)}.
+% \]
+% El paso de Newton $x- t(x)$ produce un error $e_{n+1}=c_2e_n^2+\mathcal{O}(e_n^3)$. Para anular el t\'ermino cuadr\'atico, consideramos una correcci\'on de la forma $x- t(x)-b(x)\,t(x)^2$ y escogemos
+% \[
+% b(x)=\frac{1}{2}\,\frac{f''(x)}{f'(x)}.
+% \]
+% Con esta elecci\'on, el nuevo iterador reduce el error a orden c\'ubico, con ecuaci\'on de error
+% \[
+% e_{n+1}=c_3\,e_n^3+\mathcal{O}(e_n^4)=\frac{f^{(3)}(\alpha)}{6f'(\alpha)}\,e_n^3+\mathcal{O}(e_n^4).
+% \]
+
+% En forma cerrada, el \textit{m\'etodo de Chebyshev} queda
+% \begin{equation}
+% \label{eq:chebyshev}
+%  x_{n+1} 
+% 	= x_n 
+% 	- \frac{f(x_n)}{f'(x_n)} 
+% 	- \frac{1}{2}\,\frac{f''(x_n)}{f'(x_n)}\left(\frac{f(x_n)}{f'(x_n)}\right)^{\!2}.
+% \end{equation}
+% Este esquema tiene orden de convergencia tres bajo las condiciones indicadas y constante asint\'otica $\left|\tfrac{f^{(3)}(\alpha)}{6f'(\alpha)}\right|$. En comparaci\'on con Halley, requiere una evaluaci\'on adicional de $f''$, pero evita cocientes m\'as costosos como en Halley, siendo una alternativa de tercer orden basada en una correcci\'on sobre Newton que cancela el error cuadr\'atico.
+
+% % Desarrollo ampliado basado en el PDF adjunto
+% \input{cap4_construccion_chebyshev}
+
+\section{Definición general y propiedades de cada método}
+Los tres métodos iterativos de orden tres que se estudiarán en este capítulo son el método de Schröder, el método de Halley y el método de Chebyshev. Cada uno de ellos puede definirse mediante una función racional asociada a una función meromorfa \( f:\mathbb{C}\to\mathbb{C} \). A continuación, se presentan las definiciones y propiedades fundamentales de cada método. y los
+expresarames en función del operador:
+\[
+ L_f(x)=\frac{f(x)f''(x)}{(f'(x))^2}.
+\]
+\subsection{Definición y propiedades del método de Schröder}
+
+Sea $f:\mathbb{C}\to\mathbb{C}$ una función meromorfa. El método de Schröder asociado a $f$ es el método iterativo definido por la función racional:
+\begin{equation}
+	S_f(z) = z - \frac{1}{1-L_f'(z)} 
+    	\frac{f(z)}{f'(z)}
+\end{equation}
+
+
+
+\subsection{Definición y propiedades del método de Halley}
+
+Sea $f:\mathbb{C}\to\mathbb{C}$ una función meromorfa. El método de Halley asociado a $f$ es el método iterativo definido por la función racional:
+\begin{equation}
+	H_f(z) = z - \frac{1}{1-\frac{L_f'(z)}{2}} 
+    	\frac{f(z)}{f'(z)}
+\end{equation}
+
+
+
+
+\subsection{Definición y propiedades del método de Chebyshev}
+Sea $f:\mathbb{C}\to\mathbb{C}$ una función meromorfa. El método de Chebyshev asociado a $f$ es el método iterativo definido por la función racional:
+\begin{equation}
+	C_f(z) = z - \frac{f(z)}{f'(z)} \left( 1+\frac{L_f(z)}{2}\right),
+\end{equation}
+
+\section{Análisis de las funciones racionales asociadas}
+\section{Estudio de los conjuntos de Julia y Fatou}
+\section{Análisis del plano de parámetros}
+\section{Comparación con el método de Newton en términos dinámicos}
+\section{Comparación con el método de Newton en términos numéricos}
