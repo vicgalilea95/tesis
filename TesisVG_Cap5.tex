@@ -374,7 +374,7 @@ A diferencia del caso de dos raíces, donde las cuencas de atracción estaban de
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.6\textwidth]{fuentes/articulo-cuadraticos/imagenes/sch_m_2n_1.jpg}
+\includegraphics[width=0.6\textwidth]{img/sch_3+i.png}
 \caption{Cuencas de atracción del método de Schröder aplicado a $p(z)=(z^2-1)(z-3-i)$. En cyan la cuenca de atracción de $z=1$, en magenta la de $z=-1$ y en amarillo la de $z=3+i$. Las zonas blancas representan puntos que no convergen a ninguna raíz tras un número determinado de iteraciones.}
 \label{fig:cuenca_cubica_1}
 \end{figure}
@@ -588,6 +588,93 @@ Estos resultados tienen importantes implicaciones para el uso del método de Sch
 \section{El punto del infinito en el método de Schröder}
 
 Una característica distintiva del método de Schröder, que lo diferencia de otros métodos iterativos como Newton, Halley o Chebyshev, es el comportamiento del punto del infinito. Mientras que en estos últimos métodos el infinito es un punto fijo repulsor, en el método de Schröder el infinito no es punto fijo, lo que introduce fenómenos dinámicos únicos que merecen un análisis detallado.
+
+\subsection{Grado del método de Schröder}
+
+En el estudio del comportamiento dinámico de métodos iterativos para resolver ecuaciones polinómicas, uno de los primeros pasos consiste en determinar el grado de la aplicación racional asociada. Si bien es relativamente sencillo establecer cotas superiores para este grado, el cálculo del valor exacto requiere la introducción del concepto de \emph{punto crítico especial}, tal como fue empleado por Nayak y Pal en su análisis de la aplicación racional asociada al método de Chebyshev.
+
+\begin{dfn}[Punto crítico especial]
+Dado un polinomio complejo $p(z)$, un punto crítico $c\in\mathbb{C}$ se denomina especial si $p(c)\ne 0$ pero $p''(c) = 0$.
+\end{dfn}
+
+Para mayor comodidad, escribimos la aplicación de iteración del método de Schröder de la forma equivalente
+\begin{equation}
+S_p(z)=z -\frac{p(z)p'(z)}{p'(z)^2- p(z)p''(z)}.
+\label{eq:sch_alt_form}
+\end{equation}
+
+\begin{teorema}\label{teo:grado_schroder}
+Sea $S_p(z)$ la aplicación de iteración del método de Schröder para resolver ecuaciones polinómicas, escrita como en \eqref{eq:sch_alt_form}. Entonces el grado de la aplicación racional $S_{p}(z)$ es
+$$\deg(S_{p}(z)) =2r+s-C-2,$$
+donde
+\begin{itemize}
+\item $r$ es el número de raíces distintas de $p(z)$.
+\item $s$ es el número de puntos críticos especiales de $p(z)$.
+\item $C=c_1+\cdots+c_k$ es la suma de multiplicidades de todos los puntos críticos especiales.
+\end{itemize}
+\end{teorema}
+
+\begin{proof}
+Comenzamos observando que $\deg(\text{Num}(S_p(z)))\le \deg(\text{Den}(S_p(z)))\le 2d-2$. En efecto, para un polinomio mónico general de la forma $p(z)=z^d +a_{d-1} z^{d-1} + \cdots$ es fácil demostrar, tras algunas manipulaciones algebraicas, que
+$$ \text{Num}(S_p(z))=zp'(z)^2-zp(z)p''(z)-p(z)p'(z)=-a_{d-1}z^{2d-2}+P_{2d-3}(z), $$
+$$ \text{Den}(S_p(z))=p'(z)^2-p(z)p''(z)=-dz^{2d-2}+Q_{2d-3}(z),$$
+donde $P_{2d-3}(z)$ y $Q_{2d-3}(z)$ son polinomios de grado $2d-3$.
+
+Consecuentemente, $\deg(S_p(z))\le 2d-2$. Además, $\deg(S_p(z))< 2d-2$ si $\text{Num}(S_p(z))$ y $\text{Den}(S_p(z))$ tienen raíces comunes. Para calcular el grado exacto de $S_p(z)$, debemos analizar $\deg(\text{Den}(S_p(z)))$.
+
+La demostración se basa en las siguientes factorizaciones de los polinomios $p(z)$, $p'(z)$ y $p''(z)$:
+\[
+p(z)=\prod_{i=1}^m(z-\alpha_i)\prod_{j=1}^n(z-\beta_j)^{b_j},\quad b_j\ge 2,
+\]
+con $\deg(p)=m+B$, $B=\sum_{j=1}^n b_j.$ Teniendo en cuenta que una raíz de $p(z)$ con multiplicidad $k\ge 1$ es raíz de $p'(z)$ con multiplicidad $k-1$ (y un criterio similar para $p''(z)$), tenemos
+$$p'(z)=g(z)\prod_{j=1}^n(z-\beta_j)^{b_j-1},$$
+$$p''(z)=h(z)\prod_{j=1}^n(z-\beta_j)^{b_j-2},$$
+donde $g(z)$ y $h(z)$ son polinomios que satisfacen $g(\alpha_i)\ne 0$, $i=1,\dots, m$, $g(\beta_j)\ne0$ y $h(\beta_j)\ne 0$ para $j=1,\dots, n$.
+
+Además, $\deg(g)=\deg(p')-B+n=m+n-1$ y el coeficiente líder de $g(z)$ es $d$; $\deg(h)=\deg(p'')-B+2n=m+2n-2$ y el coeficiente líder de $h(z)$ es $d(d-1)$.
+
+Sean $\gamma_j$, $j=1,\dots, s$ los puntos críticos especiales de $p(z)$, con multiplicidades $c_j$. Entonces los polinomios $g(z)$ y $h(z)$ pueden factorizarse de la siguiente manera:
+$$g(z)=\tilde{g}(z)\prod_{k=1}^s(z-\gamma_k)^{c_k},$$
+$$h(z)=\tilde{h}(z)\prod_{k=1}^s(z-\gamma_k)^{c_k-1},$$
+donde $\tilde{g}(z)$ y $\tilde{h}(z)$ son polinomios que satisfacen $\tilde{g}(\alpha_i)\ne 0$, $i=1,\dots, m$; $\tilde{g}(\beta_j)\ne0$ y $\tilde{h}(\beta_j)\ne 0$ para $j=1,\dots, n$; $\tilde{h}(\gamma_k)\ne 0$ para $k=1,\dots, s$.
+
+Además, $\deg(\tilde{g})=\deg(g)-C=m+n-C-1$ y el coeficiente líder de $\tilde{g}(z)$ es $d$; $\deg(\tilde{h})=\deg(h)-C+s=m+2n-2-C+s$ y el coeficiente líder de $h(z)$ es $d(d-1)$.
+
+Por tanto, podemos simplificar las raíces comunes en el siguiente cociente
+$$
+\frac{p(z)p'(z)}{p'(z)^2- p(z)p''(z)}=\dfrac{\prod_{i=1}^m(z-\alpha_i)\prod_{j=1}^n(z-\beta_j) \prod_{k=1}^s(z-\gamma_k) \tilde{g}(z)}
+{\prod_{k=1}^s(z-\gamma_k)^{(c_k+1)} \tilde{g}(z)^2-\prod_{i=1}^m(z-\alpha_i)\tilde{h}(z)}.
+$$
+
+El grado de $S_p(z)$ coincide con el denominador del cociente anterior (nótese que no hay más raíces comunes entre el numerador y el denominador de $S_p(z)$). El coeficiente líder del polinomio en el denominador del cociente anterior
+$$
+\prod_{k=1}^s(z-\gamma_k)^{(c_k+1)} \tilde{g}(z)^2-\prod_{i=1}^m(z-\alpha_i)\tilde{h}(z)
+$$
+es $d^2-d(d-1)=d$, y su grado es
+$2m+2n+s-C-2 =2r+s-C-2$, siendo $r=m+n$ el número de raíces distintas de $p(z)$. Así queda demostrado el resultado.
+\end{proof}
+
+\begin{corolario}\label{cor:grado_sin_criticos}
+Si $p(z)$ es un polinomio sin puntos críticos especiales, entonces el grado de la aplicación racional $S_{p}(z)$ es
+$$\deg(S_{p}(z))=2r-2,$$
+donde $r$ es el número de raíces distintas de $p(z)$.
+\end{corolario}
+
+Teniendo en cuenta la demostración del Teorema~\ref{teo:grado_schroder}, podemos caracterizar el comportamiento del punto del infinito para el método de Schröder. Como veremos, este comportamiento es diferente al de los procesos iterativos más conocidos (Newton, Halley y Chebyshev), para los cuales el infinito es un punto fijo repulsor.
+
+\begin{corolario}\label{cor:infinito_no_fijo}
+El punto en el infinito no es un punto fijo para el método de Schröder.
+\end{corolario}
+
+\begin{proof}
+Siguiendo la demostración del Teorema~\ref{teo:grado_schroder}, y con las mismas notaciones, tenemos
+$$
+S_p(\infty)=-\frac{a_{d-1}}{d},
+$$
+por lo que $\infty$ no es un punto fijo para $S_p(z)$.
+\end{proof}
+
+Este resultado fundamental establece una diferencia crucial entre el método de Schröder y otros métodos iterativos clásicos, y motiva el estudio detallado del comportamiento del infinito que desarrollamos en las subsecciones siguientes.
 
 \subsection{El infinito en el plano complejo extendido}
 

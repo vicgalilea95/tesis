@@ -1,7 +1,11 @@
 \IfFileExists{aims.cls}{\documentclass{aims}}{\documentclass[11pt]{article}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{txfonts}
+
 \def\typeofarticle{Research article}
 \def\currentvolume{10}
 \def\currentissue{5}
@@ -24,10 +28,6 @@
 
 \newcommand{\ep}{\varepsilon}
 \newcommand{\eps}[1]{{#1}_{\varepsilon}}
-
-
-\usepackage{amssymb} 
-\usepackage{amsmath}
 % Español y compatibilidad de acentos
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -35,6 +35,7 @@
 \addto\captionsspanish{\renewcommand{\proofname}{Demostración}}
 % Desactivar inclusión de imágenes para compilar sin ficheros gráficos
 \usepackage{graphicx}
+\usepackage{float}
 \makeatletter
 \@ifundefined{includegraphics}{% si no está definido, no hacer nada
   \newcommand{\includegraphics}[2][]{% omitido
@@ -45,6 +46,11 @@
 }
 \makeatother
 
+
+% Definir estilos de teorema primero
+\newtheoremstyle{thmstyleone}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{ }{}
+\newtheoremstyle{thmstyletwo}{\topsep}{\topsep}{}{}{\bfseries}{.}{ }{}
+\newtheoremstyle{thmstylethree}{\topsep}{\topsep}{}{}{\bfseries}{.}{ }{}
 
 \theoremstyle{thmstyleone}%
 \newtheorem{theorem}{Teorema}%  meant for continuous numbers
@@ -74,11 +80,6 @@
 \@ifundefined{address}{\newcommand{\address}[1]{}}{}
 \@ifundefined{corraddr}{\newcommand{\corraddr}[1]{}}{}
 \@ifundefined{keywords}{\newcommand{\keywords}[1]{\par\noindent\textbf{Palabras clave: }#1\par}}{}
-\@ifundefined{theoremstyle}{\usepackage{amsthm}}{}
-% Definir estilos de teorema si no existen (usados por AIMS)
-\@ifundefined{th@thmstyleone}{\newtheoremstyle{thmstyleone}{\topsep}{\topsep}{\itshape}{}{{\bfseries}}{.}{ }{}}{}
-\@ifundefined{th@thmstyletwo}{\newtheoremstyle{thmstyletwo}{\topsep}{\topsep}{}{}{{\bfseries}}{.}{ }{}}{}
-\@ifundefined{th@thmstylethree}{\newtheoremstyle{thmstylethree}{\topsep}{\topsep}{}{}{{\bfseries}}{.}{ }{}}{}
 \makeatother
 % Enlaces DOI si la clase no los define
 \providecommand{\doilink}[1]{\href{#1}{#1}}

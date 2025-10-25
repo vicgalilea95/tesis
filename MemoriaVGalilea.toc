@@ -18,7 +18,7 @@
 \contentsline {subsection}{\numberline {4.2.1}Reducción al caso canónico mediante conjugación}{21}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Análisis dinámico de $R_{m,n}$}{21}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}Teoremas principales: caracterización del conjunto de Julia}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Cuencas de atracción}{23}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.1}Cuencas de atracción}{22}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Análisis paramétrico: influencia de la razón de multiplicidades}{23}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Comportamiento asintótico}{23}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}Ilustraciones: cuencas de atracción}{24}{subsection.4.3.4}%
@@ -35,7 +35,7 @@
 \contentsline {subsection}{\numberline {4.4.2}Puntos críticos y el teorema de Fatou-Julia}{31}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}Reducción a una familia uniparamétrica}{32}{subsection.4.4.3}%
 \contentsline {subsection}{\numberline {4.4.4}Análisis de puntos críticos}{32}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}El plano de parámetros}{33}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.5}El plano de parámetros}{32}{subsection.4.4.5}%
 \contentsline {subsection}{\numberline {4.4.6}Comparación con el método de Newton}{35}{subsection.4.4.6}%
 \contentsline {subsection}{\numberline {4.4.7}Caso especial: raíces formando un triángulo equilátero}{36}{subsection.4.4.7}%
 \contentsline {subsection}{\numberline {4.4.8}Observaciones dinámicas adicionales}{36}{subsection.4.4.8}%
@@ -44,24 +44,25 @@
 \contentsline {subsection}{\numberline {4.5.2}Síntesis de resultados para polinomios cúbicos}{37}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Implicaciones prácticas}{38}{subsection.4.5.3}%
 \contentsline {section}{\numberline {4.6}El punto del infinito en el método de Schröder}{38}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}El infinito en el plano complejo extendido}{38}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Comportamiento del infinito para polinomios cúbicos}{38}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Plano de parámetros del infinito}{39}{subsection.4.6.3}%
-\contentsline {subsection}{\numberline {4.6.4}Raíces dominantes}{39}{subsection.4.6.4}%
-\contentsline {subsection}{\numberline {4.6.5}Casos excepcionales: ausencia de raíz dominante}{40}{subsection.4.6.5}%
-\contentsline {subsubsection}{\numberline {4.6.5.1}Caso del triángulo equilátero: $\lambda =\sqrt {3}i$}{40}{subsubsection.4.6.5.1}%
-\contentsline {subsubsection}{\numberline {4.6.5.2}Otros valores especiales}{40}{subsubsection.4.6.5.2}%
-\contentsline {subsection}{\numberline {4.6.6}Extensión a polinomios con raíces múltiples}{40}{subsection.4.6.6}%
-\contentsline {subsection}{\numberline {4.6.7}Comparación con el teorema de Hubbard}{41}{subsection.4.6.7}%
-\contentsline {subsection}{\numberline {4.6.8}Implicaciones dinámicas del comportamiento del infinito}{41}{subsection.4.6.8}%
-\contentsline {section}{\numberline {4.7}Conclusiones del capítulo}{42}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Síntesis: polinomios con dos raíces}{42}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Síntesis: polinomios cúbicos}{42}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Síntesis: comportamiento del infinito}{43}{subsection.4.7.3}%
-\contentsline {subsection}{\numberline {4.7.4}Implicaciones para la práctica numérica}{43}{subsection.4.7.4}%
-\contentsline {subsection}{\numberline {4.7.5}Direcciones de investigación futura}{44}{subsection.4.7.5}%
-\contentsline {chapter}{\numberline {5}Análisis detallado del método de Schröder}{45}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Dinámica de la familia Chebyshev-Halley}{47}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusiones y líneas futuras de investigación}{49}{chapter.7}%
-\contentsline {chapter}{Anexo 1: Desarrollo de un framework en Python para el análisis dinámico}{51}{chapter*.2}%
-\contentsline {chapter}{Bibliografía}{51}{chapter*.2}%
+\contentsline {subsection}{\numberline {4.6.1}Grado del método de Schröder}{38}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}El infinito en el plano complejo extendido}{40}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Comportamiento del infinito para polinomios cúbicos}{41}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}Plano de parámetros del infinito}{41}{subsection.4.6.4}%
+\contentsline {subsection}{\numberline {4.6.5}Raíces dominantes}{42}{subsection.4.6.5}%
+\contentsline {subsection}{\numberline {4.6.6}Casos excepcionales: ausencia de raíz dominante}{42}{subsection.4.6.6}%
+\contentsline {subsubsection}{\numberline {4.6.6.1}Caso del triángulo equilátero: $\lambda =\sqrt {3}i$}{42}{subsubsection.4.6.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.6.2}Otros valores especiales}{42}{subsubsection.4.6.6.2}%
+\contentsline {subsection}{\numberline {4.6.7}Extensión a polinomios con raíces múltiples}{43}{subsection.4.6.7}%
+\contentsline {subsection}{\numberline {4.6.8}Comparación con el teorema de Hubbard}{43}{subsection.4.6.8}%
+\contentsline {subsection}{\numberline {4.6.9}Implicaciones dinámicas del comportamiento del infinito}{43}{subsection.4.6.9}%
+\contentsline {section}{\numberline {4.7}Conclusiones del capítulo}{44}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Síntesis: polinomios con dos raíces}{44}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Síntesis: polinomios cúbicos}{44}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Síntesis: comportamiento del infinito}{45}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Implicaciones para la práctica numérica}{45}{subsection.4.7.4}%
+\contentsline {subsection}{\numberline {4.7.5}Direcciones de investigación futura}{46}{subsection.4.7.5}%
+\contentsline {chapter}{\numberline {5}Análisis detallado del método de Schröder}{47}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Dinámica de la familia Chebyshev-Halley}{49}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusiones y líneas futuras de investigación}{51}{chapter.7}%
+\contentsline {chapter}{Anexo 1: Desarrollo de un framework en Python para el análisis dinámico}{53}{chapter*.2}%
+\contentsline {chapter}{Bibliografía}{53}{chapter*.2}%
