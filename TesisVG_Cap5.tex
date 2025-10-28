@@ -27,32 +27,28 @@ como
  \label{eq:Sch_real}
 \end{equation}
 
-\subsection{Propiedades del método de Schröder}
-
-Una ventaja importante del método de Schröder, señalada por el propio autor, es que converge cuadráticamente incluso para raíces múltiples, a diferencia del método de Newton que reduce su orden de convergencia en presencia de multiplicidad. Esto hace al método de Schröder particularmente valioso en situaciones donde se sospecha la existencia de raíces múltiples.
-
 El coste computacional del método de Schröder es superior al de Newton: requiere evaluar no solo $f$ y $f'$, sino también $f''$, lo que lo sitúa en un nivel de coste comparable a los métodos de la familia Chebyshev-Halley.
 
-\subsection{Conjugación topológica}
+% \subsection{Conjugación topológica}
 
-Una herramienta fundamental en el análisis de sistemas dinámicos es la conjugación topológica. Dos funciones $f,g: \C \to \C$ se dicen \emph{topológicamente conjugadas} si existe un homeomorfismo $\varphi$ tal que
-$$
-\varphi\circ g=f\circ \varphi.
-$$
-La conjugación topológica es muy útil porque funciones conjugadas comparten las mismas propiedades dinámicas desde el punto de vista topológico: los puntos fijos de una función se mapean en puntos fijos de la otra, los puntos periódicos corresponden entre sí, y lo mismo ocurre con las cuencas de atracción y los conjuntos de Julia.
+% Una herramienta fundamental en el análisis de sistemas dinámicos es la conjugación topológica. Dos funciones $f,g: \C \to \C$ se dicen \emph{topológicamente conjugadas} si existe un homeomorfismo $\varphi$ tal que
+% $$
+% \varphi\circ g=f\circ \varphi.
+% $$
+% La conjugación topológica es muy útil porque funciones conjugadas comparten las mismas propiedades dinámicas desde el punto de vista topológico: los puntos fijos de una función se mapean en puntos fijos de la otra, los puntos periódicos corresponden entre sí, y lo mismo ocurre con las cuencas de atracción y los conjuntos de Julia.
 
-\subsection{El problema de Cayley para polinomios cuadráticos}
+% \subsection{El problema de Cayley para polinomios cuadráticos}
 
-En 1879, Arthur Cayley \cite{Cay} abordó el problema de caracterizar las cuencas de atracción del método de Newton aplicado a polinomios cuadráticos con raíces simples. Este problema, conocido como el \emph{problema de Cayley}, estableció las bases para el estudio de la dinámica compleja de métodos iterativos.
+% En 1879, Arthur Cayley \cite{Cay} abordó el problema de caracterizar las cuencas de atracción del método de Newton aplicado a polinomios cuadráticos con raíces simples. Este problema, conocido como el \emph{problema de Cayley}, estableció las bases para el estudio de la dinámica compleja de métodos iterativos.
 
-Cayley demostró que para el polinomio
-\begin{equation}
-f(z)=(z-a)(z-b),\quad a,b\in \C, \quad a\ne b,
-\label{eq:poly_simple}
-\end{equation}
-la función iterativa de Newton es conjugada con la función $R(z)=z^2$ mediante una transformación de Möbius. El conjunto de Julia es la bisectriz entre las raíces $a$ y $b$, y las cuencas de atracción son los dos semiplanos correspondientes.
+% Cayley demostró que para el polinomio
+% \begin{equation}
+% f(z)=(z-a)(z-b),\quad a,b\in \C, \quad a\ne b,
+% \label{eq:poly_simple}
+% \end{equation}
+% la función iterativa de Newton es conjugada con la función $R(z)=z^2$ mediante una transformación de Möbius. El conjunto de Julia es la bisectriz entre las raíces $a$ y $b$, y las cuencas de atracción son los dos semiplanos correspondientes.
 
-De manera análoga, el método de Schröder aplicado al mismo polinomio es conjugado con $-R(z)=-z^2$, produciendo el mismo conjunto de Julia y las mismas cuencas de atracción. Esto muestra que, para polinomios cuadráticos con raíces simples, ambos métodos tienen comportamiento dinámico idéntico.
+% De manera análoga, el método de Schröder aplicado al mismo polinomio es conjugado con $-R(z)=-z^2$, produciendo el mismo conjunto de Julia y las mismas cuencas de atracción. Esto muestra que, para polinomios cuadráticos con raíces simples, ambos métodos tienen comportamiento dinámico idéntico.
 
 \section{Polinomios con dos raíces de multiplicidades arbitrarias}
 
@@ -96,7 +92,7 @@ C_{m,n}=\left\{z\in\C; |z|=\frac{m}{n}\right\}
 $$
 es invariante bajo $R_{m,n}$. Los puntos con $|z_0|<m/n$ convergen al origen bajo iteración, mientras que los puntos con $|z_0|>m/n$ divergen a infinito. Por tanto, $C_{m,n}$ es el conjunto de Julia de $R_{m,n}$.
 
-\section{Teoremas principales: caracterización del conjunto de Julia}
+\subsection{Teoremas principales: caracterización del conjunto de Julia}
 
 Los siguientes dos teoremas constituyen los resultados principales de este capítulo, caracterizando completamente el conjunto de Julia del método de Schröder para polinomios con dos raíces.
 
@@ -381,7 +377,7 @@ A diferencia del caso de dos raíces, donde las cuencas de atracción estaban de
 
 Observamos dos fenómenos importantes:
 \begin{enumerate}
-\item Existen regiones extensas (en blanco) donde el método no converge a ninguna raíz.
+\item Existen regiones extensas (en negro) donde el método no converge a ninguna raíz.
 \item La cuenca de atracción de la raíz $z=1$ (en cyan) domina ampliamente el plano, un comportamiento distinto al del método de Newton donde todas las cuencas se extienden hasta el infinito.
 \end{enumerate}
 
@@ -440,38 +436,26 @@ Esta ecuación cúbica en $z$ tiene tres soluciones $\zeta_1(\lambda)$, $\zeta_2
 
 \subsection{El plano de parámetros}
 
-Para cada valor de $\lambda\in\C$, estudiamos el comportamiento de las órbitas de los tres puntos críticos libres. Coloreamos el plano complejo (plano de parámetros) según el destino de cada punto crítico:
-\begin{itemize}
-\item \textbf{Cyan}: el punto crítico converge a la raíz $z=1$.
-\item \textbf{Magenta}: el punto crítico converge a la raíz $z=-1$.
-\item \textbf{Amarillo}: el punto crítico converge a la raíz $z=\lambda$.
-\item \textbf{Negro}: el punto crítico no converge a ninguna raíz (indica ciclo atractor extraño).
-\end{itemize}
-
-En las Figuras~\ref{fig:plano_param_1}, \ref{fig:plano_param_2} y~\ref{fig:plano_param_3} se muestran los planos de parámetros para cada uno de los tres puntos críticos libres.
+Hay que entender el punto de que cuando al menos uno de los puntos críticos libres converja a algo diferente de una raíz, entonces  van a existir ciclos atractores para ese valor de $\lambda$
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.55\textwidth]{fuentes/articulo-cuadraticos/imagenes/sch_m_5n_1.jpg}
-\caption{Plano de parámetros para el punto crítico libre $\zeta_1(\lambda)$. En cyan los valores de $\lambda$ para los que $\zeta_1$ converge a $1$, en magenta a $-1$, en amarillo a $\lambda$, y en negro cuando no converge a ninguna raíz.}
-\label{fig:plano_param_1}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{img/plano_param_sch_2.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{img/plano_param_sch_1.png}
+\end{minipage}
+\caption{Planos de parámetros del método de Schröder para los puntos críticos libres.}
+\label{fig:planos_param_sch}
 \end{figure}
 
-\begin{figure}[H]
-\centering 
-\includegraphics[width=0.55\textwidth]{fuentes/articulo-cuadraticos/imagenes/sch_m_7n_6.jpg}
-\caption{Plano de parámetros para el punto crítico libre $\zeta_2(\lambda)$.}
-\label{fig:plano_param_2}
-\end{figure}
 
-\begin{figure}[H]
-\centering 
-\includegraphics[width=0.55\textwidth]{fuentes/articulo-cuadraticos/imagenes/sch_m_8n_6.jpg}
-\caption{Plano de parámetros para el punto crítico libre $\zeta_3(\lambda)$.}
-\label{fig:plano_param_3}
-\end{figure}
+Las zonas negras del plano de parámetros corresponden a valores de $\lambda$ para los cuales al menos un punto crítico libre asociado no converge a ninguna raíz, indicando la presencia de ciclos atractores adicionales.
+Numéricamente se ha comprobado que si coges valores $\lambda$ de los sucesivos lóbulos autosemejantes del conjunto de tipo Mandelbrot central, se obtienen $2^n$ ciclos.
 
-Las zonas negras en estas figuras corresponden a valores de $\lambda$ para los cuales existe al menos un ciclo atractor que no es una raíz. Estos son precisamente los polinomios para los que el método de Schröder presenta zonas de no convergencia en sus cuencas de atracción.
 
 \subsection{Comparación con el método de Newton}
 
@@ -489,9 +473,16 @@ El método de Newton tiene un único punto crítico libre: $\zeta=\lambda/3$. Su
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.6\textwidth]{fuentes/articulo-cuadraticos/imagenes/newton_m_7n_6.jpg}
-\caption{Plano de parámetros del método de Newton para $p_\lambda(z)=(z^2-1)(z-\lambda)$. El método de Newton tiene un único punto crítico libre, lo que simplifica considerablemente el análisis.}
-\label{fig:plano_param_newton}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{img/plan_param_newton_2.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{img/plan_param_newton_1.png}
+\end{minipage}
+\caption{Planos de parámetros del método de Schröder para los puntos críticos libres.}
+\label{fig:planos_param_sch}
 \end{figure}
 
 Comparando con las Figuras~\ref{fig:plano_param_1}--\ref{fig:plano_param_3}, observamos que:
@@ -516,15 +507,15 @@ En este caso, los únicos puntos críticos son las propias raíces. Por el Teore
 \centering 
 \begin{minipage}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{fuentes/articulo-cuadraticos/imagenes/sch_n_6_m_6.jpg}
-\caption{Cuencas de atracción para $\lambda=\sqrt{3}i$ en la región $[-5,5]\times[-5i,5i]$.}
+\includegraphics[width=\textwidth]{img/sch_sqrt3i_1.png}
+\caption{Cuencas de atracción para $\lambda=\sqrt{3}i$ en la región $[-10,10]\times[-10i,10i]$.}
 \label{fig:cuenca_triangulo_1}
 \end{minipage}
 \hfill
 \begin{minipage}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{fuentes/articulo-cuadraticos/imagenes/newton_n_6_m_6.jpg}
-\caption{Mismo caso en la región $[-100,100]\times[-100i,100i]$.}
+\includegraphics[width=\textwidth]{img/sch_sqrt3i_2.png}
+\caption{Mismo caso en la región $[-2,2]\times[-2i,2i]$.}
 \label{fig:cuenca_triangulo_2}
 \end{minipage}
 \end{figure}
@@ -535,55 +526,55 @@ Los casos especiales analizados ($\lambda=\sqrt{3}i$ y $\lambda=0$) revelan la r
 
 Este comportamiento contrasta notablemente con el caso de dos raíces, donde todos los puntos del plano complejo (excepto el conjunto de Julia) convergen necesariamente a una de las raíces. La presencia de tres puntos críticos libres en el caso cúbico, frente a ninguno en el caso de dos raíces, explica esta mayor complejidad dinámica.
 
-\section{Conclusiones}
+% \section{Conclusiones}
 
-El estudio dinámico del método de Schröder en el plano complejo revela comportamientos cualitativamente distintos según el número de raíces del polinomio.
+% El estudio dinámico del método de Schröder en el plano complejo revela comportamientos cualitativamente distintos según el número de raíces del polinomio.
 
-\subsection{Síntesis de resultados para dos raíces}
+% \subsection{Síntesis de resultados para dos raíces}
 
-Para polinomios con dos raíces de multiplicidades arbitrarias:
+% Para polinomios con dos raíces de multiplicidades arbitrarias:
 
-\begin{enumerate}
-\item El conjunto de Julia es siempre un círculo (o una recta cuando las multiplicidades son iguales), cuya ecuación explícita está dada por los Teoremas~\ref{teo:julia_canonico} y~\ref{teo:julia_general}.
+% \begin{enumerate}
+% \item El conjunto de Julia es siempre un círculo (o una recta cuando las multiplicidades son iguales), cuya ecuación explícita está dada por los Teoremas~\ref{teo:julia_canonico} y~\ref{teo:julia_general}.
 
-\item La razón $p=m/n$ entre multiplicidades es el parámetro fundamental que determina la geometría del Julia.
+% \item La razón $p=m/n$ entre multiplicidades es el parámetro fundamental que determina la geometría del Julia.
 
-\item Existe un comportamiento límite bien definido: colapso en la raíz simple cuando $p\to\infty$, y explosión en la bisectriz cuando $p\to 1^+$.
+% \item Existe un comportamiento límite bien definido: colapso en la raíz simple cuando $p\to\infty$, y explosión en la bisectriz cuando $p\to 1^+$.
 
-\item La comparación con Newton muestra que Schröder tiene conjuntos de Julia más simples geométricamente (círculos vs. parábolas deformadas).
+% \item La comparación con Newton muestra que Schröder tiene conjuntos de Julia más simples geométricamente (círculos vs. parábolas deformadas).
 
-\item El método de Schröder mantiene convergencia cuadrática para raíces múltiples, ventaja importante frente a Newton.
-\end{enumerate}
+% \item El método de Schröder mantiene convergencia cuadrática para raíces múltiples, ventaja importante frente a Newton.
+% \end{enumerate}
 
-\subsection{Síntesis de resultados para polinomios cúbicos}
+% \subsection{Síntesis de resultados para polinomios cúbicos}
 
-Para polinomios cúbicos con tres raíces simples:
+% Para polinomios cúbicos con tres raíces simples:
 
-\begin{enumerate}
-\item La presencia de tres puntos críticos libres (frente a ninguno en el caso de dos raíces) introduce complejidad dinámica fundamental.
+% \begin{enumerate}
+% \item La presencia de tres puntos críticos libres (frente a ninguno en el caso de dos raíces) introduce complejidad dinámica fundamental.
 
-\item Aparecen regiones extensas de no convergencia, correspondientes a ciclos atractores que no son raíces.
+% \item Aparecen regiones extensas de no convergencia, correspondientes a ciclos atractores que no son raíces.
 
-\item El plano de parámetros revela una estructura compleja: para ciertos valores de $\lambda$ existen ciclos atractores extraños, mientras que para otros todas las órbitas convergen a raíces.
+% \item El plano de parámetros revela una estructura compleja: para ciertos valores de $\lambda$ existen ciclos atractores extraños, mientras que para otros todas las órbitas convergen a raíces.
 
-\item El caso $\lambda=\sqrt{3}i$ (triángulo equilátero) es excepcional: no tiene puntos críticos libres y todas las órbitas convergen a alguna raíz.
+% \item El caso $\lambda=\sqrt{3}i$ (triángulo equilátero) es excepcional: no tiene puntos críticos libres y todas las órbitas convergen a alguna raíz.
 
-\item El caso $\lambda=0$ exhibe un 2-ciclo superatractor en $\{i,-i\}$, ilustrando claramente la existencia de atractores no triviales.
+% \item El caso $\lambda=0$ exhibe un 2-ciclo superatractor en $\{i,-i\}$, ilustrando claramente la existencia de atractores no triviales.
 
-\item El método de Newton, con un solo punto crítico libre, presenta un plano de parámetros más simple y menos zonas de no convergencia.
-\end{enumerate}
+% \item El método de Newton, con un solo punto crítico libre, presenta un plano de parámetros más simple y menos zonas de no convergencia.
+% \end{enumerate}
 
-\subsection{Implicaciones prácticas}
+% \subsection{Implicaciones prácticas}
 
-Estos resultados tienen importantes implicaciones para el uso del método de Schröder:
+% Estos resultados tienen importantes implicaciones para el uso del método de Schröder:
 
-\begin{itemize}
-\item \textbf{Para polinomios con dos raíces:} El método es altamente predecible. La geometría circular del Julia facilita la selección de condiciones iniciales apropiadas. Es particularmente ventajoso en presencia de multiplicidades.
+% \begin{itemize}
+% \item \textbf{Para polinomios con dos raíces:} El método es altamente predecible. La geometría circular del Julia facilita la selección de condiciones iniciales apropiadas. Es particularmente ventajoso en presencia de multiplicidades.
 
-\item \textbf{Para polinomios cúbicos:} La posible existencia de ciclos atractores extraños requiere precaución. El método puede no converger a ninguna raíz incluso con condiciones iniciales aparentemente razonables. Es recomendable implementar criterios de detección de no convergencia.
+% \item \textbf{Para polinomios cúbicos:} La posible existencia de ciclos atractores extraños requiere precaución. El método puede no converger a ninguna raíz incluso con condiciones iniciales aparentemente razonables. Es recomendable implementar criterios de detección de no convergencia.
 
-\item \textbf{Comparación con Newton:} Mientras que Schröder supera a Newton en presencia de raíces múltiples, para polinomios con múltiples raíces simples, Newton puede ser más robusto debido a su menor número de puntos críticos libres.
-\end{itemize}
+% \item \textbf{Comparación con Newton:} Mientras que Schröder supera a Newton en presencia de raíces múltiples, para polinomios con múltiples raíces simples, Newton puede ser más robusto debido a su menor número de puntos críticos libres.
+% \end{itemize}
 
 \section{El punto del infinito en el método de Schröder}
 
@@ -593,9 +584,9 @@ Una característica distintiva del método de Schröder, que lo diferencia de ot
 
 En el estudio del comportamiento dinámico de métodos iterativos para resolver ecuaciones polinómicas, uno de los primeros pasos consiste en determinar el grado de la aplicación racional asociada. Si bien es relativamente sencillo establecer cotas superiores para este grado, el cálculo del valor exacto requiere la introducción del concepto de \emph{punto crítico especial}, tal como fue empleado por Nayak y Pal en su análisis de la aplicación racional asociada al método de Chebyshev.
 
-\begin{dfn}[Punto crítico especial]
+\begin{definition}[Punto crítico especial]
 Dado un polinomio complejo $p(z)$, un punto crítico $c\in\mathbb{C}$ se denomina especial si $p(c)\ne 0$ pero $p''(c) = 0$.
-\end{dfn}
+\end{definition}
 
 Para mayor comodidad, escribimos la aplicación de iteración del método de Schröder de la forma equivalente
 \begin{equation}
